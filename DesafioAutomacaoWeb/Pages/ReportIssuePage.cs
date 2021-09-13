@@ -4,13 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DesafioAutomacaoWeb.Utils.Settings
+namespace DesafioAutomacaoWeb.Pages
 {
-    public enum BrowserType
+    public class ReportIssuePage
     {
-        Chrome,
-        Edge,
-        Firefox,
-        Opera
     }
 }

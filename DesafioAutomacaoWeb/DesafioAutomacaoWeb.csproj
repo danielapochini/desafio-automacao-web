@@ -34,10 +34,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Bases\" />
-    <Folder Include="Pages\" />
-    <Folder Include="Utils\Helpers\" />
-    <Folder Include="Utils\Hooks\" />
     <Folder Include="Utils\Entities\" />
     <Folder Include="Utils\Queries\" />
   </ItemGroup>

@@ -19,7 +19,7 @@ namespace DesafioAutomacaoWeb.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public partial class PaginaTesteFeature : object, Xunit.IClassFixture<PaginaTesteFeature.FixtureData>, System.IDisposable
+    public partial class LoginFeature : object, Xunit.IClassFixture<LoginFeature.FixtureData>, System.IDisposable
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
@@ -28,10 +28,10 @@ namespace DesafioAutomacaoWeb.Features
         
         private Xunit.Abstractions.ITestOutputHelper _testOutputHelper;
         
-#line 1 "PaginaTeste.feature"
+#line 1 "Login.feature"
 #line hidden
         
-        public PaginaTesteFeature(PaginaTesteFeature.FixtureData fixtureData, DesafioAutomacaoWeb_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
+        public LoginFeature(LoginFeature.FixtureData fixtureData, DesafioAutomacaoWeb_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
         {
             this._testOutputHelper = testOutputHelper;
             this.TestInitialize();
@@ -40,7 +40,7 @@ namespace DesafioAutomacaoWeb.Features
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("pt-br"), "Features", "PaginaTeste", "\tSimple calculator for adding two numbers", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("pt-br"), "Features", "Login", null, ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -80,15 +80,15 @@ namespace DesafioAutomacaoWeb.Features
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Página de logar")]
-        [Xunit.TraitAttribute("FeatureTitle", "PaginaTeste")]
-        [Xunit.TraitAttribute("Description", "Página de logar")]
-        public virtual void PaginaDeLogar()
+        [Xunit.SkippableFactAttribute(DisplayName="Realizar o login com sucesso")]
+        [Xunit.TraitAttribute("FeatureTitle", "Login")]
+        [Xunit.TraitAttribute("Description", "Realizar o login com sucesso")]
+        public virtual void RealizarOLoginComSucesso()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Página de logar", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 7
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Realizar o login com sucesso", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 6
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -108,14 +108,14 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
+#line 7
+ testRunner.Given("que o usuário acesse a página de login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
+#line hidden
 #line 8
-testRunner.Given("que o usuário informe os dados de login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
+ testRunner.When("preencher com os dados corretos de login e senha", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
 #line 9
-testRunner.When("clicar no botão para logar", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
-#line hidden
-#line 10
-testRunner.Then("seu acesso deverá ser permitido", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
+ testRunner.Then("o login deverá ser realizado com sucesso", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -128,12 +128,12 @@ testRunner.Then("seu acesso deverá ser permitido", ((string)(null)), ((TechTalk
             
             public FixtureData()
             {
-                PaginaTesteFeature.FeatureSetup();
+                LoginFeature.FeatureSetup();
             }
             
             void System.IDisposable.Dispose()
             {
-                PaginaTesteFeature.FeatureTearDown();
+                LoginFeature.FeatureTearDown();
             }
         }
     }

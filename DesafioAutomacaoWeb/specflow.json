@@ -1,10 +1,12 @@
 ﻿{
-    "bindingCulture":
-    {
-        "name" :"pt-br"
-    },
-    "language":
-    {
-        "feature": "pt-br"
-    }
+  "bindingCulture": {
+    "name": "pt-br"
+  },
+  "language": {
+    "feature": "pt-br"
+  },
+  "livingDocGenerator": {
+    "enabled": true,
+    "filePath": "{CurrentDirectory}\\TestExecution.json"
+  }
 }

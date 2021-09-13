@@ -1,9 +1,6 @@
-﻿using DesafioAutomacaoWeb.Utils.Settings.Interface;
+﻿using DesafioAutomacaoWeb.Utils.Drivers;
+using DesafioAutomacaoWeb.Utils.Settings.Interface;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DesafioAutomacaoWeb.Utils.Settings
 {
