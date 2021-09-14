@@ -37,3 +37,5 @@ environment.properties
  - [x] 6) O projeto deverá gerar um relatório de testes automaticamente com screenshots ou vídeos
 embutidos. Sugestões: Allure Report ou ExtentReport.
  > O relatório de testes é gerado no formato BDD através do plugin `SpecFlow.Plus.LivingDocPlugin` e os screenshots são embutidos neste arquivo através da classe `TakeScreenShotAfterEveryStep()`
+ - [x] 7) A massa de testes deve ser preparada neste projeto, seja com scripts carregando massa nova no BD ou com restore de banco de dados.
+ > A massa de dados está sendo tratada através do método `DatabaseHelper.ResetMantisDatabase()` que realiza o restore do BD antes da execução dos testes.
