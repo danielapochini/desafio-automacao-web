@@ -18,7 +18,7 @@ namespace DesafioAutomacaoWeb.Pages
         [FindsBy(How = How.Id, Using = "password")]
         private IWebElement PasswordTextBox;
 
-        [FindsBy(How = How.XPath, Using = "//input[@value= 'Entrar']")]
+        [FindsBy(How = How.XPath, Using = "//input[@value= 'Login']")]
         private IWebElement LoginButton;
         #endregion
 

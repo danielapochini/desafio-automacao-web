@@ -18,8 +18,9 @@ namespace DesafioAutomacaoWeb.Utils.Drivers
             ChromeOptions chromeOptions = new ChromeOptions();
             chromeOptions.AddArgument("--start-maximized");
             chromeOptions.AddArgument("--no-sandbox");
-            chromeOptions.AddArgument("--disable-dev-shm-usage");
-            chromeOptions.AddArgument("--whitelisted-ips=''");
+            chromeOptions.AddArguments("--disable-dev-shm-usage");
+            chromeOptions.AddArguments("--whitelisted-ips=''");
+            chromeOptions.AddArgument("--lang=en");
             chromeOptions.AddAdditionalCapability(CapabilityType.AcceptSslCertificates, true, true);
             return chromeOptions;
         }
