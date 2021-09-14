@@ -1,4 +1,5 @@
-﻿using DesafioAutomacaoWeb.Utils.Settings;
+﻿using DesafioAutomacaoWeb.Utils.Helpers;
+using DesafioAutomacaoWeb.Utils.Settings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace DesafioAutomacaoWeb.Utils.Drivers
         public DriverFactory(ISpecFlowOutputHelper outputHelper)
         {
             _outputHelper = outputHelper;
+            DatabaseHelper.ResetMantisDatabase();
         }
 
         [BeforeScenario]
