@@ -10,7 +10,6 @@ namespace DesafioAutomacaoWeb.Utils.Drivers
     {
         Chrome,
         Edge,
-        Firefox,
-        Opera
+        Firefox
     }
 }

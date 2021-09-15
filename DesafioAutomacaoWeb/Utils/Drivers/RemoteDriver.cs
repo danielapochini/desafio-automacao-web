@@ -9,11 +9,8 @@ namespace DesafioAutomacaoWeb.Utils.Drivers
     [Binding]
     public class RemoteDriver
     {
-        private static IWebDriver GetRemoteWebDriver(ICapabilities capabilities)
-        {
-            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
-
-            ObjectRepository.Config = new AppSettingsReader();
+        public static IWebDriver GetRemoteWebDriver(ICapabilities capabilities)
+        {  
             string hubUrl = ObjectRepository.Config.GetHubUrl();
 
             TimeSpan timeSpan = new TimeSpan(0, 3, 0);
@@ -23,9 +20,9 @@ namespace DesafioAutomacaoWeb.Utils.Drivers
                         timeSpan
                     );
         }
-         
-        public static IWebDriver CreateRemoteInstance()
-        {
+          
+        public static void CreateRemoteInstance()
+        { 
             switch (ObjectRepository.Config.GetBrowser())
             {
                 case BrowserType.Chrome:
@@ -37,15 +34,11 @@ namespace DesafioAutomacaoWeb.Utils.Drivers
                     break;
 
                 case BrowserType.Firefox:
+                    System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
                     ObjectRepository.Driver = GetRemoteWebDriver(DriversOptions.GetFirefoxOptions().ToCapabilities());
-                    break;
-
-                case BrowserType.Opera:
-                    ObjectRepository.Driver = GetRemoteWebDriver(DriversOptions.GetOperaOptions().ToCapabilities());
-                    break;
+                    break; 
             }
-            DriverManagement.DriversConfigurations();
-            return ObjectRepository.Driver;
+            DriverManagement.DriversConfigurations(); 
         }    
        
     }

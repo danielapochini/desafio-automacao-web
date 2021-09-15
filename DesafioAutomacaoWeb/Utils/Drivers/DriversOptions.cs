@@ -15,12 +15,12 @@ namespace DesafioAutomacaoWeb.Utils.Drivers
     {
         public static ChromeOptions GetChromeOptions()
         {
-            ChromeOptions chromeOptions = new ChromeOptions();
-            chromeOptions.AddArgument("--start-maximized");
-            chromeOptions.AddArgument("--no-sandbox");
-            chromeOptions.AddArguments("--disable-dev-shm-usage");
-            chromeOptions.AddArguments("--whitelisted-ips=''");
-            chromeOptions.AddArgument("--lang=en");
+            ChromeOptions chromeOptions = new ChromeOptions(); 
+            chromeOptions.AddArgument("start-maximized");
+            chromeOptions.AddArgument("no-sandbox");
+            chromeOptions.AddArgument("proxy-server='direct://'");
+            chromeOptions.AddArgument("proxy-bypass-list=*");
+            chromeOptions.AddArgument("lang=en");
             chromeOptions.AddAdditionalCapability(CapabilityType.AcceptSslCertificates, true, true);
             return chromeOptions;
         }
@@ -32,16 +32,19 @@ namespace DesafioAutomacaoWeb.Utils.Drivers
             FirefoxOptions firefoxOptions = new FirefoxOptions()
             {
                 Profile = manager.GetProfile("default"),
-                AcceptInsecureCertificates = true,
+                AcceptInsecureCertificates = true, 
 
             };
+            firefoxOptions.SetPreference("intl.accept_languages", "en-US");
             return firefoxOptions;
         }
 
         public static EdgeOptions GetEdgeOptions()
         {
             EdgeOptions edgeOptions = new EdgeOptions();
-            edgeOptions.UseChromium = true;
+            edgeOptions.UseChromium = true; 
+            edgeOptions.AddArgument("start-maximized");
+            edgeOptions.AddArgument("lang=en");
             return edgeOptions;
         }
 

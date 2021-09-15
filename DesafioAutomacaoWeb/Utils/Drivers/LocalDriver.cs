@@ -39,10 +39,11 @@ namespace DesafioAutomacaoWeb.Utils.Drivers
         }
 
         public static IWebDriver GetFirefoxDriver()
-        { 
-            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
-            new DriverManager().SetUpDriver(new FirefoxConfig()); 
-            IWebDriver driver = new FirefoxDriver(DriversOptions.GetFirefoxOptions());
+        {
+            new DriverManager().SetUpDriver(new FirefoxConfig());
+            FirefoxDriverService service = FirefoxDriverService.CreateDefaultService();
+            service.Host = "::1"; 
+            IWebDriver driver = new FirefoxDriver(service, DriversOptions.GetFirefoxOptions());
             return driver;
         }
 
@@ -53,8 +54,8 @@ namespace DesafioAutomacaoWeb.Utils.Drivers
             return driver;
         }
 
-        public static IWebDriver CreateWebDriverInstance()
-        {
+        public static void CreateWebDriverInstance()
+        { 
             switch (ObjectRepository.Config.GetBrowser())
             {
                 case BrowserType.Chrome:
@@ -65,17 +66,12 @@ namespace DesafioAutomacaoWeb.Utils.Drivers
                     ObjectRepository.Driver = GetEdgeDriver();
                     break;
 
-                case BrowserType.Firefox:
+                case BrowserType.Firefox: 
+                    System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
                     ObjectRepository.Driver = GetFirefoxDriver();
-                    break;
-
-                case BrowserType.Opera:
-                    ObjectRepository.Driver = GetOperaDriver();
-                    break;
+                    break; 
             }
-            DriverManagement.DriversConfigurations();
-
-            return ObjectRepository.Driver;
+            DriverManagement.DriversConfigurations(); 
         }
 
     }
