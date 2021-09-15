@@ -81,7 +81,7 @@ namespace DesafioAutomacaoWeb.Steps
         [Then(@"será direcionado a página inicial")]
         public void EntaoSeraDirecionadoAPaginaInicial()
         {
-            Assert.Equal("http://kubernetes.docker.internal:8989/my_view_page.php", ObjectRepository.Driver.Url);
+            Assert.Equal("http://host.docker.internal:8989/my_view_page.php", ObjectRepository.Driver.Url);
         }
         
         [Then(@"o usuário será criado com sucesso")]

@@ -81,7 +81,7 @@ namespace DesafioAutomacaoWeb.Steps
         [Then(@"deverá retornar para a página de login")]
         public void EntaoDeveraRetornarParaAPaginaDeLogin()
         {
-            Assert.Equal("http://kubernetes.docker.internal:8989/login_page.php?return=lost_pwd.php", ObjectRepository.Driver.Url);
+            Assert.Equal("http://host.docker.internal:8989/login_page.php?return=lost_pwd.php", ObjectRepository.Driver.Url);
         }
 
     }
