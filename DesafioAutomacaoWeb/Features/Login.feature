@@ -1,7 +1,4 @@
-﻿#language:pt-br
-#encoding:utf-8
-
-Funcionalidade: Login
+﻿Funcionalidade: Login
   
 Cenário: Realizar o login com sucesso
 	Dado que o usuário acesse a página de login

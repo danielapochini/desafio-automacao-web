@@ -73,7 +73,7 @@ namespace DesafioAutomacaoWeb.Steps
         [When(@"preencher o campo de username com caracteres inválidos")]
         public void QuandoPreencherOCampoDeUsernameComCaracteresInvalidos()
         {
-            manageUserCreatePage.FillUsername("_teste_");
+            manageUserCreatePage.FillUsername("teste*&");
             manageUserCreatePage.SubmitForm();
         }
 
