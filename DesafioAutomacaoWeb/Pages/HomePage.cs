@@ -23,7 +23,9 @@ namespace DesafioAutomacaoWeb.Pages
         [FindsBy(How = How.XPath, Using = "//span[contains(text(),'View Issues')]")]
         private IWebElement ViewIssuesButton;
 
-
+        [FindsBy(How = How.XPath, Using = "//a[contains(@href, 'manage_user_create_page')]")]
+        private IWebElement InviteUsersButton;
+         
         [FindsBy(How = How.XPath, Using = "//span[contains(text(),'Report Issue')]")]
         private IWebElement ReportIssuesButton;
          
@@ -42,6 +44,12 @@ namespace DesafioAutomacaoWeb.Pages
         {
             ReportIssuesButton.Click();
             return new ReportIssuePage();
+        }
+
+        public ManageUserCreatePage NavigateToInviteUsers()
+        {
+            GenericHelper.GetElement(InviteUsersButton).Click();
+            return new ManageUserCreatePage();
         }
 
         #endregion

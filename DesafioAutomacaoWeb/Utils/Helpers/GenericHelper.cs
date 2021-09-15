@@ -26,6 +26,12 @@ namespace DesafioAutomacaoWeb.Utils.Helpers
             return element.Text; 
         }
 
+        public static IWebElement GetElement(IWebElement element)
+        {
+            WaitForWebElementInPage(element, TimeSpan.FromSeconds(30));
+            return element;
+        }
+
         public static bool IsElementPresent(By locator)
         {
             try
