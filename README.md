@@ -36,4 +36,23 @@ environment.properties
  > O método `TakeScreenShotAfterEveryStep()` na classe `LogHooks` realiza os screenshots durante a execução de cada step em um cenário de testes
  - [x] 6) O projeto deverá gerar um relatório de testes automaticamente com screenshots ou vídeos
 embutidos. Sugestões: Allure Report ou ExtentReport.
- > O relatório de testes é gerado no formato BDD através do plugin `SpecFlow.Plus.LivingDocPlugin` e os screenshots são embutidos neste arquivo através da classe `TakeScreenShotAfterEveryStep()`
+ > O relatório de testes é gerado tanto para a execução local quanto remota no formato BDD através do plugin `SpecFlow.Plus.LivingDocPlugin` e os screenshots são embutidos neste arquivo através da classe `TakeScreenShotAfterEveryStep()`.
+ - [x] 7) A massa de testes deve ser preparada neste projeto, seja com scripts carregando massa nova no BD ou com restore de banco de dados.
+ > A massa de dados está sendo tratada através do método `DatabaseHelper.ResetMantisDatabase()` que realiza o restore do BD antes da execução dos testes.
+ - [x] 9) Testes deverão ser agendados pelo Gitlab-CI, Azure DevOps, Jenkins, CircleCI, TFS,
+TeamCity ou outra ferramenta de CI que preferir
+> Os testes estão implementados na pipeline do Jenkins, após a execução o Relatório LivingDoc é anexado na última execução através do plugin `PublishHTML` no Jenkins. O script de configuração da pipeline está disponível na raiz do projeto. O projeto possui um `webhook` que a cada push realizado no repositório do GitHub é disparado automaticamente um novo build no Jenkins.
+
+
+## Referências
+- [Getting Started with WebDriver C# in 10 Minutes](https://www.automatetheplanet.com/getting-started-webdriver/)
+- [UITest with C# and Selenium Grid](https://www.puresourcecode.com/dotnet/uitest-with-c-and-selenium-grid/)
+- [Selenium Grid Tutorial: Hub & Node](https://www.guru99.com/introduction-to-selenium-grid.html)
+- [BDD with Selenium Webdriver and Specflow using C#](https://www.udemy.com/share/101rvK3@VWk73qt6IfuQLtDS7SexlXDcp36_PJzqLGQ3EhEop5DsS9PgjFRaKbzrHCBhOLXX/)
+- [Step-by-step guide for LivingDoc Generator](https://docs.specflow.org/projects/specflow-livingdoc/en/latest/sbsguides/sbscli.html)
+- [LivingDoc - Store it in your Continuous Integration Server](https://docs.specflow.org/projects/specflow-livingdoc/en/latest/LivingDocGenerator/sharing-and-publishing.html#jenkins)
+- [Jenkins - Publish HTML Report](https://www.youtube.com/watch?v=snlxU386wjo)
+- [Jenkins - Build Job Automatically on Git Commit - Webhook](https://youtu.be/YkabAT213h0)
+- [Backing up Database in MySQL using C#](https://stackoverflow.com/a/12311685)
+- [Configuration Files XUnit](https://xunit.net/docs/configuration-files)
+- [Configuration Files Specflow](https://docs.specflow.org/projects/specflow/en/latest/Installation/Configuration.html)
