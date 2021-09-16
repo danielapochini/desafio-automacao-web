@@ -36,18 +36,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Utils\Entities\" />
-    <Folder Include="Utils\Queries\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="specflow.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Utils\Resources\Database\mantis_dump.sql">
+    <None Update="Utils\Database\Resources\mantis_dump.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="xunit.runner.json">

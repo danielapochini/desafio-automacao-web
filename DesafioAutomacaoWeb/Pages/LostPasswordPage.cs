@@ -21,14 +21,7 @@ namespace DesafioAutomacaoWeb.Pages
         private IWebElement EmailTextBox;
 
         [FindsBy(How = How.XPath, Using = "//input[@value= 'Submit']")]
-        private IWebElement SubmitButton;
-         
-        [FindsBy(How = How.XPath, Using = "//div[@class='alert alert-danger']//p[1]")]
-        private IWebElement ErrorCodeMessage;
-
-        [FindsBy(How = How.XPath, Using = "//div[@class='alert alert-danger']//p[2]")]
-        private IWebElement ErrorDescriptionMessage;
-
+        private IWebElement SubmitButton; 
         #endregion
 
         #region Actions
@@ -42,18 +35,7 @@ namespace DesafioAutomacaoWeb.Pages
         {
             LoginTextBox.Clear();
         }
-
-        public string ReturnErrorCode()
-        {
-            var text = GenericHelper.GetElementText(ErrorCodeMessage);
-            return text;
-        }
-
-        public string ReturnErrorDescription()
-        {
-            var text = GenericHelper.GetElementText(ErrorDescriptionMessage);
-            return text;
-        }
+         
         #endregion
     }
 }

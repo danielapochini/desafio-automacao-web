@@ -1,4 +1,5 @@
 ﻿using DesafioAutomacaoWeb.Bases;
+using DesafioAutomacaoWeb.Pages.Manage.Users;
 using DesafioAutomacaoWeb.Utils.Helpers;
 using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
@@ -28,7 +29,10 @@ namespace DesafioAutomacaoWeb.Pages
          
         [FindsBy(How = How.XPath, Using = "//span[contains(text(),'Report Issue')]")]
         private IWebElement ReportIssuesButton;
-         
+        
+        [FindsBy(How = How.XPath, Using = "//span[contains(text(),'Manage')]")]
+        private IWebElement ManageButton;
+
         #endregion
 
         #region Actions 
@@ -52,6 +56,11 @@ namespace DesafioAutomacaoWeb.Pages
             return new ManageUserCreatePage();
         }
 
+        public ManagePage NavigateToManage()
+        {
+            GenericHelper.GetElement(ManageButton).Click();
+            return new ManagePage();
+        }
         #endregion
     }
 }

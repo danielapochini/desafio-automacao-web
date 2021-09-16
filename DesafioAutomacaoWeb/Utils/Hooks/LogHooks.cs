@@ -23,12 +23,12 @@ namespace DesafioAutomacaoWeb.Utils.Hooks
             _outputHelper = outputHelper;
         }
 
-       [AfterStep()]
-       public void TakeScreenShotAfterEveryStep()
-        { 
-            var filename = $"screenshot-{DateTime.UtcNow:yyyy-MM-dd-mm-ss.FFF}.png";
-            ObjectRepository.Driver.TakeScreenshot().SaveAsFile(filename);
-            _outputHelper.AddAttachment(filename); 
-        }
+       //[AfterStep()]
+       //public void TakeScreenShotAfterEveryStep()
+       // { 
+       //     var filename = $"screenshot-{DateTime.UtcNow:yyyy-MM-dd-mm-ss.FFF}.png";
+       //     ObjectRepository.Driver.TakeScreenshot().SaveAsFile(filename);
+       //     _outputHelper.AddAttachment(filename); 
+       // }
     }
 }

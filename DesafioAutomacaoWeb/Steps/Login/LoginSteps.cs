@@ -7,7 +7,7 @@ using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Infrastructure;
 using Xunit;
 
-namespace DesafioAutomacaoWeb.Steps
+namespace DesafioAutomacaoWeb.Steps.Login
 {
     [Binding]
     public class LoginSteps 

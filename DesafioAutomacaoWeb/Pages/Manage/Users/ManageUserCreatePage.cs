@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DesafioAutomacaoWeb.Pages
+namespace DesafioAutomacaoWeb.Pages.Manage.Users
 {
     public class ManageUserCreatePage : PageBase
     {
@@ -24,7 +24,7 @@ namespace DesafioAutomacaoWeb.Pages
 
         [FindsBy(How = How.Id, Using = "user-access-level")]
         private IWebElement AccessLevelSelect;
-
+         
         [FindsBy(How = How.Id, Using = "user-enabled")]
         private IWebElement EnabledCheckBox;
 
@@ -33,62 +33,44 @@ namespace DesafioAutomacaoWeb.Pages
 
         [FindsBy(How = How.XPath, Using = "//input[@value= 'Create User']")]
         private IWebElement SubmitButton;
-
-        [FindsBy(How = How.XPath, Using = "//div[@class='alert alert-success center']//p[1]")]
-        private IWebElement SuccessMessage;
-
+         
         #endregion
 
         #region Actions
 
-        public void CreateNewUser(string username, string realname, string email, string accessValue)
+        public void CreateNewUser(string username, string realname, string email, string accessValue, bool enabledCheck, bool protectedCheck)
         {
-            FillUsername(username);
-            FillRealName(realname);
-            FillEmail(email);
-            SelectAcessLevel(accessValue);
+            UsernameTextBox.SendKeys(username);
+            RealNameTextBox.SendKeys(realname);
+            EmailTextBox.SendKeys(email);
+            ComboBoxHelper.SelectElement(AccessLevelSelect, accessValue);
+            CheckEnabledCheckBox(enabledCheck);
+            CheckProtectedCheckBox(protectedCheck);
             SubmitForm();
         }
 
-        public void FillUsername(string username)
+        public void FillOnlyUsername(string username)
         {
             UsernameTextBox.SendKeys(username);
-        }
-        public void FillRealName(string realname)
+            SubmitForm();
+        } 
+           
+
+        public void CheckEnabledCheckBox(bool value)
         {
-            RealNameTextBox.SendKeys(realname);
-        }
-         
-        public void FillEmail(string email)
-        {
-            EmailTextBox.SendKeys(email);
+            CheckBoxHelper.CheckCheckBoxJavascript(value, EnabledCheckBox);
         }
 
-        public void SelectAcessLevel(string accessValue)
+        public void CheckProtectedCheckBox(bool value)
         {
-            ComboBoxHelper.SelectElement(AccessLevelSelect, accessValue);
-        }
-
-        public void CheckEnabledCheckBox()
-        {
-            EnabledCheckBox.Click();
-        }
-
-        public void CheckProtectedCheckBox()
-        {
-            ProtectedCheckBox.Click();
+            CheckBoxHelper.CheckCheckBoxJavascript(value, ProtectedCheckBox);
         }
 
         public void SubmitForm()
         {
             SubmitButton.Submit();
         }
-
-        public string ReturnSuccessCode()
-        {
-            var text = GenericHelper.GetElementText(SuccessMessage);
-            return text;
-        }
+         
         #endregion
 
         #region Navigation

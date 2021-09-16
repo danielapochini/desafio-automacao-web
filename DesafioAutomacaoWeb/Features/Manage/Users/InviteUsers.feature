@@ -8,22 +8,24 @@ Contexto:
 Cenário: Criar um novo usuário com sucesso
 	Dado que o usuário acesse a página de criar novos usuários
 	Quando preencher os dados da nova conta 
-	Então o usuário será criado com sucesso
+	Então será exibido a mensagem de sucesso
+	E o usuário será criado com sucesso no banco de dados
 
 Esquema do Cenário: Criar novos usuários com sucesso
 	Dado que o usuário acesse a página de criar novos usuários
-	Quando preencher os dados de <username>, <realname>, <email>, <acesso> da nova conta  
+	Quando preencher os dados de <username>, <realname>, <email>, <accessLevel>, <enabled>, <protected> da nova conta  
 	Então será exibida a mensagem de sucesso "Created user <username> with an access level of <acesso>"
+	E o usuário será criado com sucesso no banco de dados
 
 Exemplos:
-	| username      | realname        | email             | acesso    |
-	| user.selenium | Pessoa Teste    | valid01@email.com | viewer    |
-	| user.auto     | Segunda Pessoa  | valid02@email.com | developer |
-	| user.novo     | Terceira Pessoa | valid03@email.com | manager   |
+	| username      | realname        | email             | accessLevel | enabled | protected |
+	| user.selenium | Pessoa Teste    | valid01@email.com | viewer      | true    | false     |
+	| user.auto     | Segunda Pessoa  | valid02@email.com | developer   | false   | true      |
+	| user.novo     | Terceira Pessoa | valid03@email.com | manager     | true    | false     |
 
 Cenário: Criar um novo usuário - Username já existente
 	Dado que o usuário acesse a página de criar novos usuários
-	Quando preencher os dados utilizando um username que já exista
+	Quando preencher os dados utilizando um username que já exista no banco de dados
     Então deverá retornar o código de erro "APPLICATION ERROR #800" 
 	E a mensagem "That username is already being used. Please go back and select another one." 
 

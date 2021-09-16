@@ -28,7 +28,7 @@ namespace DesafioAutomacaoWeb.Utils.Helpers
 
         public static void ResetMantisDatabase()
         {
-            string file = "Utils/Resources/Database/mantis_dump.sql";
+            string file = "Utils/Database/Resources/mantis_dump.sql";
 
             string connectionString = appSettings.DbConnection;
 

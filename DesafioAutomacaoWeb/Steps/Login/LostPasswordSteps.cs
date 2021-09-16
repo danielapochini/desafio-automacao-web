@@ -4,7 +4,7 @@ using System;
 using TechTalk.SpecFlow;
 using Xunit;
 
-namespace DesafioAutomacaoWeb.Steps
+namespace DesafioAutomacaoWeb.Steps.Login
 {
     [Binding]
     public class LostPasswordSteps
@@ -60,23 +60,7 @@ namespace DesafioAutomacaoWeb.Steps
         public void QuandoApagarOsDadosDoCampoDeUsername()
         {
             lostPwdPage.ClearUsername();
-        }
-
-
-        [Then(@"deverá retornar o código de erro ""(.*)""")]
-        public void EntaoDeveraRetornarOCodigoDeErro(string expectedCode)
-        {
-            var actualCode = lostPwdPage.ReturnErrorCode();
-            Assert.Equal(expectedCode, actualCode);
-        }
-        
-        [Then(@"a mensagem ""(.*)""")]
-        public void EntaoAMensagem(string expectedMessage)
-        {
-            var actualMessage = lostPwdPage.ReturnErrorDescription();
-            Assert.Equal(expectedMessage, actualMessage);
-        }
-
+        } 
 
         [Then(@"deverá retornar para a página de login")]
         public void EntaoDeveraRetornarParaAPaginaDeLogin()

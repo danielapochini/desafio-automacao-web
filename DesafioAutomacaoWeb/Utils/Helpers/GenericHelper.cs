@@ -12,6 +12,16 @@ namespace DesafioAutomacaoWeb.Utils.Helpers
 {
     public class GenericHelper
     {
+        public static void ClearTextBox(IWebElement element)
+        {
+            element.Clear();
+        }
+         
+        public static void FillField(IWebElement element, string text)
+        {
+            element.SendKeys(text);
+        }
+
         public static IWebElement GetElement(By locator)
         {
             if (IsElementPresent(locator))
