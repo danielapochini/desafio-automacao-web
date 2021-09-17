@@ -20,8 +20,11 @@ Foi necessário instalar as seguintes Docker Image:
 - [WebDriverManager.Net](https://github.com/rosolko/WebDriverManager.Net) - Gerenciador de binários (webdrivers) dos navegadores sem a necessidade de ser instalados na máquina local
 
 ## Metas
- - [x]  4) Os casos de testes precisam ser executados em no mínimo três navegadores. Utilizando o
-Selenium Grid.
+- [x] 2) Alguns scripts devem ler dados de uma planilha Excel para implementar Data-Driven.
+ + Quem utilizar Cucumber, SpecFlow ou outra ferramenta de BDD não precisa implementar lendo de uma planilha Excel. Pode ser a implementação de um Scenario Outline.
+- [x] 3) Notem que 50 scripts podem cobrir mais de 50 casos de testes se usarmos Data-Driven. Em outras palavras, implementar 50 CTs usando data-driven não é a mesma coisa que implementar 50 scripts
+> As features `InviteUsers` e `CreateProjects` implementam Scenario Outlines do Specflow para testes Data-Driven. 
+ - [x]  4) Os casos de testes precisam ser executados em no mínimo três navegadores. Utilizando o Selenium Grid.
 + Não é necessário executar em paralelo. Pode ser demonstrada a execução dos
 browsers separadamente.
 + Não é uma boa prática executar os testes em todos os browsers em uma única
@@ -36,9 +39,12 @@ environment.properties
  > O método `TakeScreenShotAfterEveryStep()` na classe `LogHooks` realiza os screenshots durante a execução de cada step em um cenário de testes
  - [x] 6) O projeto deverá gerar um relatório de testes automaticamente com screenshots ou vídeos
 embutidos. Sugestões: Allure Report ou ExtentReport.
- > O relatório de testes é gerado tanto para a execução local quanto remota no formato BDD através do plugin `SpecFlow.Plus.LivingDocPlugin` e os screenshots são embutidos neste arquivo através da classe `TakeScreenShotAfterEveryStep()`.
+ > O relatório de testes é gerado tanto para a execução local quanto remota no formato BDD através do plugin `SpecFlow.Plus.LivingDocPlugin` e os screenshots são embutidos neste arquivo através do método `TakeScreenShotAfterEveryStep()` na classe `LogHooks`.
  - [x] 7) A massa de testes deve ser preparada neste projeto, seja com scripts carregando massa nova no BD ou com restore de banco de dados.
  > A massa de dados está sendo tratada através do método `DatabaseHelper.ResetMantisDatabase()` que realiza o restore do BD antes da execução dos testes.
+ - [x] 8) Um dos scripts deve injetar Javascript para executar alguma operação na tela. O objetivo
+aqui é exercitar a injeção de Javascript dentro do código do Selenium.
+> O método `CheckCheckBoxJavascript()` criado na classe `CheckBoxHelper` realiza o click de um botão por ação de JavaScript, pois neste caso em específico o Selenium não estava conseguindo realizar o click e estava estourando a expection `ElementClickInterceptedException`, desta forma, utilizando o JavaScript o problema foi sanado.
  - [x] 9) Testes deverão ser agendados pelo Gitlab-CI, Azure DevOps, Jenkins, CircleCI, TFS,
 TeamCity ou outra ferramenta de CI que preferir
 > Os testes estão implementados na pipeline do Jenkins, após a execução o Relatório LivingDoc é anexado na última execução através do plugin `PublishHTML` no Jenkins. O script de configuração da pipeline está disponível na raiz do projeto. O projeto possui um `webhook` que a cada push realizado no repositório do GitHub é disparado automaticamente um novo build no Jenkins.
