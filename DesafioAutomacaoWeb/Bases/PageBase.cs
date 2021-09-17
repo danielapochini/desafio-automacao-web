@@ -17,7 +17,10 @@ namespace DesafioAutomacaoWeb.Bases
 
         [FindsBy(How = How.XPath, Using = "//div[@class='alert alert-danger']//p[2]")]
         private IWebElement ErrorDescriptionMessage;
-         
+
+        [FindsBy(How = How.XPath, Using = "//div[@class='alert alert-warning center']//p[1]")]
+        private IWebElement WarningMessage;
+
         [FindsBy(How = How.XPath, Using = "//div[@class='alert alert-success center']//p[1]")]
         private IWebElement SuccessMessage;
 
@@ -49,5 +52,10 @@ namespace DesafioAutomacaoWeb.Bases
             return text;
         }
 
+        public string ReturnWarningMessage()
+        {
+            var text = GenericHelper.GetElementText(WarningMessage);
+            return text;
+        }
     }
 }

@@ -23,9 +23,12 @@ namespace DesafioAutomacaoWeb.Utils.Database.Queries
             return DatabaseHelper.ExecuteDbCommand<UsersEntities>(query).FirstOrDefault();
         }
 
-        public static UsersEntities ListLastInactiveUser()
+        public static UsersEntities ListarInformacoesUsuario(string userName)
         {
-            var query = "SELECT * FROM mantis_user_table WHERE enabled = '0' ORDER BY ID DESC LIMIT 1";
+            var query = "SELECT * FROM bugtracker.mantis_user_table " +
+                "WHERE username = '$USERNAME'".Replace("$USERNAME", userName);
+
+            //FirstOrDefault pois o método chamado retorna um Inumerable
             return DatabaseHelper.ExecuteDbCommand<UsersEntities>(query).FirstOrDefault();
         }
     }

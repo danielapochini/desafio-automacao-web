@@ -45,13 +45,13 @@ namespace DesafioAutomacaoWeb.Pages.Manage.Users
         private IWebElement EditProtectedCheckBox;
         #endregion
 
-        public void EditExistingUser()
+        public void EditExistingUser(string username, string realname, string email, string accessLevel)
         {
             ClearAllTextBoxFields();
-            EditUsernameTextBox.SendKeys("teste.username");
-            EditRealnameTextBox.SendKeys("Nome Alterado");
-            EditEmailTextBox.SendKeys("email@valid05.com");
-            SelectAcessLevel("developer");
+            EditUsernameTextBox.SendKeys(username);
+            EditRealnameTextBox.SendKeys(realname);
+            EditEmailTextBox.SendKeys(email);
+            SelectAccessLevel(accessLevel);
             UpdateUserButton.Click();
         }
         public void FillUsername(string username)
@@ -83,7 +83,7 @@ namespace DesafioAutomacaoWeb.Pages.Manage.Users
         }
          
 
-        public void SelectAcessLevel(string accessValue)
+        public void SelectAccessLevel(string accessValue)
         {
             ComboBoxHelper.SelectElement(EditAccessLevelSelect, accessValue);
         }

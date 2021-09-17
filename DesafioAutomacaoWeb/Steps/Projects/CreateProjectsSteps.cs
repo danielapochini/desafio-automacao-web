@@ -8,7 +8,7 @@ using Xunit;
 namespace DesafioAutomacaoWeb.Steps.Projects
 {
     [Binding]
-    public class CreateProjectSteps
+    public class CreateProjectsSteps
     {
         private readonly ManagePage managePage;
         private readonly ManageProjectsPage projectPage;
@@ -20,7 +20,7 @@ namespace DesafioAutomacaoWeb.Steps.Projects
         private bool projectInherit;
         private string projectDescription;
 
-        public CreateProjectSteps()
+        public CreateProjectsSteps()
         {
             managePage = new ManagePage();
             projectPage = new ManageProjectsPage();

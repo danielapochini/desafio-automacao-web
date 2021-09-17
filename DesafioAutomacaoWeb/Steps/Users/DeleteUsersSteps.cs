@@ -1,8 +1,11 @@
 ﻿using DesafioAutomacaoWeb.Pages;
 using DesafioAutomacaoWeb.Pages.Manage.Users;
+using DesafioAutomacaoWeb.Utils.Database.Queries;
 using System;
+using System.Text.RegularExpressions;
 using TechTalk.SpecFlow;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace DesafioAutomacaoWeb.Steps.Users
 {
@@ -11,11 +14,12 @@ namespace DesafioAutomacaoWeb.Steps.Users
     {   
         private readonly ManageUsersPage manageUserPage;
         private readonly ManageUserEditPage manageUserEditPage;
+        private string deletedUsername;
 
         public DeleteUsersSteps()
         {   
             manageUserPage = new ManageUsersPage();
-            manageUserEditPage = new ManageUserEditPage();
+            manageUserEditPage = new ManageUserEditPage(); 
         }
          
         [When(@"clicar no botão de Delete User")]
@@ -33,6 +37,10 @@ namespace DesafioAutomacaoWeb.Steps.Users
         [Then(@"a operação deverá ser confirmada")]
         public void EntaoAOperacaoDeveraSerConfirmada()
         {
+            string warningMessage = manageUserPage.ReturnWarningMessage();
+
+            deletedUsername = Regex.Matches(warningMessage, "\\\"(.*?)\\\"").ToString().Trim('"');
+
             manageUserEditPage.ClickDeleteAccountButton();
         }
          
@@ -42,5 +50,12 @@ namespace DesafioAutomacaoWeb.Steps.Users
             Assert.False(manageUserEditPage.CheckDeleteAccountButton());
         }
 
+        [Then(@"os dados deverão ser removidos do banco de dados com sucesso")]
+        public void EntaoOsDadosDeveraoSerRemovidosDoBancoDeDadosComSucesso()
+        {
+            var userUpdatedDb = UsersQueries.ListarInformacoesUsuario(deletedUsername);
+            Assert.Null(userUpdatedDb);
+        }
+         
     }
 }

@@ -12,6 +12,7 @@ Cenário: Deletar usuário com sucesso
 	E clicar no botão de Delete User
 	Então a operação deverá ser confirmada
 	E deverá retornar a mensagem "Operation successful."
+	E os dados deverão ser removidos do banco de dados com sucesso
 
 Cenário: Restringir botão de deletar para usuário administrador
 	Dado que o usuário acesse a página de gerenciamento

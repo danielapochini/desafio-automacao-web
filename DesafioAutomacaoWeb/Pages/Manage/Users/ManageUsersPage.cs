@@ -13,18 +13,15 @@ namespace DesafioAutomacaoWeb.Pages.Manage.Users
     public class ManageUsersPage : PageBase
     {
         #region WebElements 
-
-        [FindsBy(How = How.XPath, Using = "//a[contains(text(),'test.developer')]")]
-        private IWebElement UserLink;
-
+          
         [FindsBy(How = How.XPath, Using = "//tbody/tr[1]/td[1]/a[1]")]
         private IWebElement AdminLink;
 
         #endregion
 
-        public ManageUserEditPage ClickUserLink()
+        public ManageUserEditPage ClickUserLink(string userId)
         {
-            UserLink.Click();
+            GenericHelper.ClickElementFromDb(userId);
             return new ManageUserEditPage();
         }
 

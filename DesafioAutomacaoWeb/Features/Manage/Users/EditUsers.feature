@@ -12,6 +12,7 @@ Cenário: Editar informações de usuário com sucesso
 	Quando selecionar um usuário existente na lista
 	E alterar os campos com novos dados 
 	Então deverá retornar a mensagem "Operation successful."
+	E os dados serão atualizados com sucesso no banco de dados
 
 Cenário: Editar informações de usuário - Username Obrigatório
 	Dado que o usuário acesse a página de gerenciamento

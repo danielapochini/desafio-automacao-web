@@ -1,5 +1,6 @@
 ﻿using DesafioAutomacaoWeb.Pages;
 using DesafioAutomacaoWeb.Pages.Manage.Users;
+using DesafioAutomacaoWeb.Utils.Database.Queries;
 using DesafioAutomacaoWeb.Utils.Helpers;
 using DesafioAutomacaoWeb.Utils.Settings;
 using System;
@@ -55,7 +56,9 @@ namespace DesafioAutomacaoWeb.Steps.Users
         [When(@"selecionar um usuário existente na lista")]
         public void QuandoSelecionarUmUsuarioExistenteNaLista()
         {
-            manageUserPage.ClickUserLink();
+            var userRandomDb = UsersQueries.ListRandomUsers();
+
+            manageUserPage.ClickUserLink(userRandomDb.UserName);
         }
 
         [When(@"efetuar o login como administrador")]

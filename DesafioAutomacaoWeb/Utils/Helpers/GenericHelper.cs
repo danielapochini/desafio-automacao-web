@@ -12,14 +12,17 @@ namespace DesafioAutomacaoWeb.Utils.Helpers
 {
     public class GenericHelper
     {
+        private static IWebElement element;
+
         public static void ClearTextBox(IWebElement element)
         {
             element.Clear();
         }
          
-        public static void FillField(IWebElement element, string text)
+        public static void ClickElementFromDb(string userId)
         {
-            element.SendKeys(text);
+            element = GetElement(By.LinkText(userId));
+            element.Click();
         }
 
         public static IWebElement GetElement(By locator)
