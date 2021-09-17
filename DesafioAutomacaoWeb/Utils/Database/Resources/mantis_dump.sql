@@ -411,10 +411,7 @@ CREATE TABLE IF NOT EXISTS `mantis_project_hierarchy_table` (
   KEY `idx_project_hierarchy_parent_id` (`parent_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*!40000 ALTER TABLE `mantis_project_hierarchy_table` DISABLE KEYS */;
-INSERT INTO `mantis_project_hierarchy_table` (`child_id`, `parent_id`, `inherit_parent`) VALUES
-	(2, 1, 1),
-	(5, 1, 1);
+/*!40000 ALTER TABLE `mantis_project_hierarchy_table` DISABLE KEYS */; 
 /*!40000 ALTER TABLE `mantis_project_hierarchy_table` ENABLE KEYS */;
 
 DROP TABLE IF EXISTS `mantis_project_table`;
@@ -573,8 +570,10 @@ CREATE TABLE IF NOT EXISTS `mantis_user_print_pref_table` (
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*!40000 ALTER TABLE `mantis_user_print_pref_table` DISABLE KEYS */;
-/*!40000 ALTER TABLE `mantis_user_print_pref_table` ENABLE KEYS */;
+/*!40000 ALTER TABLE `mantis_user_pref_table` DISABLE KEYS */;
+INSERT INTO `mantis_user_pref_table` (`id`, `user_id`, `project_id`, `default_profile`, `default_project`, `refresh_delay`, `redirect_delay`, `bugnote_order`, `email_on_new`, `email_on_assigned`, `email_on_feedback`, `email_on_resolved`, `email_on_closed`, `email_on_reopened`, `email_on_bugnote`, `email_on_status`, `email_on_priority`, `email_on_priority_min_severity`, `email_on_status_min_severity`, `email_on_bugnote_min_severity`, `email_on_reopened_min_severity`, `email_on_closed_min_severity`, `email_on_resolved_min_severity`, `email_on_feedback_min_severity`, `email_on_assigned_min_severity`, `email_on_new_min_severity`, `email_bugnote_limit`, `language`, `timezone`) VALUES
+	(1, 1, 0, 0, 0, 30, 2, 'ASC', 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'english', 'UTC');
+/*!40000 ALTER TABLE `mantis_user_pref_table` ENABLE KEYS */;
 
 DROP TABLE IF EXISTS `mantis_user_profile_table`;
 CREATE TABLE IF NOT EXISTS `mantis_user_profile_table` (

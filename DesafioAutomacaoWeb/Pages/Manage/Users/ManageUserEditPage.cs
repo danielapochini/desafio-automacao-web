@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace DesafioAutomacaoWeb.Pages.Manage.Users
@@ -98,6 +99,15 @@ namespace DesafioAutomacaoWeb.Pages.Manage.Users
         {
             var value = ButtonHelper.CheckButtonDisplayed(ResetPasswordButton);
             return value;
+        }
+
+
+        public string ReturnUsernameWarningBox()
+        {
+            string warningMessage = ReturnWarningMessage();
+
+            return Regex.Matches(warningMessage, "\\\"(.*?)\\\"").ToString().Trim('"');
+
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using DesafioAutomacaoWeb.Bases;
+using DesafioAutomacaoWeb.Utils.Database.Enum;
 using DesafioAutomacaoWeb.Utils.Helpers;
 using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
@@ -6,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace DesafioAutomacaoWeb.Pages.Manage.Users
@@ -49,6 +51,16 @@ namespace DesafioAutomacaoWeb.Pages.Manage.Users
             SubmitForm();
         }
 
+        public void FillFieldsViaJavascript(string username, string realname, string email, UserAccessLevel accessValue, bool enabledCheck, bool protectedCheck)
+        {
+            JavaScriptExecutorHelper.TypeTextBoxJavascript(UsernameTextBox, username);
+            JavaScriptExecutorHelper.TypeTextBoxJavascript(RealNameTextBox, realname);
+            JavaScriptExecutorHelper.TypeTextBoxJavascript(EmailTextBox, email);
+            JavaScriptExecutorHelper.SelectValueJavascript(AccessLevelSelect, accessValue);
+            CheckEnabledCheckBox(enabledCheck);
+            CheckProtectedCheckBox(protectedCheck);
+            JavaScriptExecutorHelper.SubmitInputJavascript(SubmitButton);
+        }
         public void FillOnlyUsername(string username)
         {
             UsernameTextBox.SendKeys(username);

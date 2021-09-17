@@ -19,9 +19,9 @@ namespace DesafioAutomacaoWeb.Pages.Manage.Users
 
         #endregion
 
-        public ManageUserEditPage ClickUserLink(string userId)
+        public ManageUserEditPage ClickUserLink(string username)
         {
-            GenericHelper.ClickElementFromDb(userId);
+            GenericHelper.ClickElement(username);
             return new ManageUserEditPage();
         }
 

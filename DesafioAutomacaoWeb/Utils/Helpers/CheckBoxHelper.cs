@@ -8,21 +8,7 @@ using System.Threading.Tasks;
 namespace DesafioAutomacaoWeb.Utils.Helpers
 {
     public class CheckBoxHelper
-    { 
-        public static bool IsCheckBoxChecked(IWebElement element)
-        {
-             string flag = element.GetAttribute("checked");
-
-            if (flag == null)
-            {
-                return false;
-            }
-            else
-            {
-                return flag.Equals("true") || flag.Equals("checked");
-            }
-        }
-         
+    {   
         public static void CheckCheckBoxJavascript(bool value, IWebElement element)
         {
             string jsElement = element.GetProperty("id");

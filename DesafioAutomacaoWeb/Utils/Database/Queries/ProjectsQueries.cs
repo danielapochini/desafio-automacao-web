@@ -16,5 +16,19 @@ namespace DesafioAutomacaoWeb.Utils.Database.Queries
             return DatabaseHelper.ExecuteDbCommand<ProjectsEntities>(query).FirstOrDefault();
         }
 
+        public static ProjectsEntities ListarInformacoesProjeto(string nomeProjeto)
+        {
+            var query = "SELECT * FROM bugtracker.mantis_project_table " +
+                "WHERE name = '$NAME'".Replace("$NAME", nomeProjeto);
+
+            return DatabaseHelper.ExecuteDbCommand<ProjectsEntities>(query).FirstOrDefault();
+        }
+
+        public static ProjectsEntities ListRandomProjects()
+        {
+            var query = "SELECT * FROM mantis_project_table ORDER BY RAND() DESC LIMIT 1";
+            return DatabaseHelper.ExecuteDbCommand<ProjectsEntities>(query).FirstOrDefault();
+        }
+
     }
 }

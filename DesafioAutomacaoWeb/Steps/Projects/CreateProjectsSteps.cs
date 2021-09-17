@@ -1,6 +1,8 @@
 ﻿using DesafioAutomacaoWeb.Pages;
 using DesafioAutomacaoWeb.Pages.Manage.Projects;
 using DesafioAutomacaoWeb.Utils.Database.Queries;
+using DesafioAutomacaoWeb.Utils.Settings;
+using OpenQA.Selenium.Interactions;
 using System;
 using TechTalk.SpecFlow;
 using Xunit;
@@ -9,8 +11,7 @@ namespace DesafioAutomacaoWeb.Steps.Projects
 {
     [Binding]
     public class CreateProjectsSteps
-    {
-        private readonly ManagePage managePage;
+    { 
         private readonly ManageProjectsPage projectPage;
         private readonly ManageProjectCreatePage projectCreatePage;
 
@@ -21,17 +22,11 @@ namespace DesafioAutomacaoWeb.Steps.Projects
         private string projectDescription;
 
         public CreateProjectsSteps()
-        {
-            managePage = new ManagePage();
+        { 
             projectPage = new ManageProjectsPage();
             projectCreatePage = new ManageProjectCreatePage();
         } 
 
-        [Given(@"selecione a aba Manage Projects")]
-        public void DadoSelecioneAAbaManageProjects()
-        {
-            managePage.NavigateToManageProjectsTab();
-        }
 
         [When(@"clicar no botão de criar novo projeto")]
         public void QuandoClicarNoBotaoDeCriarNovoProjeto()
@@ -51,6 +46,20 @@ namespace DesafioAutomacaoWeb.Steps.Projects
             projectCreatePage.CreateNewProject(name, status, globalCategory, viewStatus, description);
         }
 
+
+        [When(@"não preencher o campo de nome do projeto")]
+        public void QuandoNaoPreencherOCampoDeNomeDoProjeto()
+        {
+            projectCreatePage.CheckRequiredField();
+        }
+
+        [When(@"clicar no botão de Create Project")]
+        public void QuandoClicarNoBotaoDeCreateProject()
+        {
+            projectCreatePage.ClickAddProjectButton();
+        }
+
+
         [Then(@"o projeto deverá ser criado com sucesso no banco de dados")]
         public void EntaoOProjetoDeveraSerCriadoComSucessoNoBancoDeDados()
         {
@@ -61,6 +70,18 @@ namespace DesafioAutomacaoWeb.Steps.Projects
             Assert.Equal(projectViewStatus, projectDb.ViewState.ToString().ToLower());
             Assert.Equal(projectDescription, projectDb.Description);
         }
+
+        [Then(@"deverá retornar a mensagem de campo obrigatório ""(.*)""")]
+        public void EntaoDeveraRetornarAMensagemDeCampoObrigatorio(string expectedMessage)
+        {
+            var actualMessage = projectCreatePage.ReturnRequiredMessage();
+            if (ObjectRepository.Config.GetBrowser() == Utils.Drivers.BrowserType.Firefox && ObjectRepository.Config.GetRemoteDriverExecution() == "false") {
+                Assert.Equal("Preencha este campo.", actualMessage);
+            } else
+            { 
+                Assert.Equal(expectedMessage, actualMessage);
+            }
+        } 
 
     }
 }

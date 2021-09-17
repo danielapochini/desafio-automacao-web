@@ -19,3 +19,12 @@ Exemplos:
 	| Projeto Automação Web Dois   | release     | false          | public     | Teste criação novo projeto dois   |
 	| Projeto Automação Web Três   | obsolete    | true           | private    | Teste criação novo projeto três   |
 	| Projeto Automação Web Quatro | development | false          | public     | Teste criação novo projeto quatro |
+
+
+Cenário: Criar novo projeto - Nome do projeto Obrigatório
+	Dado que o usuário acesse a página de gerenciamento
+	E selecione a aba Manage Projects
+	Quando clicar no botão de criar novo projeto
+	E não preencher o campo de nome do projeto 
+	E clicar no botão de Create Project
+    Então deverá retornar a mensagem de campo obrigatório "Please fill out this field."

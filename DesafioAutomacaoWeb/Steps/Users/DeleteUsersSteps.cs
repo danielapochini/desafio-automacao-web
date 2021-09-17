@@ -36,10 +36,8 @@ namespace DesafioAutomacaoWeb.Steps.Users
          
         [Then(@"a operação deverá ser confirmada")]
         public void EntaoAOperacaoDeveraSerConfirmada()
-        {
-            string warningMessage = manageUserPage.ReturnWarningMessage();
-
-            deletedUsername = Regex.Matches(warningMessage, "\\\"(.*?)\\\"").ToString().Trim('"');
+        { 
+            deletedUsername = manageUserEditPage.ReturnUsernameWarningBox();
 
             manageUserEditPage.ClickDeleteAccountButton();
         }

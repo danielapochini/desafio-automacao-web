@@ -19,10 +19,20 @@ namespace DesafioAutomacaoWeb.Utils.Helpers
             element.Clear();
         }
          
-        public static void ClickElementFromDb(string userId)
+        public static void ClickElement(string userId)
         {
             element = GetElement(By.LinkText(userId));
             element.Click();
+        } 
+        public static IWebElement CheckElement(string userId)
+        {
+            element = GetElement(By.LinkText(userId));
+            return element;
+        }
+         
+        public static IWebElement CheckElementFromTable(string elementValue)
+        {
+            return element = GetElement(By.XPath($"//td[contains(text(),'{elementValue}')]"));
         }
 
         public static IWebElement GetElement(By locator)
