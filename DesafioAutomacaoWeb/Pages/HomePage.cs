@@ -41,6 +41,12 @@ namespace DesafioAutomacaoWeb.Pages
             var text = GenericHelper.GetElementText(UserInfo);
             return text;
         }
+
+        public bool CheckManageButton()
+        {
+            var value = GenericHelper.IsElementPresent(ManageButton);
+            return value;
+        }
         #endregion
 
         #region Navigation
@@ -50,16 +56,22 @@ namespace DesafioAutomacaoWeb.Pages
             return new ReportIssuePage();
         }
 
-        public ManageUserCreatePage NavigateToInviteUsers()
+        public ViewIssuesPage NavigateToViewIssues()
         {
-            GenericHelper.GetElement(InviteUsersButton).Click();
-            return new ManageUserCreatePage();
+            ViewIssuesButton.Click();
+            return new ViewIssuesPage();
         }
 
         public ManagePage NavigateToManage()
         {
-            GenericHelper.GetElement(ManageButton).Click();
+            ManageButton.Click();
             return new ManagePage();
+        }
+
+        public ManageUserCreatePage NavigateToInviteUsers()
+        {
+            InviteUsersButton.Click();
+            return new ManageUserCreatePage();
         }
         #endregion
     }

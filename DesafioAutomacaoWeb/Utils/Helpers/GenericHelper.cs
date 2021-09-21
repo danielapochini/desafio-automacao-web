@@ -7,10 +7,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ExpectedConditions = SeleniumExtras.WaitHelpers.ExpectedConditions;
 
 namespace DesafioAutomacaoWeb.Utils.Helpers
 {
-    public class GenericHelper
+    public static class GenericHelper
     {
         private static IWebElement element;
 
@@ -24,6 +25,7 @@ namespace DesafioAutomacaoWeb.Utils.Helpers
             element = GetElement(By.LinkText(userId));
             element.Click();
         } 
+
         public static IWebElement CheckElement(string userId)
         {
             element = GetElement(By.LinkText(userId));
@@ -42,60 +44,45 @@ namespace DesafioAutomacaoWeb.Utils.Helpers
             else
                 throw new NoSuchElementException("Element Not Found : " + locator.ToString());
         }
-
+         
         public static string GetElementText(IWebElement element)
         {
-            WaitForWebElementInPage(element, TimeSpan.FromSeconds(30));
             return element.Text; 
         }
-
-        public static IWebElement GetElement(IWebElement element)
-        {
-            WaitForWebElementInPage(element, TimeSpan.FromSeconds(30));
-            return element;
-        }
-
+         
         public static bool IsElementPresent(By locator)
         {
             try
             {
                 return ObjectRepository.Driver.FindElements(locator).Count == 1;
             }
-            catch (Exception)
+            catch (NoSuchElementException)
+            {
+                return false;
+            } 
+        }
+
+        public static bool IsElementPresent(IWebElement element)
+        {
+            ObjectRepository.Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(600);
+            try
+            {
+                return element.Displayed;
+            }
+            catch (NoSuchElementException)
             {
                 return false;
             }
-
-        }
-          
-        public static WebDriverWait GetWebdriverWait(TimeSpan timeout)
-        {
-            ObjectRepository.Driver.Manage().Timeouts().ImplicitWait = (TimeSpan.FromSeconds(1));
-            WebDriverWait wait = new WebDriverWait(ObjectRepository.Driver, timeout)
-            {
-                PollingInterval = TimeSpan.FromMilliseconds(500),
-            };
-            wait.IgnoreExceptionTypes(typeof(NoSuchElementException), typeof(ElementNotVisibleException));
-            return wait;
         }
 
-        public static IWebElement WaitForWebElementInPage(IWebElement webElement, TimeSpan timeout)
+         
+        public static void WaitForWebElement(IWebElement webElement, TimeSpan timeout)
         {
-            ObjectRepository.Driver.Manage().Timeouts().ImplicitWait = (TimeSpan.FromSeconds(1));
-            var wait = GetWebdriverWait(timeout);
-            var flag = wait.Until(WaitForWebElementInPageFunc(webElement));
-            ObjectRepository.Driver.Manage().Timeouts().ImplicitWait = (TimeSpan.FromSeconds(ObjectRepository.Config.GetElementLoadTimeOut()));
-            return flag;
-        }
+            WebDriverWait wait = new WebDriverWait(ObjectRepository.Driver, timeout);
+            wait.PollingInterval = TimeSpan.FromMilliseconds(250);
+            wait.IgnoreExceptionTypes(typeof(NoSuchElementException), typeof(ElementNotVisibleException), typeof(StaleElementReferenceException), typeof(ElementNotInteractableException));
+            wait.Until(ExpectedConditions.ElementToBeClickable(webElement));
 
-        private static Func<IWebDriver, IWebElement> WaitForWebElementInPageFunc(IWebElement webElement)
-        {
-            return ((x) =>
-            {
-                if (webElement.Displayed)
-                    return webElement;
-                return null;
-            });
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using DesafioAutomacaoWeb.Pages.Manage.Users;
 using DesafioAutomacaoWeb.Utils.Database.Entities;
+using DesafioAutomacaoWeb.Utils.Database.Enum;
 using DesafioAutomacaoWeb.Utils.Database.Queries;
 using DesafioAutomacaoWeb.Utils.Settings;
 using System;
@@ -15,7 +16,7 @@ namespace DesafioAutomacaoWeb.Steps.Users
         private readonly ManageUsersPage manageUsersPage;
 
         private string createdUsername;
-        private string createdAcessLevel;
+        private UserAccessLevel createdAcessLevel;
         private string createdRealName;
         private string createdEmail;
         private bool createdEnabledStatus;
@@ -31,24 +32,39 @@ namespace DesafioAutomacaoWeb.Steps.Users
         public void QuandoPreencherOsDadosDaNovaConta()
         { 
             createdUsername = "pessoa.teste"; 
-            createdAcessLevel = "viewer";
+            createdAcessLevel = UserAccessLevel.Viewer;
             createdRealName = "Teste";
             createdEmail = "teste@1teste1.com.br";
             createdEnabledStatus = false;
             createdProtectedStatus = true;
-            manageUserCreatePage.CreateNewUser(createdUsername, createdRealName, createdEmail, createdAcessLevel, createdEnabledStatus, createdProtectedStatus);
+            manageUserCreatePage.CreateNewUser(createdUsername, createdRealName, createdEmail, createdAcessLevel.ToString().ToLower(), createdEnabledStatus, createdProtectedStatus);
         }
+
+        [When(@"preencher os dados da nova conta via javascript")]
+        public void QuandoPreencherOsDadosDaNovaContaViaJavascript()
+        {
+            createdUsername = "pessoa.teste.javascript"; 
+            createdRealName = "Teste Js";
+            createdEmail = "teste@js.com.br";
+            createdEnabledStatus = true;
+            createdProtectedStatus = false;
+            createdAcessLevel = UserAccessLevel.Viewer;
+            manageUserCreatePage.FillFieldsViaJavascript(createdUsername, createdRealName, createdEmail, createdAcessLevel, createdEnabledStatus, createdProtectedStatus);
+        }
+
 
         [When(@"preencher os dados de (.*), (.*), (.*), (.*), (.*), (.*) da nova conta")]
         public void QuandoPreencherOsDadosDeDaNovaConta(string username, string realname, string email, string accessLevel, bool enabled, bool _protected)
         {
+            UserAccessLevel parseEnumAcessLevel = (UserAccessLevel)Enum.Parse(typeof(UserAccessLevel), accessLevel,true);
+
             createdUsername = username;
-            createdAcessLevel = accessLevel; 
+            createdAcessLevel = parseEnumAcessLevel; 
             createdRealName = realname;
             createdEmail = email;
             createdEnabledStatus = enabled;
             createdProtectedStatus = _protected;
-            manageUserCreatePage.CreateNewUser(username, realname, email, accessLevel, enabled, _protected);
+            manageUserCreatePage.CreateNewUser(username, realname, email, accessLevel.ToString().ToLower(), enabled, _protected);
         }
 
         [When(@"preencher os dados utilizando um username que já exista no banco de dados")]
@@ -81,7 +97,7 @@ namespace DesafioAutomacaoWeb.Steps.Users
         public void EntaoSeraExibidoAMensagemDeSucesso()
         {
             var expectedMessage = manageUsersPage.ReturnSuccessCode();
-            Assert.Equal("Created user pessoa.teste with an access level of viewer", expectedMessage);
+            Assert.Equal($"Created user {createdUsername} with an access level of {createdAcessLevel.ToString().ToLower()}", expectedMessage);
         }
 
 
@@ -91,7 +107,7 @@ namespace DesafioAutomacaoWeb.Steps.Users
             var userBD = UsersQueries.ListLastUserCreated();
             Assert.Equal(createdUsername, userBD.UserName);
             Assert.Equal(createdRealName, userBD.RealName);
-            Assert.Equal(createdAcessLevel, userBD.AccessLevel.ToString().ToLower());
+            Assert.Equal(createdAcessLevel, userBD.AccessLevel);
             Assert.Equal(createdEnabledStatus, userBD.Enabled); 
             Assert.Equal(createdEmail, userBD.Email); 
         }
@@ -100,7 +116,7 @@ namespace DesafioAutomacaoWeb.Steps.Users
         public void EntaoSeraExibidaAMensagemDeSucesso(string p0)
         {
             var expectedMessage = manageUsersPage.ReturnSuccessCode();
-            var actualMessage = $"Created user {createdUsername} with an access level of {createdAcessLevel}";
+            var actualMessage = $"Created user {createdUsername} with an access level of {createdAcessLevel.ToString().ToLower()}";
             Assert.Equal(expectedMessage, actualMessage); 
         } 
 

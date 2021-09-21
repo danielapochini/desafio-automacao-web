@@ -11,10 +11,16 @@ Cenário: Criar um novo usuário com sucesso
 	Então será exibido a mensagem de sucesso
 	E o usuário será criado com sucesso no banco de dados
 
+Cenário: Criar um novo usuário com sucesso - Via JavaScript
+	Dado que o usuário acesse a página de criar novos usuários
+	Quando preencher os dados da nova conta via javascript
+	Então será exibido a mensagem de sucesso
+	E o usuário será criado com sucesso no banco de dados
+
 Esquema do Cenário: Criar novos usuários com sucesso
 	Dado que o usuário acesse a página de criar novos usuários
 	Quando preencher os dados de <username>, <realname>, <email>, <accessLevel>, <enabled>, <protected> da nova conta  
-	Então será exibida a mensagem de sucesso "Created user <username> with an access level of <acesso>"
+	Então será exibida a mensagem de sucesso "Created user <username> with an access level of <accessLevel>"
 	E o usuário será criado com sucesso no banco de dados
 
 Exemplos:

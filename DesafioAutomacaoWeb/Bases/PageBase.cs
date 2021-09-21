@@ -24,14 +24,28 @@ namespace DesafioAutomacaoWeb.Bases
         [FindsBy(How = How.XPath, Using = "//div[@class='alert alert-success center']//p[1]")]
         private IWebElement SuccessMessage;
 
+        [FindsBy(How = How.XPath, Using = "//span[@class = 'user-info']")]
+        private IWebElement UserInfo;
+
         public PageBase()
         {
             PageFactory.InitElements(ObjectRepository.Driver, this);
         }
 
-        public string PageTitle
+        public string PageTitle()
         {
-            get { return (ObjectRepository.Driver.Title); }
+            return ObjectRepository.Driver.Title; 
+        }
+
+        public string PageUrl()
+        {
+            return ObjectRepository.Driver.Url;
+        }
+
+        public string ReturnUserInfo()
+        {
+            var text = GenericHelper.GetElementText(UserInfo);
+            return text;
         }
 
         public string ReturnErrorCode()
@@ -56,6 +70,11 @@ namespace DesafioAutomacaoWeb.Bases
         {
             var text = GenericHelper.GetElementText(WarningMessage);
             return text;
+        }
+
+        public string ReturnRequiredMessage(IWebElement element)
+        {
+            return element.GetAttribute("validationMessage");
         }
     }
 }

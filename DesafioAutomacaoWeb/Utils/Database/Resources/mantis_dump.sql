@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `mantis_api_token_table` (
 
 /*!40000 ALTER TABLE `mantis_api_token_table` DISABLE KEYS */;
 INSERT INTO `mantis_api_token_table` (`id`, `user_id`, `name`, `hash`, `date_created`, `date_used`) VALUES
-	(1, 1, 'Token API', '08083526e04806724f9c06413566d7a3bca2b72323c5219e82068af8bae708ab', 1619203777, 1631627389);
+	(1, 1, 'Token API', '08083526e04806724f9c06413566d7a3bca2b72323c5219e82068af8bae708ab', 1619203777, 1632148947);
 /*!40000 ALTER TABLE `mantis_api_token_table` ENABLE KEYS */;
 
 DROP TABLE IF EXISTS `mantis_bugnote_table`;
@@ -241,7 +241,8 @@ CREATE TABLE IF NOT EXISTS `mantis_category_table` (
 
 /*!40000 ALTER TABLE `mantis_category_table` DISABLE KEYS */;
 INSERT INTO `mantis_category_table` (`id`, `project_id`, `user_id`, `name`, `status`) VALUES
-	(1, 0, 0, 'General', 0);
+	(1, 0, 0, 'General', 0), 
+	(2, 0, 0, 'Selenium', 0);
 /*!40000 ALTER TABLE `mantis_category_table` ENABLE KEYS */;
 
 DROP TABLE IF EXISTS `mantis_config_table`;
@@ -329,7 +330,9 @@ INSERT INTO `mantis_email_table` (`email_id`, `email`, `subject`, `metadata`, `b
 	(11, 'joao.silva97@gmail.com', '[MantisBT] Password Reset', 'a:3:{s:7:"headers";a:0:{}s:7:"charset";s:5:"utf-8";s:8:"hostname";s:20:"host.docker.internal";}', 'Someone (presumably you) requested a password change through e-mail verification. If this was not you, ignore this message and nothing will happen.\n\nIf you requested this verification, visit the following URL to change your password: \n\nhttp://host.docker.internal:8989/verify.php?id=3&confirm_hash=0sGoMe4TzDAaebTBo2lQpvt7P1CxRhIEBekDGckXZHS5LA9P7zYTICc0EOTZEyj8qxaG6Ilo_P__QCCzZtEl \n\nUsername: leonardo55 \nRemote IP address: 172.18.0.1 \n\nDo not reply to this message', 1631627388),
 	(12, 'email01@valid.com', '[MantisBT] Account registration', 'a:3:{s:7:"headers";a:0:{}s:7:"charset";s:5:"utf-8";s:8:"hostname";s:20:"host.docker.internal";}', 'The user administrator has created an account for you with username "test.updater". In order to complete your registration, visit the following URL (make sure it is entered as the single line) and set your own access password:\n\nhttp://host.docker.internal:8989/verify.php?id=12&confirm_hash=z8uVEOotFp3Oi8KMfQ7emywKrWrxIlj7scRcJfp7imMiOsW5QBfRhq4-Rsj6B6CS-pWExBWRltzNn2KloUjq\n\nIf you did not request any registration, ignore this message and nothing will happen.\n\nDo not reply to this message', 1631627388),
 	(13, 'email02@valid.com', '[MantisBT] Account registration', 'a:3:{s:7:"headers";a:0:{}s:7:"charset";s:5:"utf-8";s:8:"hostname";s:20:"host.docker.internal";}', 'The user administrator has created an account for you with username "test.reporter". In order to complete your registration, visit the following URL (make sure it is entered as the single line) and set your own access password:\n\nhttp://host.docker.internal:8989/verify.php?id=13&confirm_hash=W8ix_OTq8NGVozTJ8IoWxJVvFI9l02saxoMJ4PewCbx-YydFVytopjVl9gROWUCvW-IjwaTVYvJ0x6bBuC39\n\nIf you did not request any registration, ignore this message and nothing will happen.\n\nDo not reply to this message', 1631627388),
-	(14, 'email03@valid.com', '[MantisBT] Account registration', 'a:3:{s:7:"headers";a:0:{}s:7:"charset";s:5:"utf-8";s:8:"hostname";s:20:"host.docker.internal";}', 'The user administrator has created an account for you with username "test.developer". In order to complete your registration, visit the following URL (make sure it is entered as the single line) and set your own access password:\n\nhttp://host.docker.internal:8989/verify.php?id=14&confirm_hash=XHO1sT6IkSZDq_VvKHUlYnGTqRCQe6_vJhEflgPH4y_AKxJ0ECrHTVP_DO29TL8bjrY8aS0nP4ye3Ua0S6g0\n\nIf you did not request any registration, ignore this message and nothing will happen.\n\nDo not reply to this message', 1631627388);
+	(14, 'email03@valid.com', '[MantisBT] Account registration', 'a:3:{s:7:"headers";a:0:{}s:7:"charset";s:5:"utf-8";s:8:"hostname";s:20:"host.docker.internal";}', 'The user administrator has created an account for you with username "test.developer". In order to complete your registration, visit the following URL (make sure it is entered as the single line) and set your own access password:\n\nhttp://host.docker.internal:8989/verify.php?id=14&confirm_hash=XHO1sT6IkSZDq_VvKHUlYnGTqRCQe6_vJhEflgPH4y_AKxJ0ECrHTVP_DO29TL8bjrY8aS0nP4ye3Ua0S6g0\n\nIf you did not request any registration, ignore this message and nothing will happen.\n\nDo not reply to this message', 1631627388),
+	(15, 'email04@valid.com', '[MantisBT] Account registration', 'a:3:{s:7:"headers";a:0:{}s:7:"charset";s:5:"utf-8";s:8:"hostname";s:9:"localhost";}', 'The user administrator has created an account for you with username "test.manager". In order to complete your registration, visit the following URL (make sure it is entered as the single line) and set your own access password:\n\nhttp://localhost:8989/verify.php?id=15&confirm_hash=db8UUM5VkdSm5NyB-27HxmdrMZtzVv_D-zYI7Odvqty5cmqF4atOHGIveodx26iGmjIMrcP4_b28V0oxANno\n\nIf you did not request any registration, ignore this message and nothing will happen.\n\nDo not reply to this message', 1632148878),
+	(16, 'email05@valid.com', '[MantisBT] Account registration', 'a:3:{s:7:"headers";a:0:{}s:7:"charset";s:5:"utf-8";s:8:"hostname";s:9:"localhost";}', 'The user administrator has created an account for you with username "test.viewer". In order to complete your registration, visit the following URL (make sure it is entered as the single line) and set your own access password:\n\nhttp://localhost:8989/verify.php?id=16&confirm_hash=kD0Fi2vC5HT4xPrr1R_ycnPTEo3g4kPSHdQAvOaHvawyWqgwMoN3P77E1qaR7pZHTiDPmpXmJK2TGfvC5FPE\n\nIf you did not request any registration, ignore this message and nothing will happen.\n\nDo not reply to this message', 1632148947);
 /*!40000 ALTER TABLE `mantis_email_table` ENABLE KEYS */;
 
 DROP TABLE IF EXISTS `mantis_filters_table`;
@@ -411,7 +414,7 @@ CREATE TABLE IF NOT EXISTS `mantis_project_hierarchy_table` (
   KEY `idx_project_hierarchy_parent_id` (`parent_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*!40000 ALTER TABLE `mantis_project_hierarchy_table` DISABLE KEYS */; 
+/*!40000 ALTER TABLE `mantis_project_hierarchy_table` DISABLE KEYS */;
 /*!40000 ALTER TABLE `mantis_project_hierarchy_table` ENABLE KEYS */;
 
 DROP TABLE IF EXISTS `mantis_project_table`;
@@ -519,11 +522,9 @@ CREATE TABLE IF NOT EXISTS `mantis_tokens_table` (
 /*!40000 ALTER TABLE `mantis_tokens_table` DISABLE KEYS */;
 INSERT INTO `mantis_tokens_table` (`id`, `owner`, `type`, `value`, `timestamp`, `expiry`) VALUES
 	(10, 11, 7, 'vTHVCTnzNuuGN1PADV7WSFw_yP9eNu43edVR9ePWTe9d3Xn8hAFo9PcZ6wFC6exoH6CWIJdDzUAnaizU6WFP', 1631627387, 1632232187),
-	(11, 1, 3, '2,5,4,3', 1631627387, 1631713811),
 	(12, 3, 7, '0sGoMe4TzDAaebTBo2lQpvt7P1CxRhIEBekDGckXZHS5LA9P7zYTICc0EOTZEyj8qxaG6Ilo_P__QCCzZtEl', 1631627388, 1632232188),
-	(13, 12, 7, 'z8uVEOotFp3Oi8KMfQ7emywKrWrxIlj7scRcJfp7imMiOsW5QBfRhq4-Rsj6B6CS-pWExBWRltzNn2KloUjq', 1631627388, 1632232188),
-	(14, 13, 7, 'W8ix_OTq8NGVozTJ8IoWxJVvFI9l02saxoMJ4PewCbx-YydFVytopjVl9gROWUCvW-IjwaTVYvJ0x6bBuC39', 1631627388, 1632232188),
-	(15, 14, 7, 'XHO1sT6IkSZDq_VvKHUlYnGTqRCQe6_vJhEflgPH4y_AKxJ0ECrHTVP_DO29TL8bjrY8aS0nP4ye3Ua0S6g0', 1631627388, 1632232188);
+	(16, 1, 4, '1', 1632148675, 1632148977),
+	(22, 14, 4, '1', 1632148931, 1632149231);
 /*!40000 ALTER TABLE `mantis_tokens_table` ENABLE KEYS */;
 
 DROP TABLE IF EXISTS `mantis_user_pref_table`;
@@ -561,6 +562,9 @@ CREATE TABLE IF NOT EXISTS `mantis_user_pref_table` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*!40000 ALTER TABLE `mantis_user_pref_table` DISABLE KEYS */;
+INSERT INTO `mantis_user_pref_table` (`id`, `user_id`, `project_id`, `default_profile`, `default_project`, `refresh_delay`, `redirect_delay`, `bugnote_order`, `email_on_new`, `email_on_assigned`, `email_on_feedback`, `email_on_resolved`, `email_on_closed`, `email_on_reopened`, `email_on_bugnote`, `email_on_status`, `email_on_priority`, `email_on_priority_min_severity`, `email_on_status_min_severity`, `email_on_bugnote_min_severity`, `email_on_reopened_min_severity`, `email_on_closed_min_severity`, `email_on_resolved_min_severity`, `email_on_feedback_min_severity`, `email_on_assigned_min_severity`, `email_on_new_min_severity`, `email_bugnote_limit`, `language`, `timezone`) VALUES
+	(1, 1, 0, 0, 0, 30, 2, 'ASC', 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'english', 'UTC'),
+	(2, 13, 0, 0, 2, 30, 2, 'ASC', 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'auto', 'UTC');
 /*!40000 ALTER TABLE `mantis_user_pref_table` ENABLE KEYS */;
 
 DROP TABLE IF EXISTS `mantis_user_print_pref_table`;
@@ -570,10 +574,8 @@ CREATE TABLE IF NOT EXISTS `mantis_user_print_pref_table` (
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*!40000 ALTER TABLE `mantis_user_pref_table` DISABLE KEYS */;
-INSERT INTO `mantis_user_pref_table` (`id`, `user_id`, `project_id`, `default_profile`, `default_project`, `refresh_delay`, `redirect_delay`, `bugnote_order`, `email_on_new`, `email_on_assigned`, `email_on_feedback`, `email_on_resolved`, `email_on_closed`, `email_on_reopened`, `email_on_bugnote`, `email_on_status`, `email_on_priority`, `email_on_priority_min_severity`, `email_on_status_min_severity`, `email_on_bugnote_min_severity`, `email_on_reopened_min_severity`, `email_on_closed_min_severity`, `email_on_resolved_min_severity`, `email_on_feedback_min_severity`, `email_on_assigned_min_severity`, `email_on_new_min_severity`, `email_bugnote_limit`, `language`, `timezone`) VALUES
-	(1, 1, 0, 0, 0, 30, 2, 'ASC', 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'english', 'UTC');
-/*!40000 ALTER TABLE `mantis_user_pref_table` ENABLE KEYS */;
+/*!40000 ALTER TABLE `mantis_user_print_pref_table` DISABLE KEYS */;
+/*!40000 ALTER TABLE `mantis_user_print_pref_table` ENABLE KEYS */;
 
 DROP TABLE IF EXISTS `mantis_user_profile_table`;
 CREATE TABLE IF NOT EXISTS `mantis_user_profile_table` (
@@ -587,6 +589,8 @@ CREATE TABLE IF NOT EXISTS `mantis_user_profile_table` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*!40000 ALTER TABLE `mantis_user_profile_table` DISABLE KEYS */;
+INSERT INTO `mantis_user_profile_table` (`id`, `user_id`, `platform`, `os`, `os_build`, `description`) VALUES
+	(1, 0, 'Windows', '10', 'x64', '');
 /*!40000 ALTER TABLE `mantis_user_profile_table` ENABLE KEYS */;
 
 DROP TABLE IF EXISTS `mantis_user_table`;
@@ -615,7 +619,7 @@ CREATE TABLE IF NOT EXISTS `mantis_user_table` (
 
 /*!40000 ALTER TABLE `mantis_user_table` DISABLE KEYS */;
 INSERT INTO `mantis_user_table` (`id`, `username`, `realname`, `email`, `password`, `enabled`, `protected`, `access_level`, `login_count`, `lost_password_request_count`, `failed_login_count`, `cookie_string`, `last_visit`, `date_created`) VALUES
-	(1, 'administrator', 'Daniela Pochini', 'root@localhost', '200ceb26807d6bf99fd6f4f0d1ca54d4', 1, 0, 90, 5, 0, 0, '8Pfw94O1akdxwD4CcBau-EsWLVgenquSatYCSZdpsbvijzySBNQOzF9LvlenXFxA', 1631627417, 1619203676),
+	(1, 'administrator', 'Daniela Pochini', 'root@localhost', '200ceb26807d6bf99fd6f4f0d1ca54d4', 1, 0, 90, 6, 0, 0, '8Pfw94O1akdxwD4CcBau-EsWLVgenquSatYCSZdpsbvijzySBNQOzF9LvlenXFxA', 1632148677, 1619203676),
 	(3, 'leonardo55', 'Alicia Carvalho', 'joao.silva97@gmail.com', 'f741229e47342b5616e9697b4e05c3d5', 1, 0, 40, 0, 0, 0, 'TXeB2YHfehnAfIT29Qxa64WQydBw4asxr9n7qvthnlJho0pCy2EX_A9-l6fEM9x1', 1621022507, 1621022507),
 	(4, 'marli_macedo21', 'Giovanna Pereira', 'isabela43@gmail.com', '2165fc563da826eab6da80ad3a1bccd0', 1, 0, 40, 0, 0, 0, 'aAV9mRCaYufj3T-CATzDKTj5YeRtv75usbtpc_asXeJB8u5W53_6Ih7eJ1CzDWIg', 1621022518, 1621022518),
 	(5, 'bruna73', 'Henrique Barros', 'beatriz_albuquerque93@gmail.com', '4c2b0706baa9475d92932d4f415a7738', 1, 0, 40, 0, 0, 0, 'fMZIVbGnausECxzNDBr8vWYsfuaDMQpAHj1Aak8ilM-EPjsDChJZqhj2lVafy5pH', 1621022530, 1621022530),
@@ -625,9 +629,11 @@ INSERT INTO `mantis_user_table` (`id`, `username`, `realname`, `email`, `passwor
 	(9, 'joana_macedo', 'Renata Souza', 'joana11@hotmail.com', '6942f198ec20ae0d5148f63cdb510ea5', 1, 0, 40, 0, 0, 0, 'qSuteQy8Z9TpYC64ritx2QzHNN6ph__oIMVJ4Bs3oXKpopidHMlDLPoh4y3zzrM9', 1621022591, 1621022591),
 	(10, 'julia_barros', 'Marli Costa', 'enzo_xavier40@live.com', 'affcd66a7924598a9e7080ddcb01c42f', 1, 0, 40, 0, 0, 0, '1zbQxLH0SSwBqgkYrKmzC8t1gCpdxa37OUwbmJ0MCfQGfse369jtdB6eCi8R5N07', 1621022603, 1621022603),
 	(11, 'isabela.martins27', 'Marcos Franco', 'felipe_melo@gmail.com', '279468535f1c974fe2b954ba406877f9', 1, 0, 40, 0, 0, 0, 'RCGF3tGcI2wA0s5IzvWlABjumOKa773pzYLSDoOhIT7AvvF1zUzDeRnI5pjLhI9S', 1631627387, 1631627387),
-	(12, 'test.updater', 'Usuario Nivel Updater', 'email01@valid.com', 'c5ce81ac1109df434c1e127ce95bbe89', 1, 0, 40, 0, 0, 0, 'w3VBmF2BGW7cMdc3IhRcNk815RFIfJdrh1HZksnYKMqqmDQnBcx3jruIWrUFqPnb', 1631627388, 1631627388),
-	(13, 'test.reporter', 'Usuario Nivel Reporter', 'email02@valid.com', '5b5ddbb3035c3f87ff232011dd9691cd', 1, 0, 25, 0, 0, 0, 'iXxbGiVAvtQ_yc8FLJ4pZtCOT6RQaGXaOxjtEjVy2NRZnz4yGj79VT6WNP6XgGCU', 1631627388, 1631627388),
-	(14, 'test.developer', 'Usuario Nivel Developer', 'email03@valid.com', 'e7898ec299764ff3bab2c427152f46e4', 1, 0, 55, 0, 0, 0, 'cwJAuVWlgnvDSUaSr51BuLsfdgY0q6IEACtE8CQU6-4v2UVoYRuKK-2d9SYPchc2', 1631627388, 1631627388);
+	(12, 'test.updater', 'Usuario Nivel Updater', 'email01@valid.com', 'aa1bf4646de67fd9086cf6c79007026c', 1, 0, 40, 1, 0, 0, '7JoNeeleXegJDJ40jJoowi3akws-IJCJ7KRmeYipjJwRDkT-DGmS22Fc20NXs27G', 1631627388, 1631627388),
+	(13, 'test.reporter', 'Usuario Nivel Reporter', 'email02@valid.com', 'aa1bf4646de67fd9086cf6c79007026c', 1, 0, 25, 1, 0, 0, '2ShUqSpptUcWbvqQd9n8RZ7Z7tVZte8Z5e4q7QKO1YHGWNdm56PVg9GBhiNx7n4o', 1631627388, 1631627388),
+	(14, 'test.developer', 'Usuario Nivel Developer', 'email03@valid.com', 'aa1bf4646de67fd9086cf6c79007026c', 1, 0, 55, 2, 0, 0, 'RYTtF0Dsse_sBQTmKmohuKdYpFnMofyiPHjDLJcyth-NiXaGuUySS8p0t26-xOcC', 1632148932, 1631627388),
+	(15, 'test.manager', 'Usuario Nivel Manager', 'email04@valid.com', 'aa1bf4646de67fd9086cf6c79007026c', 1, 0, 70, 1, 0, 0, '_MB22IVNeHzO9abp2DI8fW8HUHTByc7ZfGfaSABKihYg9mW6ILivwJufBb3ghIQT', 1632148878, 1632148878),
+	(16, 'test.viewer', 'Usuario Nivel Viewer', 'email05@valid.com', 'aa1bf4646de67fd9086cf6c79007026c', 1, 0, 10, 1, 0, 0, 'mtOlrzho6q8_WoajIACTFGJaacVOFhFNU3tIwCnVyegU4swlcrZxe-r0_irav9Nw', 1632148947, 1632148947);
 /*!40000 ALTER TABLE `mantis_user_table` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

@@ -26,7 +26,7 @@ namespace DesafioAutomacaoWeb.Steps.Users
         {
             editedUsername = "teste.username";
             editedRealName = "Nome Alterado";
-            editedEmail = "email05@valid.com";
+            editedEmail = "email06@valid.com";
             editedAccessLevel = "viewer";
             manageUserEditPage.EditExistingUser(editedUsername, editedRealName, editedEmail, editedAccessLevel);
         }

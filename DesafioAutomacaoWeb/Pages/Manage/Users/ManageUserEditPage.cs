@@ -91,17 +91,16 @@ namespace DesafioAutomacaoWeb.Pages.Manage.Users
 
         public bool CheckDeleteAccountButton()
         {
-            var value = ButtonHelper.CheckButtonDisplayed(DeleteAccountButton);
+            var value = GenericHelper.IsElementPresent(DeleteAccountButton);
             return value;
         }
 
         public bool CheckResetPasswordButton()
         {
-            var value = ButtonHelper.CheckButtonDisplayed(ResetPasswordButton);
+            var value = GenericHelper.IsElementPresent(ResetPasswordButton);
             return value;
         }
-
-
+         
         public string ReturnUsernameWarningBox()
         {
             string warningMessage = ReturnWarningMessage();
