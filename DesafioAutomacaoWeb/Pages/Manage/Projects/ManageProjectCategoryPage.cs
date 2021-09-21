@@ -1,30 +1,20 @@
 ﻿using DesafioAutomacaoWeb.Bases;
 using DesafioAutomacaoWeb.Utils.Helpers;
+using DesafioAutomacaoWeb.Utils.Settings;
 using OpenQA.Selenium;
-using SeleniumExtras.PageObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DesafioAutomacaoWeb.Pages.Manage.Projects
 {
     public class ManageProjectCategoryPage : PageBase
     {
         #region WebElements
-        [FindsBy(How = How.Id, Using = "proj-category-name")]
-        private IWebElement ProjectCategoryTextBox;
 
-        [FindsBy(How = How.Id, Using = "proj-category-assigned-to")]
-        private IWebElement ProjectCategoryAssigneeSelect;
+        private IWebElement ProjectCategoryTextBox => ObjectRepository.Driver.FindElement(By.Id("proj-category-name"));
+        private IWebElement ProjectCategoryAssigneeSelect => ObjectRepository.Driver.FindElement(By.Id("proj-category-assigned-to"));
+        private IWebElement UpdateCategoryButton => ObjectRepository.Driver.FindElement(By.XPath("//input[@value='Update Category']"));
+        private IWebElement DeleteCategoryButton => ObjectRepository.Driver.FindElement(By.XPath("//input[@value='Delete Category']"));
 
-        [FindsBy(How = How.XPath, Using = "//input[@value='Update Category']")]
-        private IWebElement UpdateCategoryButton;
-
-        [FindsBy(How = How.XPath, Using = "//input[@value='Delete Category']")]
-        private IWebElement DeleteCategoryButton;
-        #endregion
+        #endregion WebElements
 
         #region Actions
 
@@ -41,6 +31,7 @@ namespace DesafioAutomacaoWeb.Pages.Manage.Projects
             ProjectCategoryTextBox.Clear();
             ClickUpdateCategoryButton();
         }
+
         public void ClickUpdateCategoryButton()
         {
             UpdateCategoryButton.Click();
@@ -50,6 +41,7 @@ namespace DesafioAutomacaoWeb.Pages.Manage.Projects
         {
             DeleteCategoryButton.Click();
         }
-        #endregion
+
+        #endregion Actions
     }
 }

@@ -1,30 +1,21 @@
 ﻿using DesafioAutomacaoWeb.Bases;
-using DesafioAutomacaoWeb.Utils.Helpers;
+using DesafioAutomacaoWeb.Utils.Settings;
 using OpenQA.Selenium;
-using SeleniumExtras.PageObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DesafioAutomacaoWeb.Pages
 {
     public class LostPasswordPage : PageBase
     {
-        #region WebElements 
+        #region WebElements
 
-        [FindsBy(How = How.Id, Using = "username")]
-        private IWebElement LoginTextBox;
+        private IWebElement LoginTextBox => ObjectRepository.Driver.FindElement(By.Id("username"));
+        private IWebElement EmailTextBox => ObjectRepository.Driver.FindElement(By.Id("email-field"));
+        private IWebElement SubmitButton => ObjectRepository.Driver.FindElement(By.XPath("//input[@value= 'Submit']"));
 
-        [FindsBy(How = How.Id, Using = "email-field")]
-        private IWebElement EmailTextBox;
-
-        [FindsBy(How = How.XPath, Using = "//input[@value= 'Submit']")]
-        private IWebElement SubmitButton; 
-        #endregion
+        #endregion WebElements
 
         #region Actions
+
         public void FillEmail(string email)
         {
             EmailTextBox.SendKeys(email);
@@ -35,7 +26,7 @@ namespace DesafioAutomacaoWeb.Pages
         {
             LoginTextBox.Clear();
         }
-         
-        #endregion
+
+        #endregion Actions
     }
 }

@@ -1,51 +1,28 @@
 ﻿using DesafioAutomacaoWeb.Bases;
 using DesafioAutomacaoWeb.Utils.Helpers;
+using DesafioAutomacaoWeb.Utils.Settings;
 using OpenQA.Selenium;
-using SeleniumExtras.PageObjects;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace DesafioAutomacaoWeb.Pages.Manage.Users
 {
     public class ManageUserEditPage : PageBase
     {
-        #region WebElements 
-
-        [FindsBy(How = How.XPath, Using = "//input[@value= 'Delete User']")]
-        private IWebElement DeleteUserButton;
-
-        [FindsBy(How = How.XPath, Using = "//input[@value= 'Delete Account']")]
-        private IWebElement DeleteAccountButton;
-
-        [FindsBy(How = How.XPath, Using = "//input[@value= 'Reset Password']")]
-        private IWebElement ResetPasswordButton;
-
-        [FindsBy(How = How.XPath, Using = "//input[@value= 'Update User']")]
-        private IWebElement UpdateUserButton;
-
-        [FindsBy(How = How.Id, Using = "edit-username")]
-        private IWebElement EditUsernameTextBox;
-
-        [FindsBy(How = How.Id, Using = "edit-realname")]
-        private IWebElement EditRealnameTextBox;
+        #region WebElements
          
-        [FindsBy(How = How.Id, Using = "email-field")]
-        private IWebElement EditEmailTextBox;
+        private IWebElement DeleteUserButton => ObjectRepository.Driver.FindElement(By.XPath("//input[@value= 'Delete User']"));
+        private IWebElement DeleteAccountButton => ObjectRepository.Driver.FindElement(By.XPath("//input[@value= 'Delete Account']"));
+        private IWebElement ResetPasswordButton => ObjectRepository.Driver.FindElement(By.XPath("//input[@value= 'Reset Password']"));
+        private IWebElement UpdateUserButton => ObjectRepository.Driver.FindElement(By.XPath("//input[@value= 'Update User']"));
+        private IWebElement EditUsernameTextBox => ObjectRepository.Driver.FindElement(By.Id("edit-username"));
+        private  IWebElement EditRealnameTextBox => ObjectRepository.Driver.FindElement(By.Id("edit-realname"));
+        private IWebElement EditEmailTextBox => ObjectRepository.Driver.FindElement(By.Id("email-field"));
+        private IWebElement EditAccessLevelSelect => ObjectRepository.Driver.FindElement(By.Id("edit-access-level"));
+          
+        #endregion WebElements
 
-        [FindsBy(How = How.Id, Using = "edit-access-level")]
-        private IWebElement EditAccessLevelSelect;
-
-        [FindsBy(How = How.Id, Using = "edit-enabled")]
-        private IWebElement EditEnabledCheckBox;
-
-        [FindsBy(How = How.Id, Using = "edit-protected")]
-        private IWebElement EditProtectedCheckBox;
-        #endregion
-
+        #region Actions
         public void EditExistingUser(string username, string realname, string email, string accessLevel)
         {
             ClearAllTextBoxFields();
@@ -55,6 +32,7 @@ namespace DesafioAutomacaoWeb.Pages.Manage.Users
             SelectAccessLevel(accessLevel);
             UpdateUserButton.Click();
         }
+
         public void FillUsername(string username)
         {
             GenericHelper.ClearTextBox(EditUsernameTextBox);
@@ -68,11 +46,12 @@ namespace DesafioAutomacaoWeb.Pages.Manage.Users
             GenericHelper.ClearTextBox(EditRealnameTextBox);
             GenericHelper.ClearTextBox(EditEmailTextBox);
         }
+
         public void ClickDeleteUserButton()
         {
             DeleteUserButton.Click();
         }
-        
+
         public void ClickDeleteAccountButton()
         {
             DeleteAccountButton.Click();
@@ -82,7 +61,6 @@ namespace DesafioAutomacaoWeb.Pages.Manage.Users
         {
             ResetPasswordButton.Click();
         }
-         
 
         public void SelectAccessLevel(string accessValue)
         {
@@ -91,22 +69,24 @@ namespace DesafioAutomacaoWeb.Pages.Manage.Users
 
         public bool CheckDeleteAccountButton()
         {
-            var value = GenericHelper.IsElementPresent(DeleteAccountButton);
+            bool value = GenericHelper.IsElementPresent(By.XPath("//input[@value= 'Delete Account']"));
             return value;
         }
 
         public bool CheckResetPasswordButton()
         {
-            var value = GenericHelper.IsElementPresent(ResetPasswordButton);
+            bool value = GenericHelper.IsElementPresent(By.XPath("//input[@value= 'Reset Password']"));
             return value;
         }
-         
+
         public string ReturnUsernameWarningBox()
         {
             string warningMessage = ReturnWarningMessage();
 
             return Regex.Matches(warningMessage, "\\\"(.*?)\\\"").ToString().Trim('"');
-
         }
+        #endregion Actions
+
+
     }
 }

@@ -1,52 +1,34 @@
 ﻿using DesafioAutomacaoWeb.Bases;
 using DesafioAutomacaoWeb.Utils.Helpers;
+using DesafioAutomacaoWeb.Utils.Settings;
 using OpenQA.Selenium;
-using SeleniumExtras.PageObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DesafioAutomacaoWeb.Pages
 {
     public class ReportIssuePage : PageBase
-    { 
+    {
         #region WebElements
-        [FindsBy(How = How.Id, Using = "category_id")]
-        private IWebElement SelectCategory;
 
-        [FindsBy(How = How.Id, Using = "reproducibility")]
-        private IWebElement SelectReproducibility;
+        private IWebElement SelectCategory => ObjectRepository.Driver.FindElement(By.Id("category_id"));
+        private IWebElement SelectReproducibility => ObjectRepository.Driver.FindElement(By.Id("reproducibility"));
+        private IWebElement SelectSeverity => ObjectRepository.Driver.FindElement(By.Id("severity"));
+        private IWebElement SelectPriority => ObjectRepository.Driver.FindElement(By.Id("priority"));
+        private IWebElement SelectProfile => ObjectRepository.Driver.FindElement(By.Id("profile_id"));
+        private IWebElement SummaryTextBox => ObjectRepository.Driver.FindElement(By.Id("summary"));
+        private IWebElement DescriptionTextBox => ObjectRepository.Driver.FindElement(By.Id("description"));
+        private IWebElement StepsTextBox => ObjectRepository.Driver.FindElement(By.Id("steps_to_reproduce"));
+        private IWebElement AdditionalInfoTextBox => ObjectRepository.Driver.FindElement(By.Id("additional_info"));
+        private IWebElement TagTextBox => ObjectRepository.Driver.FindElement(By.Id("tag_string"));
+        private IWebElement DropFileUpload => ObjectRepository.Driver.FindElement(By.XPath("//input[@type='file']"));
+         
+        private IWebElement SubmitButton => ObjectRepository.Driver.FindElement(By.XPath("//input[@value='Submit Issue']"));
 
-        [FindsBy(How = How.Id, Using = "severity")]
-        private IWebElement SelectSeverity;
-
-        [FindsBy(How = How.Id, Using = "priority")]
-        private IWebElement SelectPriority;
-
-        [FindsBy(How = How.Id, Using = "profile_id")]
-        private IWebElement SelectProfile;
-
-        [FindsBy(How = How.Id, Using = "summary")]
-        private IWebElement SummaryTextBox;
-
-        [FindsBy(How = How.Id, Using = "description")]
-        private IWebElement DescriptionTextBox;
-
-        [FindsBy(How = How.Id, Using = "steps_to_reproduce")]
-        private IWebElement StepsTextBox;
-
-        [FindsBy(How = How.Id, Using = "additional_info")]
-        private IWebElement AdditionalInfoTextBox;
-
-
-        [FindsBy(How = How.XPath, Using = "//input[@value='Submit Issue']")]
-        private IWebElement SubmitButton;
-        #endregion
+        #endregion WebElements
 
         #region Actions
-        public void ReportNewIssue(string category, string reproducibility, string severity, string priority, string profile, string summary, string description, string steps, string additionalInfo)
+
+        public void ReportNewIssue(string category, string reproducibility, string severity, string priority,
+            string profile, string summary, string description, string steps, string tags, string additionalInfo, string pathToFile)
         {
             ComboBoxHelper.SelectElement(SelectCategory, category);
             ComboBoxHelper.SelectElement(SelectReproducibility, reproducibility);
@@ -56,9 +38,34 @@ namespace DesafioAutomacaoWeb.Pages
             SummaryTextBox.SendKeys(summary);
             DescriptionTextBox.SendKeys(description);
             StepsTextBox.SendKeys(steps);
+            TagTextBox.SendKeys(tags);
             AdditionalInfoTextBox.SendKeys(additionalInfo);
+            DropFileUpload.SendKeys(pathToFile);
+        }
+
+        public void ReportBasicIssue(int category, string summary, string description)
+        {
+            ComboBoxHelper.SelectElement(SelectCategory, category);
+            SummaryTextBox.SendKeys(summary);
+            DescriptionTextBox.SendKeys(description); 
+        }
+         
+
+        public void SubmitIssue()
+        {
             SubmitButton.Click();
         }
-        #endregion
+        #endregion Actions
+
+        public void CheckSummaryRequiredField()
+        {
+            GenericHelper.ClearTextBox(SummaryTextBox);
+        } 
+         
+        public string ReturnRequiredMessage()
+        {
+            return GetValidationMessage(SummaryTextBox);
+        }
+
     }
 }

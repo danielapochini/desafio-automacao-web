@@ -9,9 +9,8 @@ Cenário: Permissão de Acesso - Administrator
 Cenário: Permissão de Acesso - Manager 
 	 Dado que o usuário acesse o Mantis
 	 Quando efetuar o login como manager
-	 E acessar a página de gerenciamento
-	 Então não possuirá acesso completo ao gerenciamento do sistema
-	 Mas possuirá acesso a area de gerenciamento de projetos
+	 E acessar a página de gerenciamento 
+	 Então possuirá acesso a area de gerenciamento de projetos
 
 Cenário: Permissão de Acesso - Developer
 	 Dado que o usuário acesse o Mantis

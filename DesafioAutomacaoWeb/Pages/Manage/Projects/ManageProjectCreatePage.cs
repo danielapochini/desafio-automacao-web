@@ -1,46 +1,27 @@
 ﻿using DesafioAutomacaoWeb.Bases;
 using DesafioAutomacaoWeb.Utils.Helpers;
 using DesafioAutomacaoWeb.Utils.Settings;
-using OpenQA.Selenium;
-using SeleniumExtras.PageObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+using OpenQA.Selenium; 
 
 namespace DesafioAutomacaoWeb.Pages.Manage.Projects
 {
     public class ManageProjectCreatePage : PageBase
     {
         #region WebElements
-        [FindsBy(How = How.Id, Using = "project-name")]
-        private IWebElement ProjectNameTextBox;
 
-        [FindsBy(How = How.Id, Using = "project-status")] 
-        private IWebElement ProjectStatusSelect;
+        private IWebElement ProjectNameTextBox => ObjectRepository.Driver.FindElement(By.Id("project-name"));
+        private IWebElement ProjectStatusSelect => ObjectRepository.Driver.FindElement(By.Id("project-status"));
+        private IWebElement ProjectViewStatusSelect => ObjectRepository.Driver.FindElement(By.Id("project-view-state"));
+        private IWebElement ProjectDescriptionTextArea => ObjectRepository.Driver.FindElement(By.Id("project-description"));
+        private IWebElement ProjectInheritCheckBox => ObjectRepository.Driver.FindElement(By.Id("project-inherit-global"));
+        private IWebElement AddProjectButton => ObjectRepository.Driver.FindElement(By.XPath("//input[@value='Add Project']"));
+        private IWebElement UpdateProjectButton => ObjectRepository.Driver.FindElement(By.XPath("//input[@value='Update Project']"));
+        private IWebElement DeleteProjectButton => ObjectRepository.Driver.FindElement(By.XPath("//input[@value='Delete Project']"));
 
-        [FindsBy(How = How.Id, Using = "project-view-state")]
-        private IWebElement ProjectViewStatusSelect;
-
-        [FindsBy(How = How.Id, Using = "project-description")]
-        private IWebElement ProjectDescriptionTextArea;
-
-        [FindsBy(How = How.Id, Using = "project-inherit-global")]
-        private IWebElement ProjectInheritCheckBox;
-
-        [FindsBy(How = How.XPath, Using = "//input[@value='Add Project']")]
-        private IWebElement AddProjectButton;
-
-        [FindsBy(How = How.XPath, Using = "//input[@value='Update Project']")]
-        private IWebElement UpdateProjectButton;
-
-        [FindsBy(How = How.XPath, Using = "//input[@value='Delete Project']")]
-        private IWebElement DeleteProjectButton;
-        #endregion
+        #endregion WebElements
 
         #region Actions
+
         public void CreateNewProject(string name, string status, bool value, string viewstatus, string description)
         {
             ProjectNameTextBox.SendKeys(name);
@@ -65,8 +46,9 @@ namespace DesafioAutomacaoWeb.Pages.Manage.Projects
         public void ClearAllTextBoxFields()
         {
             GenericHelper.ClearTextBox(ProjectNameTextBox);
-            GenericHelper.ClearTextBox(ProjectDescriptionTextArea); 
+            GenericHelper.ClearTextBox(ProjectDescriptionTextArea);
         }
+
         public void ClickAddProjectButton()
         {
             AddProjectButton.Click();
@@ -89,24 +71,21 @@ namespace DesafioAutomacaoWeb.Pages.Manage.Projects
 
         public void CheckProjectInheritCheckBox(bool value)
         {
-            CheckBoxHelper.CheckCheckBoxJavascript(value, ProjectInheritCheckBox);
+            JavaScriptExecutorHelper.CheckCheckBoxJavascript(value, ProjectInheritCheckBox);
         }
 
         public string ReturnRequiredMessage()
         {
-            return ProjectNameTextBox.GetAttribute("validationMessage");
+            return GetValidationMessage(ProjectNameTextBox);
         }
-
 
         public string ReturnProjectWarningBox()
         {
             string warningMessage = ReturnWarningMessage();
-            string projectName = warningMessage.Substring(warningMessage.IndexOf(":") +2);
+            string projectName = warningMessage.Substring(warningMessage.IndexOf(":") + 2);
             return projectName;
         }
-        #endregion
 
-        #region Navigation
-        #endregion
+        #endregion Actions
     }
 }

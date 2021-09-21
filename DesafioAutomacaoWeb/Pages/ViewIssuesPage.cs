@@ -1,48 +1,27 @@
 ﻿using DesafioAutomacaoWeb.Bases;
 using DesafioAutomacaoWeb.Utils.Helpers;
+using DesafioAutomacaoWeb.Utils.Settings;
 using OpenQA.Selenium;
-using SeleniumExtras.PageObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DesafioAutomacaoWeb.Pages
 {
     public class ViewIssuesPage : PageBase
     {
         #region WebElements
-        [FindsBy(How = How.LinkText, Using = "0000005")]
-        private IWebElement BugLink;
 
-        [FindsBy(How = How.XPath, Using = "//select[@name='handler_id']")]
-        private IWebElement HandlerSelect;
+        private IWebElement BugLink => ObjectRepository.Driver.FindElement(By.LinkText("0000005"));
+        private IWebElement HandlerSelect => ObjectRepository.Driver.FindElement(By.XPath("//select[@name='handler_id']"));
+        private IWebElement ActionSelect => ObjectRepository.Driver.FindElement(By.XPath("//select[@name='action']"));
+        private IWebElement AllIssuesCheckBox => ObjectRepository.Driver.FindElement(By.Id("bug_arr_all"));
+        private IWebElement AssignButton => ObjectRepository.Driver.FindElement(By.XPath("//input[@value='Assign To:']"));
+        private IWebElement OkButton => ObjectRepository.Driver.FindElement(By.XPath("//input[@value='OK']"));
+        private IWebElement UpdateButton => ObjectRepository.Driver.FindElement(By.XPath("//input[@value='Update Severity']"));
+        private IWebElement AssignedToText => ObjectRepository.Driver.FindElement(By.XPath("//td[@class='bug-assigned-to']"));
+        private IWebElement SeverityText => ObjectRepository.Driver.FindElement(By.XPath("//td[@class='column-severity']"));
 
-        [FindsBy(How = How.XPath, Using = "//select[@name='action']")]
-        private IWebElement ActionSelect;
+        #endregion WebElements
 
-        [FindsBy(How = How.Id, Using = "bug_arr_all")]
-        private IWebElement AllIssuesCheckBox;
-
-        [FindsBy(How = How.XPath, Using = "//input[@value='Assign To:']")]
-        private IWebElement AssignButton;
-
-        [FindsBy(How = How.XPath, Using = "//input[@value='OK']")]
-        private IWebElement OkButton;
-
-        [FindsBy(How = How.XPath, Using = "//input[@value='Update Severity']")]
-        private IWebElement UpdateButton; 
-
-        [FindsBy(How = How.XPath, Using = "//td[@class='bug-assigned-to']")]
-        private IWebElement AssignedToText;
-
-        [FindsBy(How = How.XPath, Using = "//td[@class='column-severity']")]
-        private IWebElement SeverityText;
-
-        #endregion
-
-        #region Actions 
+        #region Actions
 
         public void AssignBug()
         {
@@ -53,12 +32,12 @@ namespace DesafioAutomacaoWeb.Pages
 
         public void UpdateBug()
         {
-            CheckBoxHelper.CheckCheckBoxJavascript(true, AllIssuesCheckBox);
+            JavaScriptExecutorHelper.CheckCheckBoxJavascript(true, AllIssuesCheckBox);
             ComboBoxHelper.SelectElement(ActionSelect, "Update Severity");
             OkButton.Click();
             UpdateButton.Click();
         }
-          
+
         public void ViewBug()
         {
             BugLink.Click();
@@ -73,10 +52,7 @@ namespace DesafioAutomacaoWeb.Pages
         {
             return SeverityText.Text.Trim();
         }
-        #endregion
 
-        #region Navigation
-
-        #endregion
+        #endregion Actions
     }
 }

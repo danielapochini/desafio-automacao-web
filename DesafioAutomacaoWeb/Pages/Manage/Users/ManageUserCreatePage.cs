@@ -1,46 +1,29 @@
 ﻿using DesafioAutomacaoWeb.Bases;
 using DesafioAutomacaoWeb.Utils.Database.Enum;
 using DesafioAutomacaoWeb.Utils.Helpers;
+using DesafioAutomacaoWeb.Utils.Settings;
 using OpenQA.Selenium;
-using SeleniumExtras.PageObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace DesafioAutomacaoWeb.Pages.Manage.Users
 {
     public class ManageUserCreatePage : PageBase
     {
-        #region WebElements 
-        [FindsBy(How = How.Id, Using = "user-username")]
-        private IWebElement UsernameTextBox;
+        #region WebElements
 
-        [FindsBy(How = How.Id, Using = "user-realname")]
-        private IWebElement RealNameTextBox;
+        private IWebElement UsernameTextBox => ObjectRepository.Driver.FindElement(By.Id("user-username"));
+        private IWebElement RealNameTextBox => ObjectRepository.Driver.FindElement(By.Id("user-realname"));
+        private IWebElement EmailTextBox => ObjectRepository.Driver.FindElement(By.Id("email-field"));
+        private IWebElement AccessLevelSelect => ObjectRepository.Driver.FindElement(By.Id("user-access-level"));
+        private IWebElement EnabledCheckBox => ObjectRepository.Driver.FindElement(By.Id("user-enabled"));
+        private IWebElement ProtectedCheckBox => ObjectRepository.Driver.FindElement(By.Id("user-protected"));
+        private IWebElement SubmitButton => ObjectRepository.Driver.FindElement(By.XPath("//input[@value= 'Create User']"));
 
-        [FindsBy(How = How.Id, Using = "email-field")]
-        private IWebElement EmailTextBox;
-
-        [FindsBy(How = How.Id, Using = "user-access-level")]
-        private IWebElement AccessLevelSelect;
-         
-        [FindsBy(How = How.Id, Using = "user-enabled")]
-        private IWebElement EnabledCheckBox;
-
-        [FindsBy(How = How.Id, Using = "user-protected")]
-        private IWebElement ProtectedCheckBox;
-
-        [FindsBy(How = How.XPath, Using = "//input[@value= 'Create User']")]
-        private IWebElement SubmitButton;
-         
-        #endregion
+        #endregion WebElements
 
         #region Actions
 
-        public void CreateNewUser(string username, string realname, string email, string accessValue, bool enabledCheck, bool protectedCheck)
+        public void CreateNewUser(string username, string realname, string email, string accessValue, bool enabledCheck,
+            bool protectedCheck)
         {
             UsernameTextBox.SendKeys(username);
             RealNameTextBox.SendKeys(realname);
@@ -51,7 +34,8 @@ namespace DesafioAutomacaoWeb.Pages.Manage.Users
             SubmitForm();
         }
 
-        public void FillFieldsViaJavascript(string username, string realname, string email, UserAccessLevel accessValue, bool enabledCheck, bool protectedCheck)
+        public void FillFieldsViaJavascript(string username, string realname, string email, UserAccessLevel accessValue,
+            bool enabledCheck, bool protectedCheck)
         {
             JavaScriptExecutorHelper.TypeTextBoxJavascript(UsernameTextBox, username);
             JavaScriptExecutorHelper.TypeTextBoxJavascript(RealNameTextBox, realname);
@@ -61,31 +45,28 @@ namespace DesafioAutomacaoWeb.Pages.Manage.Users
             CheckProtectedCheckBox(protectedCheck);
             JavaScriptExecutorHelper.SubmitInputJavascript(SubmitButton);
         }
+
         public void FillOnlyUsername(string username)
         {
             UsernameTextBox.SendKeys(username);
             SubmitForm();
-        } 
-           
+        }
 
         public void CheckEnabledCheckBox(bool value)
         {
-            CheckBoxHelper.CheckCheckBoxJavascript(value, EnabledCheckBox);
+            JavaScriptExecutorHelper.CheckCheckBoxJavascript(value, EnabledCheckBox);
         }
 
         public void CheckProtectedCheckBox(bool value)
         {
-            CheckBoxHelper.CheckCheckBoxJavascript(value, ProtectedCheckBox);
+            JavaScriptExecutorHelper.CheckCheckBoxJavascript(value, ProtectedCheckBox);
         }
 
         public void SubmitForm()
         {
             SubmitButton.Submit();
         }
-         
-        #endregion
 
-        #region Navigation
-        #endregion
+        #endregion Actions
     }
 }

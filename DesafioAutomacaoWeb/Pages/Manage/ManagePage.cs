@@ -3,85 +3,72 @@ using DesafioAutomacaoWeb.Pages.Manage.Projects;
 using DesafioAutomacaoWeb.Pages.Manage.Tags;
 using DesafioAutomacaoWeb.Pages.Manage.Users;
 using DesafioAutomacaoWeb.Utils.Helpers;
+using DesafioAutomacaoWeb.Utils.Settings;
 using OpenQA.Selenium;
-using SeleniumExtras.PageObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DesafioAutomacaoWeb.Pages
 {
     public class ManagePage : PageBase
     {
-        #region WebElements 
+        #region WebElements
 
-        [FindsBy(How = How.LinkText, Using = "Manage Users")]
-        private IWebElement ManageUsersTab;
+        private IWebElement ManageUsersTab => ObjectRepository.Driver.FindElement(By.LinkText("Manage Users"));
+        private IWebElement ManageProjectsTab => ObjectRepository.Driver.FindElement(By.LinkText("Manage Projects"));
+        private IWebElement ManageTagsTab => ObjectRepository.Driver.FindElement(By.LinkText("Manage Tags"));
+        private IWebElement ManageCustomFieldsTab => ObjectRepository.Driver.FindElement(By.LinkText("Manage Custom Fields"));
+        private IWebElement ManageGlobalProfilesTab => ObjectRepository.Driver.FindElement(By.LinkText("Manage Global Profiles"));
+        private IWebElement ManagePluginsTab => ObjectRepository.Driver.FindElement(By.LinkText("Manage Plugins"));
+        private IWebElement ManageConfigurationTab => ObjectRepository.Driver.FindElement(By.LinkText("Manage Configuration"));
 
-        [FindsBy(How = How.LinkText, Using = "Manage Projects")]
-        private IWebElement ManageProjectsTab;
-
-        [FindsBy(How = How.LinkText, Using = "Manage Tags")]
-        private IWebElement ManageTagsTab;
-
-        [FindsBy(How = How.LinkText, Using = "Manage Custom Fields")]
-        private IWebElement ManageCustomFieldsTab;
-         
-        [FindsBy(How = How.LinkText, Using = "Manage Global Profiles")]
-        private IWebElement ManageGlobalProfilesTab;
-
-        [FindsBy(How = How.LinkText, Using = "Manage Plugins")]
-        private IWebElement ManagePluginsTab;
-
-        [FindsBy(How = How.LinkText, Using = "Manage Configuration")]
-        private IWebElement ManageConfigurationTab;
-        #endregion
+        #endregion WebElements
 
         #region Actions
+
         public bool CheckManageUsersTabDisplayed()
         {
-            return GenericHelper.IsElementPresent(ManageUsersTab); 
+            return GenericHelper.IsElementPresent(ManageUsersTab);
         }
 
         public bool CheckManageProjectsTabDisplayed()
         {
-            var value = GenericHelper.IsElementPresent(ManageProjectsTab);
+            bool value = GenericHelper.IsElementPresent(ManageProjectsTab);
             return value;
         }
 
         public bool CheckManageTagsTabDisplayed()
         {
-            var value = GenericHelper.IsElementPresent(ManageTagsTab);
+            bool value = GenericHelper.IsElementPresent(ManageTagsTab);
             return value;
         }
 
         public bool CheckManageCustomFieldsTabDisplayed()
         {
-            var value = GenericHelper.IsElementPresent(ManageCustomFieldsTab);
+            bool value = GenericHelper.IsElementPresent(ManageCustomFieldsTab);
             return value;
         }
+
         public bool CheckManageGlobalProfilesTabDisplayed()
         {
-            var value = GenericHelper.IsElementPresent(ManageGlobalProfilesTab);
+            bool value = GenericHelper.IsElementPresent(ManageGlobalProfilesTab);
             return value;
         }
+
         public bool CheckManagePluginsTabDisplayed()
         {
-            var value = GenericHelper.IsElementPresent(ManagePluginsTab);
+            bool value = GenericHelper.IsElementPresent(ManagePluginsTab);
             return value;
         }
 
         public bool CheckManageConfigurationTabDisplayed()
         {
-            var value = GenericHelper.IsElementPresent(ManageConfigurationTab);
+            bool value = GenericHelper.IsElementPresent(ManageConfigurationTab);
             return value;
         }
 
-        #endregion
+        #endregion Actions
 
         #region Navigation
+
         public ManageUsersPage NavigateToManageUsersTab()
         {
             ManageUsersTab.Click();
@@ -99,6 +86,7 @@ namespace DesafioAutomacaoWeb.Pages
             ManageTagsTab.Click();
             return new ManageTagsPage();
         }
-        #endregion
+
+        #endregion Navigation
     }
 }

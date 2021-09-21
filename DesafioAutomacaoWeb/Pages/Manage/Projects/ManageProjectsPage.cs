@@ -1,34 +1,23 @@
 ﻿using DesafioAutomacaoWeb.Bases;
 using DesafioAutomacaoWeb.Utils.Helpers;
+using DesafioAutomacaoWeb.Utils.Settings;
 using OpenQA.Selenium;
-using SeleniumExtras.PageObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DesafioAutomacaoWeb.Pages.Manage.Projects
 {
     public class ManageProjectsPage : PageBase
     {
-        #region WebElements 
+        #region WebElements
 
-        [FindsBy(How = How.XPath, Using = "//button[contains(text(),'Create New Project')]")]
-        private IWebElement CreateProjectButton;
+        private IWebElement CreateProjectButton => ObjectRepository.Driver.FindElement(By.XPath("//button[contains(text(),'Create New Project')]"));
+        private IWebElement CreateCategoryButton => ObjectRepository.Driver.FindElement(By.XPath("//input[@value='Add Category']"));
+        private IWebElement EditCategoryButton => ObjectRepository.Driver.FindElement(By.XPath("//button[contains(text(),'Edit')]"));
+        private IWebElement CategoryTextBox => ObjectRepository.Driver.FindElement(By.XPath("//*[@id='categories']/div/div[2]/form/div/input[3]"));
 
-        [FindsBy(How = How.XPath, Using = "//input[@value='Add Category']")]
-        private IWebElement CreateCategoryButton;
-
-        [FindsBy(How = How.XPath, Using = "//button[contains(text(),'Edit')]")]
-        private IWebElement EditCategoryButton;
-
-        [FindsBy(How = How.XPath, Using = "//*[@id='categories']/div/div[2]/form/div/input[3]")]
-        private IWebElement CategoryTextBox;
-         
-        #endregion
+        #endregion WebElements
 
         #region Actions
+
         public ManageProjectCreatePage ClickCreateNewProjectButton()
         {
             CreateProjectButton.Click();
@@ -47,10 +36,9 @@ namespace DesafioAutomacaoWeb.Pages.Manage.Projects
             return new ManageProjectCategoryPage();
         }
 
-
         public bool CheckCategoryTable(string categoryName)
         {
-            var element = GenericHelper.CheckElementFromTable(categoryName);
+            IWebElement element = GenericHelper.CheckElementFromTable(categoryName);
 
             return element.Displayed;
         }
@@ -65,6 +53,7 @@ namespace DesafioAutomacaoWeb.Pages.Manage.Projects
         {
             CategoryTextBox.SendKeys(text);
         }
-        #endregion
+
+        #endregion Actions
     }
 }

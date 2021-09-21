@@ -1,55 +1,42 @@
 ﻿using DesafioAutomacaoWeb.Bases;
 using DesafioAutomacaoWeb.Pages.Manage.Users;
 using DesafioAutomacaoWeb.Utils.Helpers;
+using DesafioAutomacaoWeb.Utils.Settings;
 using OpenQA.Selenium;
-using SeleniumExtras.PageObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DesafioAutomacaoWeb.Pages
 {
     public class HomePage : PageBase
     {
-        #region WebElements 
+        #region WebElements
 
-        [FindsBy(How = How.XPath, Using = "//span[@class='user-info']")]
-        private IWebElement UserInfo;
+        private IWebElement UserInfo => ObjectRepository.Driver.FindElement(By.XPath("//span[@class='user-info']"));
+        private IWebElement MyViewButton => ObjectRepository.Driver.FindElement(By.XPath("//span[contains(text(),'My View')]"));
+        private IWebElement ViewIssuesButton => ObjectRepository.Driver.FindElement(By.XPath("//span[contains(text(),'View Issues')]"));
+        private IWebElement InviteUsersButton => ObjectRepository.Driver.FindElement(By.XPath("//a[contains(@href, 'manage_user_create_page')]"));
+        private IWebElement ReportIssuesButton => ObjectRepository.Driver.FindElement(By.XPath("//span[contains(text(),'Report Issue')]"));
+        private IWebElement ManageButton => ObjectRepository.Driver.FindElement(By.XPath("//span[contains(text(),'Manage')]"));
 
-        [FindsBy(How = How.XPath, Using = "//span[contains(text(),'My View')]")]
-        private IWebElement MyViewButton;
+        #endregion WebElements
 
-        [FindsBy(How = How.XPath, Using = "//span[contains(text(),'View Issues')]")]
-        private IWebElement ViewIssuesButton;
+        #region Actions
 
-        [FindsBy(How = How.XPath, Using = "//a[contains(@href, 'manage_user_create_page')]")]
-        private IWebElement InviteUsersButton;
-         
-        [FindsBy(How = How.XPath, Using = "//span[contains(text(),'Report Issue')]")]
-        private IWebElement ReportIssuesButton;
-        
-        [FindsBy(How = How.XPath, Using = "//span[contains(text(),'Manage')]")]
-        private IWebElement ManageButton;
-
-        #endregion
-
-        #region Actions 
         public string ReturnUser()
         {
-            var text = GenericHelper.GetElementText(UserInfo);
+            string text = GenericHelper.GetElementText(UserInfo);
             return text;
         }
 
         public bool CheckManageButton()
         {
-            var value = GenericHelper.IsElementPresent(ManageButton);
+            bool value = GenericHelper.IsElementPresent(ManageButton);
             return value;
         }
-        #endregion
+
+        #endregion Actions
 
         #region Navigation
+
         public ReportIssuePage NavigateToReportIssues()
         {
             ReportIssuesButton.Click();
@@ -73,6 +60,7 @@ namespace DesafioAutomacaoWeb.Pages
             InviteUsersButton.Click();
             return new ManageUserCreatePage();
         }
-        #endregion
+
+        #endregion Navigation
     }
 }

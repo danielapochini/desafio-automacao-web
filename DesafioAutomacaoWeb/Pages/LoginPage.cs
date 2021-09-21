@@ -1,57 +1,43 @@
 ﻿using DesafioAutomacaoWeb.Bases;
 using DesafioAutomacaoWeb.Utils.Helpers;
+using DesafioAutomacaoWeb.Utils.Settings;
 using OpenQA.Selenium;
-using SeleniumExtras.PageObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DesafioAutomacaoWeb.Pages
 {
     public class LoginPage : PageBase
     {
-        #region WebElements 
-        [FindsBy(How = How.Id, Using = "username")]
-        private IWebElement LoginTextBox;
+        #region WebElements
 
-        [FindsBy(How = How.Id, Using = "password")]
-        private IWebElement PasswordTextBox;
+        private IWebElement LoginTextBox => ObjectRepository.Driver.FindElement(By.Id("username"));
+        private IWebElement PasswordTextBox => ObjectRepository.Driver.FindElement(By.Id("password"));
+        private IWebElement LoginButton => ObjectRepository.Driver.FindElement(By.XPath("//input[@value= 'Login']"));
+        private IWebElement LoginErrorMessage => ObjectRepository.Driver.FindElement(By.XPath("//p[contains(text(),'Your account may be disabled or blocked or the use')]"));
+        private IWebElement LostPwdLink => ObjectRepository.Driver.FindElement(By.LinkText("Lost your password?"));
 
-        [FindsBy(How = How.XPath, Using = "//input[@value= 'Login']")]
-        private IWebElement LoginButton;
-
-
-        [FindsBy(How = How.XPath, Using = "//p[contains(text(),'Your account may be disabled or blocked or the use')]")]
-        private IWebElement LoginErrorMessage;
-
-        [FindsBy(How = How.LinkText, Using = "Lost your password?")]
-        private IWebElement LostPwdLink;
-
-        
-        #endregion
+        #endregion WebElements
 
         #region Actions
+
         public HomePage Login(string username, string password)
         {
             FillLogin(username);
-            FillPassword(password); 
+            FillPassword(password);
             return new HomePage();
         }
 
         public LostPasswordPage LostPassword()
-        { 
+        {
             LostPwdLink.Click();
             return new LostPasswordPage();
         }
-
 
         public void FillLogin(string username)
         {
             LoginTextBox.SendKeys(username);
             LoginButton.Click();
         }
+
         public void FillPassword(string password)
         {
             PasswordTextBox.SendKeys(password);
@@ -60,14 +46,10 @@ namespace DesafioAutomacaoWeb.Pages
 
         public string ReturnErrorMessage()
         {
-            var text = GenericHelper.GetElementText(LoginErrorMessage);
+            string text = GenericHelper.GetElementText(LoginErrorMessage);
             return text;
         }
 
-        #endregion
-
-        #region Navigation
-
-        #endregion
+        #endregion Actions
     }
 }

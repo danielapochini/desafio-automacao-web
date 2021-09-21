@@ -1,35 +1,28 @@
 ﻿using DesafioAutomacaoWeb.Bases;
 using DesafioAutomacaoWeb.Utils.Helpers;
+using DesafioAutomacaoWeb.Utils.Settings;
 using OpenQA.Selenium;
-using SeleniumExtras.PageObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DesafioAutomacaoWeb.Pages.Manage.Tags
 {
     public class ManageTagsPage : PageBase
     {
-        #region WebElements  
-        [FindsBy(How = How.Id, Using = "tag-name")]
-        private IWebElement TagNameTextBox;
+        #region WebElements
 
-        [FindsBy(How = How.Id, Using = "tag-description")]
-        private IWebElement TagDescriptionTextArea;
+        private IWebElement TagNameTextBox => ObjectRepository.Driver.FindElement(By.Id("tag-name"));
+        private IWebElement TagDescriptionTextArea => ObjectRepository.Driver.FindElement(By.Id("tag-description"));
+        private IWebElement CreateTagButton => ObjectRepository.Driver.FindElement(By.XPath("//input[@type='submit']"));
 
-        [FindsBy(How = How.XPath, Using = "//input[@type='submit']")]
-        private IWebElement CreateTagButton; 
-        #endregion
+        #endregion WebElements
 
         #region Actions
+
         public void FillTagFields(string tagName, string tagDescription)
         {
             TagNameTextBox.SendKeys(tagName);
-            TagDescriptionTextArea.SendKeys(tagDescription); 
+            TagDescriptionTextArea.SendKeys(tagDescription);
         }
-         
+
         public void CheckRequiredField()
         {
             TagNameTextBox.Clear();
@@ -42,17 +35,16 @@ namespace DesafioAutomacaoWeb.Pages.Manage.Tags
 
         public bool CheckTagTable(string tagName)
         {
-            var element = GenericHelper.CheckElement(tagName);
+            IWebElement element = GenericHelper.CheckElement(tagName);
 
             return element.Displayed;
         }
-
 
         public string ReturnRequiredMessage()
         {
             return TagNameTextBox.GetAttribute("validationMessage");
         }
 
-        #endregion
+        #endregion Actions
     }
 }
