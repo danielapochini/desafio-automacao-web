@@ -12,7 +12,7 @@ namespace DesafioAutomacaoWeb.Utils.Database.Queries
     {
         public static BugsEntities ListLastBugAdded()
         {
-            string query = "SELECT * FROM bugtracker.mantis_bug_table ORDER BY ID DESC LIMIT 1";
+            string query = "SELECT * FROM mantis_bug_table ORDER BY ID DESC LIMIT 1";
             return DatabaseHelper.ExecuteDbCommand<BugsEntities>(query).FirstOrDefault();
         }
     }

@@ -8,13 +8,13 @@ namespace DesafioAutomacaoWeb.Utils.Database.Queries
     {
         public static ProjectsEntities ListLastProjectAdded()
         {
-            string query = "SELECT * FROM bugtracker.mantis_project_table ORDER BY ID DESC LIMIT 1";
+            string query = "SELECT * FROM mantis_project_table ORDER BY ID DESC LIMIT 1";
             return DatabaseHelper.ExecuteDbCommand<ProjectsEntities>(query).FirstOrDefault();
         }
 
         public static ProjectsEntities ListProjectInfo(string nomeProjeto)
         {
-            string query = "SELECT * FROM bugtracker.mantis_project_table " +
+            string query = "SELECT * FROM mantis_project_table " +
                         "WHERE name = '$NAME'".Replace("$NAME", nomeProjeto);
 
             return DatabaseHelper.ExecuteDbCommand<ProjectsEntities>(query).FirstOrDefault();
