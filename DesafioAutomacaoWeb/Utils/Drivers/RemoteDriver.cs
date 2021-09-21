@@ -2,27 +2,28 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 using System;
+using System.Text;
 using TechTalk.SpecFlow;
 
 namespace DesafioAutomacaoWeb.Utils.Drivers
 {
     [Binding]
-    public class RemoteDriver
+    public static class RemoteDriver
     {
         public static IWebDriver GetRemoteWebDriver(ICapabilities capabilities)
-        {  
+        {
             string hubUrl = ObjectRepository.Config.GetHubUrl();
 
             TimeSpan timeSpan = new TimeSpan(0, 3, 0);
             return new RemoteWebDriver(
-                        new Uri(hubUrl),
-                        capabilities,
-                        timeSpan
-                    );
+                new Uri(hubUrl),
+                capabilities,
+                timeSpan
+            );
         }
-          
+
         public static void CreateRemoteInstance()
-        { 
+        {
             switch (ObjectRepository.Config.GetBrowser())
             {
                 case BrowserType.Chrome:
@@ -34,12 +35,12 @@ namespace DesafioAutomacaoWeb.Utils.Drivers
                     break;
 
                 case BrowserType.Firefox:
-                    System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+                    Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
                     ObjectRepository.Driver = GetRemoteWebDriver(DriversOptions.GetFirefoxOptions().ToCapabilities());
-                    break; 
+                    break;
             }
-            DriverManagement.DriversConfigurations(); 
-        }    
-       
+
+            DriverManagement.DriversConfigurations();
+        }
     }
 }

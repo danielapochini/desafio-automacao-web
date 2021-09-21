@@ -1,6 +1,5 @@
 ﻿using DesafioAutomacaoWeb.Pages;
 using DesafioAutomacaoWeb.Utils.Settings;
-using System;
 using TechTalk.SpecFlow;
 using Xunit;
 
@@ -18,19 +17,18 @@ namespace DesafioAutomacaoWeb.Steps.Login
             lostPwdPage = new LostPasswordPage();
         }
 
-
         [When(@"preencher com os dados corretos de login")]
         public void QuandoPreencherComOsDadosCorretosDeLogin()
         {
             loginPage.FillLogin("test.updater");
         }
-        
+
         [When(@"clicar no botão de Esqueci minha Senha")]
         public void QuandoClicarNoBotaoDeEsqueciMinhaSenha()
         {
             loginPage.LostPassword();
         }
-        
+
         [When(@"preencher os dados de e-mail no formato inválido")]
         public void QuandoPreencherOsDadosDeE_MailNoFormatoInvalido()
         {
@@ -42,7 +40,6 @@ namespace DesafioAutomacaoWeb.Steps.Login
         {
             lostPwdPage.FillEmail("");
         }
-
 
         [When(@"preencher os dados de e-mail corretamente")]
         public void QuandoPreencherOsDadosDeE_MailCorretamente()
@@ -60,13 +57,13 @@ namespace DesafioAutomacaoWeb.Steps.Login
         public void QuandoApagarOsDadosDoCampoDeUsername()
         {
             lostPwdPage.ClearUsername();
-        } 
+        }
 
         [Then(@"deverá retornar para a página de login")]
         public void EntaoDeveraRetornarParaAPaginaDeLogin()
         {
-            Assert.Equal("http://host.docker.internal:8989/login_page.php?return=lost_pwd.php", ObjectRepository.Driver.Url);
+            Assert.Equal("http://host.docker.internal:8989/login_page.php?return=lost_pwd.php",
+                loginPage.ReturnPageUrl());
         }
-
     }
 }

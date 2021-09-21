@@ -3,11 +3,6 @@ using DesafioAutomacaoWeb.Pages.Manage.Users;
 using DesafioAutomacaoWeb.Utils.Database.Queries;
 using DesafioAutomacaoWeb.Utils.Helpers;
 using DesafioAutomacaoWeb.Utils.Settings;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 using Xunit;
 
@@ -16,19 +11,19 @@ namespace DesafioAutomacaoWeb.Steps.Users
     [Binding]
     public class CommonSteps
     {
+        private readonly HomePage homePage;
         private readonly LoginPage loginPage;
-        private readonly HomePage homePage; 
         private readonly ManagePage managePage;
-        private readonly ManageUsersPage manageUserPage; 
+        private readonly ManageUsersPage manageUserPage;
 
         public CommonSteps()
         {
             loginPage = new LoginPage();
             homePage = new HomePage();
             managePage = new ManagePage();
-            manageUserPage = new ManageUsersPage(); 
+            manageUserPage = new ManageUsersPage();
         }
-         
+
         [Given(@"que o usuário acesse o Mantis")]
         public void DadoQueOUsuarioAcesseOMantis()
         {
@@ -45,7 +40,7 @@ namespace DesafioAutomacaoWeb.Steps.Users
         public void DadoSelecioneAAbaManageUsers()
         {
             managePage.NavigateToManageUsersTab();
-        } 
+        }
 
         [Given(@"que o usuário acesse a página de gerenciamento")]
         public void DadoQueOUsuarioAcesseAPaginaDeGerenciamento()
@@ -56,7 +51,7 @@ namespace DesafioAutomacaoWeb.Steps.Users
         [When(@"selecionar um usuário existente na lista")]
         public void QuandoSelecionarUmUsuarioExistenteNaLista()
         {
-            var userRandomDb = UsersQueries.ListRandomUsers();
+            Utils.Entities.UsersEntities userRandomDb = UsersQueries.ListRandomUsers();
 
             manageUserPage.ClickUserLink(userRandomDb.UserName);
         }
@@ -70,21 +65,21 @@ namespace DesafioAutomacaoWeb.Steps.Users
         [Then(@"deverá retornar o código de erro ""(.*)""")]
         public void EntaoDeveraRetornarOCodigoDeErro(string expectedCode)
         {
-            var actualCode = manageUserPage.ReturnErrorCode();
+            string actualCode = manageUserPage.ReturnErrorCode();
             Assert.Equal(expectedCode, actualCode);
         }
 
         [Then(@"a mensagem ""(.*)""")]
         public void EntaoAMensagem(string expectedMessage)
         {
-            var actualMessage = manageUserPage.ReturnErrorDescription();
+            string actualMessage = manageUserPage.ReturnErrorDescription();
             Assert.Equal(expectedMessage, actualMessage);
         }
-         
+
         [Then(@"deverá retornar a mensagem ""(.*)""")]
         public void EntaoDeveraRetornarAMensagem(string expectedMessage)
         {
-            var actualMessage = manageUserPage.ReturnSuccessCode();
+            string actualMessage = manageUserPage.ReturnSuccessCode();
             Assert.Equal(expectedMessage, actualMessage);
         }
     }

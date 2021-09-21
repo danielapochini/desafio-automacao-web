@@ -1,6 +1,5 @@
 ﻿using DesafioAutomacaoWeb.Pages.Manage.Projects;
 using DesafioAutomacaoWeb.Utils.Database.Queries;
-using System;
 using TechTalk.SpecFlow;
 using Xunit;
 
@@ -9,8 +8,8 @@ namespace DesafioAutomacaoWeb.Steps.Projects
     [Binding]
     public class EditGlobalCategoriesSteps
     {
-        private readonly ManageProjectsPage projectPage;
         private readonly ManageProjectCategoryPage categoryPage;
+        private readonly ManageProjectsPage projectPage;
         private string categoryName;
 
         public EditGlobalCategoriesSteps()
@@ -22,11 +21,11 @@ namespace DesafioAutomacaoWeb.Steps.Projects
         [When(@"selecionar uma categoria")]
         public void QuandoSelecionarUmaCategoria()
         {
-            var categoryDb = CategoriesQueries.ListarUltimaCategoriaCadastrada();
+            Utils.Database.Entities.CategoriesEntities categoryDb = CategoriesQueries.ListLastCategoryAdded();
             categoryName = categoryDb.Name;
             projectPage.ClickEditCategoryLink();
         }
-        
+
         [When(@"editar os campos")]
         public void QuandoEditarOsCampos()
         {
@@ -43,7 +42,7 @@ namespace DesafioAutomacaoWeb.Steps.Projects
         [Then(@"a categoria deverá ser atualizada com sucesso")]
         public void EntaoACategoriaDeveraSerAtualizadaComSucesso()
         {
-            var categoryDb = CategoriesQueries.ListarInformacoesCategoria(categoryName);
+            Utils.Database.Entities.ProjectsEntities categoryDb = CategoriesQueries.ListCategoryInfo(categoryName);
             Assert.Equal(categoryName, categoryDb.Name);
         }
     }

@@ -1,80 +1,59 @@
 ﻿using DesafioAutomacaoWeb.Utils.Helpers;
 using DesafioAutomacaoWeb.Utils.Settings;
-using OpenQA.Selenium;
-using SeleniumExtras.PageObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using OpenQA.Selenium; 
 
 namespace DesafioAutomacaoWeb.Bases
 {
     public class PageBase
     {
-        [FindsBy(How = How.XPath, Using = "//div[@class='alert alert-danger']//p[1]")]
-        private IWebElement ErrorCodeMessage;
+        #region WebElements
+        private IWebElement ErrorCodeMessage => ObjectRepository.Driver.FindElement(By.XPath("//div[@class='alert alert-danger']//p[1]"));
+        private IWebElement ErrorDescriptionMessage => ObjectRepository.Driver.FindElement(By.XPath("//div[@class='alert alert-danger']//p[2]"));
+        private IWebElement SuccessMessage => ObjectRepository.Driver.FindElement(By.XPath("//div[@class='alert alert-success center']//p[1]"));
+        private IWebElement WarningMessage => ObjectRepository.Driver.FindElement(By.XPath("//div[@class='alert alert-warning center']//p[1]"));
+        private IWebElement UserInfo => ObjectRepository.Driver.FindElement(By.XPath("//span[@class = 'user-info']"));
+        #endregion WebElements
 
-        [FindsBy(How = How.XPath, Using = "//div[@class='alert alert-danger']//p[2]")]
-        private IWebElement ErrorDescriptionMessage;
-
-        [FindsBy(How = How.XPath, Using = "//div[@class='alert alert-warning center']//p[1]")]
-        private IWebElement WarningMessage;
-
-        [FindsBy(How = How.XPath, Using = "//div[@class='alert alert-success center']//p[1]")]
-        private IWebElement SuccessMessage;
-
-        [FindsBy(How = How.XPath, Using = "//span[@class = 'user-info']")]
-        private IWebElement UserInfo;
-
-        public PageBase()
+        #region Actions
+        public string ReturnPageTitle()
         {
-            PageFactory.InitElements(ObjectRepository.Driver, this);
+            return ObjectRepository.Driver.Title;
         }
 
-        public string PageTitle()
-        {
-            return ObjectRepository.Driver.Title; 
-        }
-
-        public string PageUrl()
+        public string ReturnPageUrl()
         {
             return ObjectRepository.Driver.Url;
         }
 
         public string ReturnUserInfo()
         {
-            var text = GenericHelper.GetElementText(UserInfo);
-            return text;
+            return GenericHelper.GetElementText(UserInfo);
         }
 
         public string ReturnErrorCode()
         {
-            var text = GenericHelper.GetElementText(ErrorCodeMessage);
-            return text;
+            return GenericHelper.GetElementText(ErrorCodeMessage);
         }
 
         public string ReturnErrorDescription()
         {
-            var text = GenericHelper.GetElementText(ErrorDescriptionMessage);
-            return text;
+            return GenericHelper.GetElementText(ErrorDescriptionMessage);
         }
-         
+
         public string ReturnSuccessCode()
         {
-            var text = GenericHelper.GetElementText(SuccessMessage);
-            return text;
+            return GenericHelper.GetElementText(SuccessMessage);
         }
 
         public string ReturnWarningMessage()
         {
-            var text = GenericHelper.GetElementText(WarningMessage);
-            return text;
+            return GenericHelper.GetElementText(WarningMessage);
         }
 
-        public string ReturnRequiredMessage(IWebElement element)
+        public string GetValidationMessage(IWebElement element)
         {
             return element.GetAttribute("validationMessage");
         }
+        #endregion
     }
 }

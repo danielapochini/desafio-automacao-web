@@ -1,24 +1,19 @@
 ﻿using Dapper;
 using DesafioAutomacaoWeb.Utils.Settings;
 using MySql.Data.MySqlClient;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DesafioAutomacaoWeb.Utils.Helpers
 {
-    public class DatabaseHelper
+    public static class DatabaseHelper
     {
-        private static readonly AppSettings appSettings = new AppSettings();
+        private static readonly AppSettings appSettings = new();
 
         public static IEnumerable<T> ExecuteDbCommand<T>(string query)
         {
             string connectionString = appSettings.DbConnection;
-
-            //utilizando "using" para abrir e fechar a conexao
-            using (var connection = new MySqlConnection(connectionString))
+             
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 DefaultTypeMap.MatchNamesWithUnderscores = true;
 
@@ -32,7 +27,7 @@ namespace DesafioAutomacaoWeb.Utils.Helpers
 
             string connectionString = appSettings.DbConnection;
 
-            using (var connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 using (MySqlCommand cmd = new MySqlCommand())
                 {

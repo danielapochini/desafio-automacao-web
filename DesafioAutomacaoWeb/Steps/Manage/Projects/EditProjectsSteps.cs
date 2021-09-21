@@ -1,7 +1,5 @@
-﻿using DesafioAutomacaoWeb.Pages;
-using DesafioAutomacaoWeb.Pages.Manage.Projects;
+﻿using DesafioAutomacaoWeb.Pages.Manage.Projects;
 using DesafioAutomacaoWeb.Utils.Database.Queries;
-using System;
 using TechTalk.SpecFlow;
 using Xunit;
 
@@ -9,21 +7,20 @@ namespace DesafioAutomacaoWeb.Steps.Projects
 {
     [Binding]
     public class EditProjectsSteps
-    { 
+    {
         private readonly ManageProjectCreatePage projectCreatePage;
+        private string projectDescription;
+        private bool projectInherit;
 
         private string projectName;
         private string projectStatus;
         private string projectViewStatus;
-        private bool projectInherit;
-        private string projectDescription;
 
         public EditProjectsSteps()
-        {  
+        {
             projectCreatePage = new ManageProjectCreatePage();
         }
 
-         
         [When(@"alterar todos os campos com novos dados")]
         public void QuandoAlterarTodosOsCamposComNovosDados()
         {
@@ -33,7 +30,8 @@ namespace DesafioAutomacaoWeb.Steps.Projects
             projectInherit = false;
             projectDescription = "Projeto Teste Automação Web";
 
-            projectCreatePage.UpdateExistingProject(projectName, projectStatus, projectInherit, projectViewStatus, projectDescription);
+            projectCreatePage.UpdateExistingProject(projectName, projectStatus, projectInherit, projectViewStatus,
+                projectDescription);
         }
 
         [When(@"clicar no botão de Update Project")]
@@ -41,16 +39,16 @@ namespace DesafioAutomacaoWeb.Steps.Projects
         {
             projectCreatePage.ClickUpdateProjectButton();
         }
-         
+
         [Then(@"os dados do projeto serão atualizados com sucesso no banco de dados")]
         public void EntaoOsDadosDoProjetoSeraoAtualizadosComSucessoNoBancoDeDados()
         {
-            var projectDb = ProjectsQueries.ListarInformacoesProjeto(projectName);
+            Utils.Database.Entities.ProjectsEntities projectDb = ProjectsQueries.ListProjectInfo(projectName);
             Assert.Equal(projectName, projectDb.Name);
             Assert.Equal(projectStatus, projectDb.Status.ToString().ToLower());
             Assert.Equal(projectInherit, projectDb.InheritGlobal);
             Assert.Equal(projectViewStatus, projectDb.ViewState.ToString().ToLower());
-            Assert.Equal(projectDescription, projectDb.Description); 
+            Assert.Equal(projectDescription, projectDb.Description);
         }
     }
 }
