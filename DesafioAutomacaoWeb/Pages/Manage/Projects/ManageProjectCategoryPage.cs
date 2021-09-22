@@ -9,10 +9,10 @@ namespace DesafioAutomacaoWeb.Pages.Manage.Projects
     {
         #region WebElements
 
-        private IWebElement ProjectCategoryTextBox => ObjectRepository.Driver.FindElement(By.Id("proj-category-name"));
-        private IWebElement ProjectCategoryAssigneeSelect => ObjectRepository.Driver.FindElement(By.Id("proj-category-assigned-to"));
-        private IWebElement UpdateCategoryButton => ObjectRepository.Driver.FindElement(By.XPath("//input[@value='Update Category']"));
-        private IWebElement DeleteCategoryButton => ObjectRepository.Driver.FindElement(By.XPath("//input[@value='Delete Category']"));
+        private IWebElement ProjectCategoryTextBox => GenericHelper.GetElement(By.Id("proj-category-name"));
+        private IWebElement ProjectCategoryAssigneeSelect => GenericHelper.GetElement(By.Id("proj-category-assigned-to"));
+        private IWebElement UpdateCategoryButton => GenericHelper.GetElement(By.XPath("//input[@value='Update Category']"));
+        private IWebElement DeleteCategoryButton => GenericHelper.GetElement(By.XPath("//input[@value='Delete Category']"));
 
         #endregion WebElements
 

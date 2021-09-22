@@ -1,16 +1,17 @@
 ﻿using DesafioAutomacaoWeb.Bases;
+using DesafioAutomacaoWeb.Utils.Helpers;
 using DesafioAutomacaoWeb.Utils.Settings;
 using OpenQA.Selenium;
 
-namespace DesafioAutomacaoWeb.Pages
+namespace DesafioAutomacaoWeb.Pages.Login
 {
     public class LostPasswordPage : PageBase
     {
         #region WebElements
 
-        private IWebElement LoginTextBox => ObjectRepository.Driver.FindElement(By.Id("username"));
-        private IWebElement EmailTextBox => ObjectRepository.Driver.FindElement(By.Id("email-field"));
-        private IWebElement SubmitButton => ObjectRepository.Driver.FindElement(By.XPath("//input[@value= 'Submit']"));
+        private IWebElement LoginTextBox => GenericHelper.GetElement(By.Id("username"));
+        private IWebElement EmailTextBox => GenericHelper.GetElement(By.Id("email-field"));
+        private IWebElement SubmitButton => GenericHelper.GetElement(By.XPath("//input[@value= 'Submit']"));
 
         #endregion WebElements
 

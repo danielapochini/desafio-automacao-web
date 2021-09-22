@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using System;
 using System.IO;
 
 namespace DesafioAutomacaoWeb.Utils.Settings
@@ -15,7 +16,7 @@ namespace DesafioAutomacaoWeb.Utils.Settings
             PageLoadTimeOut = ReturnParamAppSettings("PageLoadTimeOut");
             ElementLoadTimeOut = ReturnParamAppSettings("ElementLoadTimeOut");
             DbConnection = ReturnParamAppSettings("DbConnection");
-            RemoteDriverExecution = ReturnParamAppSettings("RemoteDriverExecution");
+            RemoteDriverExecution = Boolean.Parse(ReturnParamAppSettings("RemoteDriverExecution"));
         }
 
         public string Browser { get; set; }
@@ -26,7 +27,7 @@ namespace DesafioAutomacaoWeb.Utils.Settings
         public string PageLoadTimeOut { get; set; }
         public string ElementLoadTimeOut { get; set; }
         public string DbConnection { get; set; }
-        public string RemoteDriverExecution { get; set; }
+        public bool RemoteDriverExecution { get; set; }
 
         public static string ReturnParamAppSettings(string nameParam)
         {

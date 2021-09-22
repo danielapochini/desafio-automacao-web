@@ -9,9 +9,9 @@ namespace DesafioAutomacaoWeb.Pages.Manage.Tags
     {
         #region WebElements
 
-        private IWebElement TagNameTextBox => ObjectRepository.Driver.FindElement(By.Id("tag-name"));
-        private IWebElement TagDescriptionTextArea => ObjectRepository.Driver.FindElement(By.Id("tag-description"));
-        private IWebElement CreateTagButton => ObjectRepository.Driver.FindElement(By.XPath("//input[@type='submit']"));
+        private IWebElement TagNameTextBox => GenericHelper.GetElement(By.Id("tag-name"));
+        private IWebElement TagDescriptionTextArea => GenericHelper.GetElement(By.Id("tag-description"));
+        private IWebElement CreateTagButton => GenericHelper.GetElement(By.XPath("//input[@type='submit']"));
 
         #endregion WebElements
 

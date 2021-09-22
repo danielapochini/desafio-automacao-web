@@ -7,11 +7,11 @@ namespace DesafioAutomacaoWeb.Bases
     public class PageBase
     {
         #region WebElements
-        private IWebElement ErrorCodeMessage => ObjectRepository.Driver.FindElement(By.XPath("//div[@class='alert alert-danger']//p[1]"));
-        private IWebElement ErrorDescriptionMessage => ObjectRepository.Driver.FindElement(By.XPath("//div[@class='alert alert-danger']//p[2]"));
-        private IWebElement SuccessMessage => ObjectRepository.Driver.FindElement(By.XPath("//div[@class='alert alert-success center']//p[1]"));
-        private IWebElement WarningMessage => ObjectRepository.Driver.FindElement(By.XPath("//div[@class='alert alert-warning center']//p[1]"));
-        private IWebElement UserInfo => ObjectRepository.Driver.FindElement(By.XPath("//span[@class = 'user-info']"));
+        private IWebElement ErrorCodeMessage => GenericHelper.GetElement(By.XPath("//div[@class='alert alert-danger']//p[1]"));
+        private IWebElement ErrorDescriptionMessage => GenericHelper.GetElement(By.XPath("//div[@class='alert alert-danger']//p[2]"));
+        private IWebElement SuccessMessage => GenericHelper.GetElement(By.XPath("//div[@class='alert alert-success center']//p[1]"));
+        private IWebElement WarningMessage => GenericHelper.GetElement(By.XPath("//div[@class='alert alert-warning center']//p[1]"));
+        private IWebElement UserInfo => GenericHelper.GetElement(By.XPath("//span[@class = 'user-info']"));
         #endregion WebElements
 
         #region Actions
@@ -54,6 +54,6 @@ namespace DesafioAutomacaoWeb.Bases
         {
             return element.GetAttribute("validationMessage");
         }
-        #endregion
+        #endregion Actions
     }
 }

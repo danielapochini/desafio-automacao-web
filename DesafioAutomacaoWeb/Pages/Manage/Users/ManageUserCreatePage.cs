@@ -10,13 +10,13 @@ namespace DesafioAutomacaoWeb.Pages.Manage.Users
     {
         #region WebElements
 
-        private IWebElement UsernameTextBox => ObjectRepository.Driver.FindElement(By.Id("user-username"));
-        private IWebElement RealNameTextBox => ObjectRepository.Driver.FindElement(By.Id("user-realname"));
-        private IWebElement EmailTextBox => ObjectRepository.Driver.FindElement(By.Id("email-field"));
-        private IWebElement AccessLevelSelect => ObjectRepository.Driver.FindElement(By.Id("user-access-level"));
-        private IWebElement EnabledCheckBox => ObjectRepository.Driver.FindElement(By.Id("user-enabled"));
-        private IWebElement ProtectedCheckBox => ObjectRepository.Driver.FindElement(By.Id("user-protected"));
-        private IWebElement SubmitButton => ObjectRepository.Driver.FindElement(By.XPath("//input[@value= 'Create User']"));
+        private IWebElement UsernameTextBox => GenericHelper.GetElement(By.Id("user-username"));
+        private IWebElement RealNameTextBox => GenericHelper.GetElement(By.Id("user-realname"));
+        private IWebElement EmailTextBox => GenericHelper.GetElement(By.Id("email-field"));
+        private IWebElement AccessLevelSelect => GenericHelper.GetElement(By.Id("user-access-level"));
+        private IWebElement EnabledCheckBox => GenericHelper.GetElement(By.Id("user-enabled"));
+        private IWebElement ProtectedCheckBox => GenericHelper.GetElement(By.Id("user-protected"));
+        private IWebElement SubmitButton => GenericHelper.GetElement(By.XPath("//input[@value= 'Create User']"));
 
         #endregion WebElements
 

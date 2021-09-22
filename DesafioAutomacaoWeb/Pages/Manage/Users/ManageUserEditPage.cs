@@ -11,14 +11,14 @@ namespace DesafioAutomacaoWeb.Pages.Manage.Users
     {
         #region WebElements
          
-        private IWebElement DeleteUserButton => ObjectRepository.Driver.FindElement(By.XPath("//input[@value= 'Delete User']"));
-        private IWebElement DeleteAccountButton => ObjectRepository.Driver.FindElement(By.XPath("//input[@value= 'Delete Account']"));
-        private IWebElement ResetPasswordButton => ObjectRepository.Driver.FindElement(By.XPath("//input[@value= 'Reset Password']"));
-        private IWebElement UpdateUserButton => ObjectRepository.Driver.FindElement(By.XPath("//input[@value= 'Update User']"));
-        private IWebElement EditUsernameTextBox => ObjectRepository.Driver.FindElement(By.Id("edit-username"));
-        private  IWebElement EditRealnameTextBox => ObjectRepository.Driver.FindElement(By.Id("edit-realname"));
-        private IWebElement EditEmailTextBox => ObjectRepository.Driver.FindElement(By.Id("email-field"));
-        private IWebElement EditAccessLevelSelect => ObjectRepository.Driver.FindElement(By.Id("edit-access-level"));
+        private IWebElement DeleteUserButton => GenericHelper.GetElement(By.XPath("//input[@value= 'Delete User']"));
+        private IWebElement DeleteAccountButton => GenericHelper.GetElement(By.XPath("//input[@value= 'Delete Account']"));
+        private IWebElement ResetPasswordButton => GenericHelper.GetElement(By.XPath("//input[@value= 'Reset Password']"));
+        private IWebElement UpdateUserButton => GenericHelper.GetElement(By.XPath("//input[@value= 'Update User']"));
+        private IWebElement EditUsernameTextBox => GenericHelper.GetElement(By.Id("edit-username"));
+        private  IWebElement EditRealnameTextBox => GenericHelper.GetElement(By.Id("edit-realname"));
+        private IWebElement EditEmailTextBox => GenericHelper.GetElement(By.Id("email-field"));
+        private IWebElement EditAccessLevelSelect => GenericHelper.GetElement(By.Id("edit-access-level"));
           
         #endregion WebElements
 
@@ -35,16 +35,16 @@ namespace DesafioAutomacaoWeb.Pages.Manage.Users
 
         public void FillUsername(string username)
         {
-            GenericHelper.ClearTextBox(EditUsernameTextBox);
+            GenericHelper.ClearElement(EditUsernameTextBox);
             EditUsernameTextBox.SendKeys(username);
             UpdateUserButton.Click();
         }
 
         public void ClearAllTextBoxFields()
         {
-            GenericHelper.ClearTextBox(EditUsernameTextBox);
-            GenericHelper.ClearTextBox(EditRealnameTextBox);
-            GenericHelper.ClearTextBox(EditEmailTextBox);
+            GenericHelper.ClearElement(EditUsernameTextBox);
+            GenericHelper.ClearElement(EditRealnameTextBox);
+            GenericHelper.ClearElement(EditEmailTextBox);
         }
 
         public void ClickDeleteUserButton()

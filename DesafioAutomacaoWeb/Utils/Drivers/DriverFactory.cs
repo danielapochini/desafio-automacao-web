@@ -21,15 +21,15 @@ namespace DesafioAutomacaoWeb.Utils.Drivers
         {
             ObjectRepository.Config = new AppSettingsReader();
 
-            string execution = ObjectRepository.Config.GetRemoteDriverExecution();
+            bool execution = ObjectRepository.Config.GetRemoteDriverExecution();
 
             switch (execution)
             {
-                case "true":
+                case true:
                     RemoteDriver.CreateRemoteInstance();
                     break;
 
-                case "false":
+                case false:
                     LocalDriver.CreateWebDriverInstance();
                     break;
             }

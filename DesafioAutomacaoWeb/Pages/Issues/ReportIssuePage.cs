@@ -1,27 +1,26 @@
 ﻿using DesafioAutomacaoWeb.Bases;
 using DesafioAutomacaoWeb.Utils.Helpers;
-using DesafioAutomacaoWeb.Utils.Settings;
 using OpenQA.Selenium;
 
-namespace DesafioAutomacaoWeb.Pages
+namespace DesafioAutomacaoWeb.Pages.Issues
 {
     public class ReportIssuePage : PageBase
     {
         #region WebElements
 
-        private IWebElement SelectCategory => ObjectRepository.Driver.FindElement(By.Id("category_id"));
-        private IWebElement SelectReproducibility => ObjectRepository.Driver.FindElement(By.Id("reproducibility"));
-        private IWebElement SelectSeverity => ObjectRepository.Driver.FindElement(By.Id("severity"));
-        private IWebElement SelectPriority => ObjectRepository.Driver.FindElement(By.Id("priority"));
-        private IWebElement SelectProfile => ObjectRepository.Driver.FindElement(By.Id("profile_id"));
-        private IWebElement SummaryTextBox => ObjectRepository.Driver.FindElement(By.Id("summary"));
-        private IWebElement DescriptionTextBox => ObjectRepository.Driver.FindElement(By.Id("description"));
-        private IWebElement StepsTextBox => ObjectRepository.Driver.FindElement(By.Id("steps_to_reproduce"));
-        private IWebElement AdditionalInfoTextBox => ObjectRepository.Driver.FindElement(By.Id("additional_info"));
-        private IWebElement TagTextBox => ObjectRepository.Driver.FindElement(By.Id("tag_string"));
-        private IWebElement DropFileUpload => ObjectRepository.Driver.FindElement(By.XPath("//input[@type='file']"));
-         
-        private IWebElement SubmitButton => ObjectRepository.Driver.FindElement(By.XPath("//input[@value='Submit Issue']"));
+        private IWebElement SelectCategory => GenericHelper.GetElement(By.Id("category_id"));
+        private IWebElement SelectReproducibility => GenericHelper.GetElement(By.Id("reproducibility"));
+        private IWebElement SelectSeverity => GenericHelper.GetElement(By.Id("severity"));
+        private IWebElement SelectPriority => GenericHelper.GetElement(By.Id("priority"));
+        private IWebElement SelectProfile => GenericHelper.GetElement(By.Id("profile_id"));
+        private IWebElement SummaryTextBox => GenericHelper.GetElement(By.Id("summary"));
+        private IWebElement DescriptionTextBox => GenericHelper.GetElement(By.Id("description"));
+        private IWebElement StepsTextBox => GenericHelper.GetElement(By.Id("steps_to_reproduce"));
+        private IWebElement AdditionalInfoTextBox => GenericHelper.GetElement(By.Id("additional_info"));
+        private IWebElement TagTextBox => GenericHelper.GetElement(By.Id("tag_string"));
+        private IWebElement DropFileUpload => GenericHelper.GetElement(By.XPath("//input[@type='file']"));
+        private IWebElement SubmitButton => GenericHelper.GetElement(By.XPath("//input[@value='Submit Issue']"));
+
 
         #endregion WebElements
 
@@ -40,16 +39,16 @@ namespace DesafioAutomacaoWeb.Pages
             StepsTextBox.SendKeys(steps);
             TagTextBox.SendKeys(tags);
             AdditionalInfoTextBox.SendKeys(additionalInfo);
-            DropFileUpload.SendKeys(pathToFile);
+            UploadLocalFile(pathToFile);
         }
 
         public void ReportBasicIssue(int category, string summary, string description)
         {
             ComboBoxHelper.SelectElement(SelectCategory, category);
             SummaryTextBox.SendKeys(summary);
-            DescriptionTextBox.SendKeys(description); 
+            DescriptionTextBox.SendKeys(description);
         }
-         
+
 
         public void SubmitIssue()
         {
@@ -59,13 +58,18 @@ namespace DesafioAutomacaoWeb.Pages
 
         public void CheckSummaryRequiredField()
         {
-            GenericHelper.ClearTextBox(SummaryTextBox);
-        } 
-         
+            GenericHelper.ClearElement(SummaryTextBox);
+        }
+
         public string ReturnRequiredMessage()
         {
             return GetValidationMessage(SummaryTextBox);
         }
 
+        public void UploadLocalFile(string pathToFile)
+        {
+            FileUploadHelper.LocalDetector();
+            DropFileUpload.SendKeys(pathToFile);
+        }
     }
 }

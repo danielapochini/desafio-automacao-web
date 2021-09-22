@@ -9,14 +9,14 @@ namespace DesafioAutomacaoWeb.Pages.Manage.Projects
     {
         #region WebElements
 
-        private IWebElement ProjectNameTextBox => ObjectRepository.Driver.FindElement(By.Id("project-name"));
-        private IWebElement ProjectStatusSelect => ObjectRepository.Driver.FindElement(By.Id("project-status"));
-        private IWebElement ProjectViewStatusSelect => ObjectRepository.Driver.FindElement(By.Id("project-view-state"));
-        private IWebElement ProjectDescriptionTextArea => ObjectRepository.Driver.FindElement(By.Id("project-description"));
-        private IWebElement ProjectInheritCheckBox => ObjectRepository.Driver.FindElement(By.Id("project-inherit-global"));
-        private IWebElement AddProjectButton => ObjectRepository.Driver.FindElement(By.XPath("//input[@value='Add Project']"));
-        private IWebElement UpdateProjectButton => ObjectRepository.Driver.FindElement(By.XPath("//input[@value='Update Project']"));
-        private IWebElement DeleteProjectButton => ObjectRepository.Driver.FindElement(By.XPath("//input[@value='Delete Project']"));
+        private IWebElement ProjectNameTextBox => GenericHelper.GetElement(By.Id("project-name"));
+        private IWebElement ProjectStatusSelect => GenericHelper.GetElement(By.Id("project-status"));
+        private IWebElement ProjectViewStatusSelect => GenericHelper.GetElement(By.Id("project-view-state"));
+        private IWebElement ProjectDescriptionTextArea => GenericHelper.GetElement(By.Id("project-description"));
+        private IWebElement ProjectInheritCheckBox => GenericHelper.GetElement(By.Id("project-inherit-global"));
+        private IWebElement AddProjectButton => GenericHelper.GetElement(By.XPath("//input[@value='Add Project']"));
+        private IWebElement UpdateProjectButton => GenericHelper.GetElement(By.XPath("//input[@value='Update Project']"));
+        private IWebElement DeleteProjectButton => GenericHelper.GetElement(By.XPath("//input[@value='Delete Project']"));
 
         #endregion WebElements
 
@@ -45,8 +45,8 @@ namespace DesafioAutomacaoWeb.Pages.Manage.Projects
 
         public void ClearAllTextBoxFields()
         {
-            GenericHelper.ClearTextBox(ProjectNameTextBox);
-            GenericHelper.ClearTextBox(ProjectDescriptionTextArea);
+            GenericHelper.ClearElement(ProjectNameTextBox);
+            GenericHelper.ClearElement(ProjectDescriptionTextArea);
         }
 
         public void ClickAddProjectButton()
@@ -66,7 +66,7 @@ namespace DesafioAutomacaoWeb.Pages.Manage.Projects
 
         public void CheckRequiredField()
         {
-            GenericHelper.ClearTextBox(ProjectNameTextBox);
+            GenericHelper.ClearElement(ProjectNameTextBox);
         }
 
         public void CheckProjectInheritCheckBox(bool value)

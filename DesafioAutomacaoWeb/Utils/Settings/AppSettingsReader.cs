@@ -63,7 +63,7 @@ namespace DesafioAutomacaoWeb.Utils.Settings
             return Convert.ToInt32(timeout);
         }
 
-        public string GetRemoteDriverExecution()
+        public bool GetRemoteDriverExecution()
         {
             return AppSettings.RemoteDriverExecution;
         }

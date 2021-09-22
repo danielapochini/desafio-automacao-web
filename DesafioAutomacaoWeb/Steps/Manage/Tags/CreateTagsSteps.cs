@@ -56,7 +56,7 @@ namespace DesafioAutomacaoWeb.Steps.Tags
         {
             string actualMessage = manageTags.ReturnRequiredMessage();
             if (ObjectRepository.Config.GetBrowser() == BrowserType.Firefox &&
-                ObjectRepository.Config.GetRemoteDriverExecution() == "false")
+                !ObjectRepository.Config.GetRemoteDriverExecution())
             {
                 Assert.Equal("Preencha este campo.", actualMessage);
             }

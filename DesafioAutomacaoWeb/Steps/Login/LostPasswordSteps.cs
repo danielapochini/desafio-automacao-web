@@ -1,5 +1,4 @@
-﻿using DesafioAutomacaoWeb.Pages;
-using DesafioAutomacaoWeb.Utils.Settings;
+﻿using DesafioAutomacaoWeb.Pages.Login;
 using TechTalk.SpecFlow;
 using Xunit;
 
@@ -20,13 +19,13 @@ namespace DesafioAutomacaoWeb.Steps.Login
         [When(@"preencher com os dados corretos de login")]
         public void QuandoPreencherComOsDadosCorretosDeLogin()
         {
-            loginPage.FillLogin("test.updater");
+            loginPage.FillLoginTextBox("test.updater");
         }
 
         [When(@"clicar no botão de Esqueci minha Senha")]
         public void QuandoClicarNoBotaoDeEsqueciMinhaSenha()
         {
-            loginPage.LostPassword();
+            loginPage.NavigateToLostPassword();
         }
 
         [When(@"preencher os dados de e-mail no formato inválido")]

@@ -1,7 +1,7 @@
 ﻿using DesafioAutomacaoWeb.Bases;
+using DesafioAutomacaoWeb.Pages.Issues;
 using DesafioAutomacaoWeb.Pages.Manage.Users;
-using DesafioAutomacaoWeb.Utils.Helpers;
-using DesafioAutomacaoWeb.Utils.Settings;
+using DesafioAutomacaoWeb.Utils.Helpers; 
 using OpenQA.Selenium;
 
 namespace DesafioAutomacaoWeb.Pages
@@ -10,12 +10,12 @@ namespace DesafioAutomacaoWeb.Pages
     {
         #region WebElements
 
-        private IWebElement UserInfo => ObjectRepository.Driver.FindElement(By.XPath("//span[@class='user-info']"));
-        private IWebElement MyViewButton => ObjectRepository.Driver.FindElement(By.XPath("//span[contains(text(),'My View')]"));
-        private IWebElement ViewIssuesButton => ObjectRepository.Driver.FindElement(By.XPath("//span[contains(text(),'View Issues')]"));
-        private IWebElement InviteUsersButton => ObjectRepository.Driver.FindElement(By.XPath("//a[contains(@href, 'manage_user_create_page')]"));
-        private IWebElement ReportIssuesButton => ObjectRepository.Driver.FindElement(By.XPath("//span[contains(text(),'Report Issue')]"));
-        private IWebElement ManageButton => ObjectRepository.Driver.FindElement(By.XPath("//span[contains(text(),'Manage')]"));
+        private IWebElement UserInfo => GenericHelper.GetElement(By.XPath("//span[@class='user-info']"));
+        private IWebElement MyViewButton => GenericHelper.GetElement(By.XPath("//span[contains(text(),'My View')]"));
+        private IWebElement ViewIssuesButton => GenericHelper.GetElement(By.XPath("//span[contains(text(),'View Issues')]"));
+        private IWebElement InviteUsersButton => GenericHelper.GetElement(By.XPath("//a[contains(@href, 'manage_user_create_page')]"));
+        private IWebElement ReportIssuesButton => GenericHelper.GetElement(By.XPath("//span[contains(text(),'Report Issue')]"));
+        private IWebElement ManageButton => GenericHelper.GetElement(By.XPath("//span[contains(text(),'Manage')]"));
 
         #endregion WebElements
 

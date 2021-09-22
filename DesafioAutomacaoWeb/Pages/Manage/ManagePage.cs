@@ -12,13 +12,13 @@ namespace DesafioAutomacaoWeb.Pages
     {
         #region WebElements
 
-        private IWebElement ManageUsersTab => ObjectRepository.Driver.FindElement(By.LinkText("Manage Users"));
-        private IWebElement ManageProjectsTab => ObjectRepository.Driver.FindElement(By.LinkText("Manage Projects"));
-        private IWebElement ManageTagsTab => ObjectRepository.Driver.FindElement(By.LinkText("Manage Tags"));
-        private IWebElement ManageCustomFieldsTab => ObjectRepository.Driver.FindElement(By.LinkText("Manage Custom Fields"));
-        private IWebElement ManageGlobalProfilesTab => ObjectRepository.Driver.FindElement(By.LinkText("Manage Global Profiles"));
-        private IWebElement ManagePluginsTab => ObjectRepository.Driver.FindElement(By.LinkText("Manage Plugins"));
-        private IWebElement ManageConfigurationTab => ObjectRepository.Driver.FindElement(By.LinkText("Manage Configuration"));
+        private IWebElement ManageUsersTab => GenericHelper.GetElement(By.LinkText("Manage Users"));
+        private IWebElement ManageProjectsTab => GenericHelper.GetElement(By.LinkText("Manage Projects"));
+        private IWebElement ManageTagsTab => GenericHelper.GetElement(By.LinkText("Manage Tags"));
+        private IWebElement ManageCustomFieldsTab => GenericHelper.GetElement(By.LinkText("Manage Custom Fields"));
+        private IWebElement ManageGlobalProfilesTab => GenericHelper.GetElement(By.LinkText("Manage Global Profiles"));
+        private IWebElement ManagePluginsTab => GenericHelper.GetElement(By.LinkText("Manage Plugins"));
+        private IWebElement ManageConfigurationTab => GenericHelper.GetElement(By.LinkText("Manage Configuration"));
 
         #endregion WebElements
 

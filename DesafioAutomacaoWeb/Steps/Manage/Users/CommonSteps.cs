@@ -1,4 +1,5 @@
 ﻿using DesafioAutomacaoWeb.Pages;
+using DesafioAutomacaoWeb.Pages.Login;
 using DesafioAutomacaoWeb.Pages.Manage.Users;
 using DesafioAutomacaoWeb.Utils.Database.Queries;
 using DesafioAutomacaoWeb.Utils.Helpers;
@@ -59,7 +60,7 @@ namespace DesafioAutomacaoWeb.Steps.Users
         [When(@"efetuar o login como administrador")]
         public void QuandoEfetuarOLoginComoAdministrador()
         {
-            loginPage.Login("administrator", "administrator");
+            loginPage.DoLogin("administrator", "administrator");
         }
 
         [Then(@"deverá retornar o código de erro ""(.*)""")]

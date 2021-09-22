@@ -1,4 +1,6 @@
 ﻿using DesafioAutomacaoWeb.Pages;
+using DesafioAutomacaoWeb.Pages.Issues;
+using DesafioAutomacaoWeb.Pages.Login;
 using TechTalk.SpecFlow;
 using Xunit;
 
@@ -25,31 +27,31 @@ namespace DesafioAutomacaoWeb.Steps
         [When(@"efetuar o login como manager")]
         public void QuandoEfetuarOLoginComoManager()
         {
-            loginPage.Login("test.manager", "teste123");
+            loginPage.DoLogin("test.manager", "teste123");
         }
 
         [When(@"efetuar o login como developer")]
         public void QuandoEfetuarOLoginComoDeveloper()
         {
-            loginPage.Login("test.developer", "teste123");
+            loginPage.DoLogin("test.developer", "teste123");
         }
 
         [When(@"efetuar o login como updater")]
         public void QuandoEfetuarOLoginComoUpdater()
         {
-            loginPage.Login("test.updater", "teste123");
+            loginPage.DoLogin("test.updater", "teste123");
         }
 
         [When(@"efetuar o login como reporter")]
         public void QuandoEfetuarOLoginComoReporter()
         {
-            loginPage.Login("test.reporter", "teste123");
+            loginPage.DoLogin("test.reporter", "teste123");
         }
 
         [When(@"efetuar o login como viewer")]
         public void QuandoEfetuarOLoginComoViewer()
         {
-            loginPage.Login("test.viewer", "teste123");
+            loginPage.DoLogin("test.viewer", "teste123");
         }
 
         [When(@"acessar a página de gerenciamento")]
@@ -93,7 +95,14 @@ namespace DesafioAutomacaoWeb.Steps
         {
             homePage.NavigateToViewIssues();
             viewIssuesPage.UpdateBug();
-            Assert.Equal("feature", viewIssuesPage.ReturnSeverityValue());
+
+            var severityValues = viewIssuesPage.ReturnSeverityColumnValues();
+
+            foreach (var webElement in severityValues)
+            { 
+                Assert.Equal("feature", webElement.Text.Trim());
+            }
+             
             Assert.Equal("test.updater", viewIssuesPage.ReturnUserInfo());
         }
 

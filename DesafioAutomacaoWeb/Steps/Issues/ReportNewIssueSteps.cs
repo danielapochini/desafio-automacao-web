@@ -1,12 +1,12 @@
 ﻿using DesafioAutomacaoWeb.Pages;
+using DesafioAutomacaoWeb.Pages.Issues;
 using DesafioAutomacaoWeb.Utils.Database.Queries;
 using DesafioAutomacaoWeb.Utils.Drivers;
-using DesafioAutomacaoWeb.Utils.Settings;
-using System;
+using DesafioAutomacaoWeb.Utils.Settings; 
 using TechTalk.SpecFlow;
 using Xunit;
 
-namespace DesafioAutomacaoWeb.Steps.ReportIssue
+namespace DesafioAutomacaoWeb.Steps.Issues
 {
     [Binding]
     public class ReportNewIssueSteps
@@ -63,7 +63,7 @@ namespace DesafioAutomacaoWeb.Steps.ReportIssue
         {
             string actualMessage = reportIssuePage.ReturnRequiredMessage();
             if (ObjectRepository.Config.GetBrowser() == BrowserType.Firefox &&
-                ObjectRepository.Config.GetRemoteDriverExecution() == "false")
+                !ObjectRepository.Config.GetRemoteDriverExecution())
             {
                 Assert.Equal("Preencha este campo.", actualMessage);
             }

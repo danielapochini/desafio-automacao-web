@@ -9,10 +9,10 @@ namespace DesafioAutomacaoWeb.Pages.Manage.Projects
     {
         #region WebElements
 
-        private IWebElement CreateProjectButton => ObjectRepository.Driver.FindElement(By.XPath("//button[contains(text(),'Create New Project')]"));
-        private IWebElement CreateCategoryButton => ObjectRepository.Driver.FindElement(By.XPath("//input[@value='Add Category']"));
-        private IWebElement EditCategoryButton => ObjectRepository.Driver.FindElement(By.XPath("//button[contains(text(),'Edit')]"));
-        private IWebElement CategoryTextBox => ObjectRepository.Driver.FindElement(By.XPath("//*[@id='categories']/div/div[2]/form/div/input[3]"));
+        private IWebElement CreateProjectButton => GenericHelper.GetElement(By.XPath("//button[contains(text(),'Create New Project')]"));
+        private IWebElement CreateCategoryButton => GenericHelper.GetElement(By.XPath("//input[@value='Add Category']"));
+        private IWebElement EditCategoryButton => GenericHelper.GetElement(By.XPath("//tbody/tr[1]/td[3]/div[1]/div[1]/form[1]/fieldset[1]/button[1]"));
+        private IWebElement CategoryTextBox => GenericHelper.GetElement(By.XPath("//*[@id='categories']/div/div[2]/form/div/input[3]"));
 
         #endregion WebElements
 

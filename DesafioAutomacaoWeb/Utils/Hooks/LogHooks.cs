@@ -16,8 +16,8 @@ namespace DesafioAutomacaoWeb.Utils.Hooks
             _outputHelper = outputHelper;
         }
 
-        [AfterStep()]
-        public void TakeScreenShotAfterEveryStep()
+        [AfterScenario()]
+        public void TakeScreenShotAfterEveryScenario()
         {
             var filename = $"screenshot-{DateTime.UtcNow:yyyy-MM-dd-mm-ss.FFF}.png";
             ObjectRepository.Driver.TakeScreenshot().SaveAsFile(filename);

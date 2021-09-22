@@ -1,8 +1,6 @@
 ﻿using DesafioAutomacaoWeb.Utils.Settings;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
-using System;
-using ExpectedConditions = SeleniumExtras.WaitHelpers.ExpectedConditions;
+using System.Collections.ObjectModel;
 
 namespace DesafioAutomacaoWeb.Utils.Helpers
 {
@@ -10,7 +8,7 @@ namespace DesafioAutomacaoWeb.Utils.Helpers
     {
         private static IWebElement element;
 
-        public static void ClearTextBox(IWebElement element)
+        public static void ClearElement(IWebElement element)
         {
             element.Clear();
         }
@@ -42,15 +40,18 @@ namespace DesafioAutomacaoWeb.Utils.Helpers
             throw new NoSuchElementException("Element Not Found : " + locator);
         }
 
+        public static ReadOnlyCollection<IWebElement> GetElements(By locator)
+        {
+             return ObjectRepository.Driver.FindElements(locator); 
+        }
+
         public static string GetElementText(IWebElement element)
         {
             return element.Text;
         }
 
         public static bool IsElementPresent(By locator)
-        {
-            ObjectRepository.Driver.Manage().Timeouts().ImplicitWait =
-                TimeSpan.FromMilliseconds(400);
+        { 
             try
             { 
                 return ObjectRepository.Driver.FindElements(locator).Count == 1;
@@ -72,6 +73,5 @@ namespace DesafioAutomacaoWeb.Utils.Helpers
                 return false;
             }
         } 
-         
     }
 }

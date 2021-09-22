@@ -1,4 +1,5 @@
 ﻿using DesafioAutomacaoWeb.Pages;
+using DesafioAutomacaoWeb.Pages.Login;
 using DesafioAutomacaoWeb.Utils.Helpers;
 using DesafioAutomacaoWeb.Utils.Settings;
 using TechTalk.SpecFlow;
@@ -27,13 +28,13 @@ namespace DesafioAutomacaoWeb.Steps.Login
         [When(@"preencher com os dados incorretos de login e senha")]
         public void QuandoPreencherComOsDadosIncorretosDeLoginESenha()
         {
-            loginPage.Login("teste", "12345");
+            loginPage.DoLogin("teste", "12345");
         }
 
         [When(@"preencher com os dados corretos de login e senha")]
         public void QuandoPreencherComOsDadosCorretosDeLoginESenha()
         {
-            loginPage.Login("administrator", "administrator");
+            loginPage.DoLogin("administrator", "administrator");
         }
 
         [When(@"preencher com os dados")]
@@ -41,21 +42,21 @@ namespace DesafioAutomacaoWeb.Steps.Login
         {
             foreach (TableRow row in table.Rows)
             {
-                loginPage.Login(row["username"], row["password"]);
+                loginPage.DoLogin(row["username"], row["password"]);
             }
         }
 
         [When(@"não preencher com os dados de login")]
         public void QuandoNaoPreencherComOsDadosDeLogin()
         {
-            loginPage.FillLogin("");
+            loginPage.FillLoginTextBox("");
         }
 
         [When(@"não preencher com os dados de senha")]
         public void QuandoNaoPreencherComOsDadosDeSenha()
         {
-            loginPage.FillLogin("teste");
-            loginPage.FillPassword("");
+            loginPage.FillLoginTextBox("teste");
+            loginPage.FillPasswordTextBox("");
         }
 
         [Then(@"o login deverá ser realizado com sucesso")]

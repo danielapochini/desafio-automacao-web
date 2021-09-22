@@ -14,7 +14,7 @@ namespace DesafioAutomacaoWeb.Utils.Settings.Interface
 
         string GetHubUrl();
 
-        string GetRemoteDriverExecution();
+        bool GetRemoteDriverExecution();
 
         int GetPageLoadTimeOut();
 

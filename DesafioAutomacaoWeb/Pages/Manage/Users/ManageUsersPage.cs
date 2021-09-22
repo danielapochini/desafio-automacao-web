@@ -8,7 +8,7 @@ namespace DesafioAutomacaoWeb.Pages.Manage.Users
     public class ManageUsersPage : PageBase
     {
         #region WebElements 
-        private IWebElement AdminLink => ObjectRepository.Driver.FindElement(By.XPath("//tbody/tr[1]/td[1]/a[1]"));
+        private IWebElement AdminLink => GenericHelper.GetElement(By.XPath("//tbody/tr[1]/td[1]/a[1]"));
          
         #endregion WebElements
 
