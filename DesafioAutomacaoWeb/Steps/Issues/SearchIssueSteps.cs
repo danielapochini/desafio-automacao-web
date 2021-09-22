@@ -1,7 +1,6 @@
 ﻿using DesafioAutomacaoWeb.Pages;
 using DesafioAutomacaoWeb.Pages.Issues;
 using DesafioAutomacaoWeb.Utils.Database.Queries;
-using System;
 using TechTalk.SpecFlow;
 using Xunit;
 
@@ -46,13 +45,6 @@ namespace DesafioAutomacaoWeb.Steps.Issues
         public void EntaoDeveraRetornarAPaginaComAIssueDesejada()
         {
             Assert.Equal(bugId, viewIssuesPage.ReturnBugId());
-        }
-
-        [Then(@"a mensagem Issue (.*) not found\.")]
-        public void EntaoAMensagemIssueNotFound_(int p0)
-        {
-            ScenarioContext.Current.Pending();
-        }
-
+        } 
     }
 }
