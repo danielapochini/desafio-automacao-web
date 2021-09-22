@@ -38,7 +38,7 @@ namespace DesafioAutomacaoWeb.Steps.Users
         [When(@"alterar o username para um valor que já exista no banco de dados")]
         public void QuandoAlterarOUsernameParaUmValorQueJaExistaNoBancoDeDados()
         {
-            string databaseUsername = UsersQueries.ListRandomUsers().UserName;
+            string databaseUsername = UsersQueries.ListInactiveUser().UserName;
             manageUserEditPage.FillUsername(databaseUsername);
         }
 

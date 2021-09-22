@@ -19,6 +19,12 @@ namespace DesafioAutomacaoWeb.Utils.Database.Queries
             return DatabaseHelper.ExecuteDbCommand<UsersEntities>(query).FirstOrDefault();
         }
 
+        public static UsersEntities ListInactiveUser()
+        {
+            string query = "SELECT * FROM mantis_user_table  WHERE enabled = 0 ORDER BY RAND() DESC LIMIT 1";
+            return DatabaseHelper.ExecuteDbCommand<UsersEntities>(query).FirstOrDefault();
+        }
+
         public static UsersEntities ListUserInfo(string userName)
         {
             string query = "SELECT * FROM mantis_user_table " +

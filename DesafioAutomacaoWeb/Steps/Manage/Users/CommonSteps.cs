@@ -2,6 +2,7 @@
 using DesafioAutomacaoWeb.Pages.Login;
 using DesafioAutomacaoWeb.Pages.Manage.Users;
 using DesafioAutomacaoWeb.Utils.Database.Queries;
+using DesafioAutomacaoWeb.Utils.Entities;
 using DesafioAutomacaoWeb.Utils.Helpers;
 using DesafioAutomacaoWeb.Utils.Settings;
 using TechTalk.SpecFlow;
@@ -52,7 +53,7 @@ namespace DesafioAutomacaoWeb.Steps.Users
         [When(@"selecionar um usuário existente na lista")]
         public void QuandoSelecionarUmUsuarioExistenteNaLista()
         {
-            Utils.Entities.UsersEntities userRandomDb = UsersQueries.ListRandomUsers();
+            UsersEntities userRandomDb = UsersQueries.ListRandomUsers();
 
             manageUserPage.ClickUserLink(userRandomDb.UserName);
         }
