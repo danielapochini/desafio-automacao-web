@@ -19,6 +19,7 @@ namespace DesafioAutomacaoWeb.Pages.Issues
         private IWebElement UpdateButton => GenericHelper.GetElement(By.XPath("//input[@value='Update Severity']"));
         private IWebElement AssignedToText => GenericHelper.GetElement(By.XPath("//td[@class='bug-assigned-to']"));
         private ReadOnlyCollection<IWebElement> SeverityText => GenericHelper.GetElements(By.XPath("//td[@class='column-severity']"));
+        private IWebElement BugId => GenericHelper.GetElement(By.XPath("//td[@class='bug-id']"));
 
         #endregion WebElements
 
@@ -48,6 +49,11 @@ namespace DesafioAutomacaoWeb.Pages.Issues
         {
             return AssignedToText.Text.Trim();
         }
+
+        public string ReturnBugId()
+        {
+            return BugId.Text.Trim();
+        } 
 
         public ReadOnlyCollection<IWebElement> ReturnSeverityColumnValues()
         {

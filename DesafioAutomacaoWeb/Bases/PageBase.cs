@@ -1,4 +1,5 @@
-﻿using DesafioAutomacaoWeb.Utils.Helpers;
+﻿using DesafioAutomacaoWeb.Pages.Issues;
+using DesafioAutomacaoWeb.Utils.Helpers;
 using DesafioAutomacaoWeb.Utils.Settings;
 using OpenQA.Selenium; 
 
@@ -12,6 +13,9 @@ namespace DesafioAutomacaoWeb.Bases
         private IWebElement SuccessMessage => GenericHelper.GetElement(By.XPath("//div[@class='alert alert-success center']//p[1]"));
         private IWebElement WarningMessage => GenericHelper.GetElement(By.XPath("//div[@class='alert alert-warning center']//p[1]"));
         private IWebElement UserInfo => GenericHelper.GetElement(By.XPath("//span[@class = 'user-info']"));
+        private IWebElement SearchBox => GenericHelper.GetElement(By.Name("bug_id"));
+
+
         #endregion WebElements
 
         #region Actions
@@ -53,6 +57,13 @@ namespace DesafioAutomacaoWeb.Bases
         public string GetValidationMessage(IWebElement element)
         {
             return element.GetAttribute("validationMessage");
+        }
+
+        public ViewIssuesPage SearchIssueId(string issueId)
+        {
+            SearchBox.SendKeys(issueId);
+            SearchBox.SendKeys(Keys.Enter);
+            return new ViewIssuesPage();
         }
         #endregion Actions
     }

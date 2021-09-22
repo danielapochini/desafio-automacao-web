@@ -41,14 +41,7 @@ namespace DesafioAutomacaoWeb.Utils.Drivers
             IWebDriver driver = new FirefoxDriver(service, DriversOptions.GetFirefoxOptions());
             return driver;
         }
-
-        public static IWebDriver GetOperaDriver()
-        {
-            new DriverManager().SetUpDriver(new OperaConfig());
-            IWebDriver driver = new OperaDriver(DriversOptions.GetOperaOptions());
-            return driver;
-        }
-
+         
         public static void CreateWebDriverInstance()
         {
             switch (ObjectRepository.Config.GetBrowser())
