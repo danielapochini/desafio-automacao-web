@@ -17,7 +17,7 @@ namespace DesafioAutomacaoWeb.Utils.Drivers
         }
 
         [BeforeScenario]
-        public void CreateInstance()
+        public void SetUp()
         {
             ObjectRepository.Config = new AppSettingsReader();
 
