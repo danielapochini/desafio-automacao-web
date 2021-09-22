@@ -1,0 +1,83 @@
+version: '3.7' 
+services:
+  web: 
+    image: okainov/mantisbt:latest
+    container_name: mantis_web
+    ports:
+      - "8989:80"
+    environment:
+      - MANTIS_ENABLE_ADMIN=1
+      - MASTER_SALT=7kfoIR6X2g4saBvxo5fKyhHL5hPQV6Fwi5FHhlDCboBtHVNxjXwne/3T/kkCsAirwxFzGjY+bhFG1tKu7XnvcQ==
+      - EMAIL_WEBMASTER=webmaster@localhost
+      - EMAIL_FROM=webmaster@localhost
+      - EMAIL_RETURN_PATH=webmaster@localhost 
+    volumes:
+        - ./config:/var/www/html/config
+        - ./custom:/var/www/html/custom
+    depends_on:
+      - db
+    restart: always
+
+  db:
+    image: mysql:5.7
+    container_name: mantis_db 
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db_data:/var/lib/mysql
+    environment: 
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=bugtracker
+      - MYSQL_USER=mantis
+      - MYSQL_PASSWORD=mantis 
+    command: ['mysqld', '--character-set-server=latin1', '--collation-server=latin1_general_ci'] 
+    
+  chrome:
+    image: selenium/node-chrome:4.0.0-beta-4-20210608
+    container_name: selenium-chrome
+    shm_size: 2gb
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - NODE_MAX_CONCURRENT_SESSIONS=5
+    ports:
+      - "6900:5900" 
+      
+  edge:
+    image: selenium/node-edge:4.0.0-beta-4-20210608
+    container_name: selenium-edge
+    shm_size: 2gb
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - NODE_MAX_CONCURRENT_SESSIONS=5
+    ports:
+      - "6901:5900" 
+      
+  firefox:
+    image: selenium/node-firefox:4.0.0-beta-4-20210608
+    container_name: selenium-firefox
+    shm_size: 2gb
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - NODE_MAX_CONCURRENT_SESSIONS=5
+    ports:
+      - "6902:5900" 
+      
+  selenium-hub:
+    image: selenium/hub:4.0.0-beta-4-20210608
+    container_name: selenium-hub 
+    ports:
+      - "4442:4442"
+      - "4443:4443"
+      - "4444:4444"  

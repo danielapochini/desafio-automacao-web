@@ -1,7 +1,5 @@
-﻿using DesafioAutomacaoWeb.Pages;
-using DesafioAutomacaoWeb.Pages.Manage.Users;
+﻿using DesafioAutomacaoWeb.Pages.Manage.Users;
 using DesafioAutomacaoWeb.Utils.Database.Queries;
-using System;
 using TechTalk.SpecFlow;
 using Xunit;
 
@@ -9,15 +7,15 @@ namespace DesafioAutomacaoWeb.Steps.Users
 {
     [Binding]
     public class EditUsersSteps
-    { 
+    {
         private readonly ManageUserEditPage manageUserEditPage;
-        private string editedUsername;
-        private string editedRealName;
-        private string editedEmail;
         private string editedAccessLevel;
+        private string editedEmail;
+        private string editedRealName;
+        private string editedUsername;
 
         public EditUsersSteps()
-        { 
+        {
             manageUserEditPage = new ManageUserEditPage();
         }
 
@@ -40,18 +38,18 @@ namespace DesafioAutomacaoWeb.Steps.Users
         [When(@"alterar o username para um valor que já exista no banco de dados")]
         public void QuandoAlterarOUsernameParaUmValorQueJaExistaNoBancoDeDados()
         {
-            var databaseUsername = UsersQueries.ListRandomUsers().UserName;
+            string databaseUsername = UsersQueries.ListInactiveUser().UserName;
             manageUserEditPage.FillUsername(databaseUsername);
         }
 
         [Then(@"os dados serão atualizados com sucesso no banco de dados")]
         public void EntaoOsDadosSeraoAtualizadosComSucessoNoBancoDeDados()
         {
-            var userUpdatedDb = UsersQueries.ListarInformacoesUsuario(editedUsername);
+            Utils.Entities.UsersEntities userUpdatedDb = UsersQueries.ListUserInfo(editedUsername);
             Assert.Equal(editedUsername, userUpdatedDb.UserName);
             Assert.Equal(editedRealName, userUpdatedDb.RealName);
             Assert.Equal(editedEmail, userUpdatedDb.Email);
             Assert.Equal(editedAccessLevel, userUpdatedDb.AccessLevel.ToString().ToLower());
-        } 
+        }
     }
 }

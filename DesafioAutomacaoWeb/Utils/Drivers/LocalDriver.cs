@@ -1,24 +1,19 @@
 ﻿using DesafioAutomacaoWeb.Utils.Settings;
 using Microsoft.Edge.SeleniumTools;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome; 
+using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Opera;
-using OpenQA.Selenium.Remote;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using WebDriverManager;
-using WebDriverManager.DriverConfigs;
 using WebDriverManager.DriverConfigs.Impl;
 using WebDriverManager.Helpers;
 
 namespace DesafioAutomacaoWeb.Utils.Drivers
 {
-    public class LocalDriver
-    { 
+    public static class LocalDriver
+    {
         public static IWebDriver GetChromeDriver()
         {
             new DriverManager().SetUpDriver(new ChromeConfig(), VersionResolveStrategy.MatchingBrowser);
@@ -33,7 +28,7 @@ namespace DesafioAutomacaoWeb.Utils.Drivers
 
         public static IWebDriver GetEdgeDriver()
         {
-            new DriverManager().SetUpDriver(new EdgeConfig()); 
+            new DriverManager().SetUpDriver(new EdgeConfig());
             IWebDriver edgeDriver = new EdgeDriver(DriversOptions.GetEdgeOptions());
             return edgeDriver;
         }
@@ -42,20 +37,13 @@ namespace DesafioAutomacaoWeb.Utils.Drivers
         {
             new DriverManager().SetUpDriver(new FirefoxConfig());
             FirefoxDriverService service = FirefoxDriverService.CreateDefaultService();
-            service.Host = "::1"; 
+            service.Host = "::1";
             IWebDriver driver = new FirefoxDriver(service, DriversOptions.GetFirefoxOptions());
             return driver;
         }
-
-        public static IWebDriver GetOperaDriver()
-        {
-            new DriverManager().SetUpDriver(new OperaConfig()); 
-            IWebDriver driver = new OperaDriver(DriversOptions.GetOperaOptions());
-            return driver;
-        }
-
+         
         public static void CreateWebDriverInstance()
-        { 
+        {
             switch (ObjectRepository.Config.GetBrowser())
             {
                 case BrowserType.Chrome:
@@ -66,13 +54,13 @@ namespace DesafioAutomacaoWeb.Utils.Drivers
                     ObjectRepository.Driver = GetEdgeDriver();
                     break;
 
-                case BrowserType.Firefox: 
-                    System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+                case BrowserType.Firefox:
+                    Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
                     ObjectRepository.Driver = GetFirefoxDriver();
-                    break; 
+                    break;
             }
-            DriverManagement.DriversConfigurations(); 
-        }
 
+            DriverManagement.DriversConfigurations();
+        }
     }
 }

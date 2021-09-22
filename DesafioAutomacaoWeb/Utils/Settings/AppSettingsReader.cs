@@ -6,7 +6,7 @@ namespace DesafioAutomacaoWeb.Utils.Settings
 {
     public class AppSettingsReader : IConfig
     {
-        private readonly AppSettings AppSettings = new AppSettings();
+        private readonly AppSettings AppSettings = new();
 
         public BrowserType? GetBrowser()
         {
@@ -45,7 +45,10 @@ namespace DesafioAutomacaoWeb.Utils.Settings
         {
             string timeout = AppSettings.PageLoadTimeOut;
             if (timeout == null)
+            {
                 return 30;
+            }
+
             return Convert.ToInt32(timeout);
         }
 
@@ -53,11 +56,14 @@ namespace DesafioAutomacaoWeb.Utils.Settings
         {
             string timeout = AppSettings.ElementLoadTimeOut;
             if (timeout == null)
+            {
                 return 30;
+            }
+
             return Convert.ToInt32(timeout);
         }
 
-        public string GetRemoteDriverExecution()
+        public bool GetRemoteDriverExecution()
         {
             return AppSettings.RemoteDriverExecution;
         }

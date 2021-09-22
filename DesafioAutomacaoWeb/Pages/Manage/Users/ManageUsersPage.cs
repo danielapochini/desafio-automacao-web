@@ -1,24 +1,18 @@
 ﻿using DesafioAutomacaoWeb.Bases;
 using DesafioAutomacaoWeb.Utils.Helpers;
-using OpenQA.Selenium;
-using SeleniumExtras.PageObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using DesafioAutomacaoWeb.Utils.Settings;
+using OpenQA.Selenium; 
 
 namespace DesafioAutomacaoWeb.Pages.Manage.Users
 {
     public class ManageUsersPage : PageBase
     {
         #region WebElements 
-          
-        [FindsBy(How = How.XPath, Using = "//tbody/tr[1]/td[1]/a[1]")]
-        private IWebElement AdminLink;
+        private IWebElement AdminLink => GenericHelper.GetElement(By.XPath("//tbody/tr[1]/td[1]/a[1]"));
+         
+        #endregion WebElements
 
-        #endregion
-
+        #region Navigation
         public ManageUserEditPage ClickUserLink(string username)
         {
             GenericHelper.ClickElement(username);
@@ -30,6 +24,6 @@ namespace DesafioAutomacaoWeb.Pages.Manage.Users
             AdminLink.Click();
             return new ManageUserEditPage();
         }
-
+        #endregion Navigation
     }
 }

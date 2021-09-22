@@ -1,46 +1,27 @@
 ﻿using DesafioAutomacaoWeb.Bases;
 using DesafioAutomacaoWeb.Utils.Helpers;
 using DesafioAutomacaoWeb.Utils.Settings;
-using OpenQA.Selenium;
-using SeleniumExtras.PageObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+using OpenQA.Selenium; 
 
 namespace DesafioAutomacaoWeb.Pages.Manage.Projects
 {
     public class ManageProjectCreatePage : PageBase
     {
         #region WebElements
-        [FindsBy(How = How.Id, Using = "project-name")]
-        private IWebElement ProjectNameTextBox;
 
-        [FindsBy(How = How.Id, Using = "project-status")] 
-        private IWebElement ProjectStatusSelect;
+        private IWebElement ProjectNameTextBox => GenericHelper.GetElement(By.Id("project-name"));
+        private IWebElement ProjectStatusSelect => GenericHelper.GetElement(By.Id("project-status"));
+        private IWebElement ProjectViewStatusSelect => GenericHelper.GetElement(By.Id("project-view-state"));
+        private IWebElement ProjectDescriptionTextArea => GenericHelper.GetElement(By.Id("project-description"));
+        private IWebElement ProjectInheritCheckBox => GenericHelper.GetElement(By.Id("project-inherit-global"));
+        private IWebElement AddProjectButton => GenericHelper.GetElement(By.XPath("//input[@value='Add Project']"));
+        private IWebElement UpdateProjectButton => GenericHelper.GetElement(By.XPath("//input[@value='Update Project']"));
+        private IWebElement DeleteProjectButton => GenericHelper.GetElement(By.XPath("//input[@value='Delete Project']"));
 
-        [FindsBy(How = How.Id, Using = "project-view-state")]
-        private IWebElement ProjectViewStatusSelect;
-
-        [FindsBy(How = How.Id, Using = "project-description")]
-        private IWebElement ProjectDescriptionTextArea;
-
-        [FindsBy(How = How.Id, Using = "project-inherit-global")]
-        private IWebElement ProjectInheritCheckBox;
-
-        [FindsBy(How = How.XPath, Using = "//input[@value='Add Project']")]
-        private IWebElement AddProjectButton;
-
-        [FindsBy(How = How.XPath, Using = "//input[@value='Update Project']")]
-        private IWebElement UpdateProjectButton;
-
-        [FindsBy(How = How.XPath, Using = "//input[@value='Delete Project']")]
-        private IWebElement DeleteProjectButton;
-        #endregion
+        #endregion WebElements
 
         #region Actions
+
         public void CreateNewProject(string name, string status, bool value, string viewstatus, string description)
         {
             ProjectNameTextBox.SendKeys(name);
@@ -64,9 +45,10 @@ namespace DesafioAutomacaoWeb.Pages.Manage.Projects
 
         public void ClearAllTextBoxFields()
         {
-            GenericHelper.ClearTextBox(ProjectNameTextBox);
-            GenericHelper.ClearTextBox(ProjectDescriptionTextArea); 
+            GenericHelper.ClearElement(ProjectNameTextBox);
+            GenericHelper.ClearElement(ProjectDescriptionTextArea);
         }
+
         public void ClickAddProjectButton()
         {
             AddProjectButton.Click();
@@ -84,29 +66,26 @@ namespace DesafioAutomacaoWeb.Pages.Manage.Projects
 
         public void CheckRequiredField()
         {
-            GenericHelper.ClearTextBox(ProjectNameTextBox);
+            GenericHelper.ClearElement(ProjectNameTextBox);
         }
 
         public void CheckProjectInheritCheckBox(bool value)
         {
-            CheckBoxHelper.CheckCheckBoxJavascript(value, ProjectInheritCheckBox);
+            JavaScriptExecutorHelper.CheckCheckBoxJavascript(value, ProjectInheritCheckBox);
         }
 
         public string ReturnRequiredMessage()
         {
-            return ProjectNameTextBox.GetAttribute("validationMessage");
+            return GetValidationMessage(ProjectNameTextBox);
         }
-
 
         public string ReturnProjectWarningBox()
         {
             string warningMessage = ReturnWarningMessage();
-            string projectName = warningMessage.Substring(warningMessage.IndexOf(":") +2);
+            string projectName = warningMessage.Substring(warningMessage.IndexOf(":") + 2);
             return projectName;
         }
-        #endregion
 
-        #region Navigation
-        #endregion
+        #endregion Actions
     }
 }

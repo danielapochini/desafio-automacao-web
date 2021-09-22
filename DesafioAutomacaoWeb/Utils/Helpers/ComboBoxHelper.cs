@@ -1,14 +1,9 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DesafioAutomacaoWeb.Utils.Helpers
 {
-    public class ComboBoxHelper
+    public static class ComboBoxHelper
     {
         private static SelectElement select;
 
@@ -16,6 +11,12 @@ namespace DesafioAutomacaoWeb.Utils.Helpers
         {
             select = new SelectElement(element);
             select.SelectByText(visibletext);
+        }
+
+        public static void SelectElement(IWebElement element, int index)
+        {
+            select = new SelectElement(element);
+            select.SelectByIndex(index);
         }
     }
 }
