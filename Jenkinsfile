@@ -7,7 +7,7 @@ pipeline {
         stage('Git Checkout') { 
            steps{ 
                 bat 'echo Git Checkout'
-                git branch: 'main', url: 'https://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@github.com/danielapochini/desafio-automacao-web.git'
+                git branch: 'main', url: 'https://<auth>@github.com/danielapochini/desafio-automacao-web.git'
             }
         }
         stage('CleanUp Stage') { 
