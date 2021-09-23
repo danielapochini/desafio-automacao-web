@@ -24,8 +24,6 @@ pipeline {
         }
         stage('Build Stage') { 
             steps{ 
-                bat 'echo Installing LivingDoc'
-                bat 'dotnet tool update --global SpecFlow.Plus.LivingDoc.CLI'
                 bat 'echo build'
                 dotnetBuild configuration: 'Debug', project: 'DesafioAutomacaoWeb.sln', sdk: '.NET 5.0', workDirectory: "${WORKSPACE}/DesafioAutomacaoWeb/"
             }
